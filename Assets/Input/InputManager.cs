@@ -6,7 +6,7 @@ using System;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
+    public static InputManager Instance;
     public static event Action OpenInventoryEvent;
     public Vector2 MouseInput { get; private set; }
     private Vector2 movementInput;
@@ -21,9 +21,9 @@ public class InputManager : MonoBehaviour
     private InputHandler inputActions;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {

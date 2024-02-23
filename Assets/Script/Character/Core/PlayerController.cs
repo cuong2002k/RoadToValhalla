@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        InputHandler = InputManager.instance;
+        InputHandler = InputManager.Instance;
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();

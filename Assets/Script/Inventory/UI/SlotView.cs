@@ -5,24 +5,28 @@ using UnityEngine.UI;
 using TMPro;
 public class SlotView : MonoBehaviour
 {
-    [SerializeField] private int _slotID;
-    [SerializeField] private ItemStack _itemUI;
+    [SerializeField] protected int _slotID;
+    [SerializeField] protected ItemStack _itemUI;
 
-    [SerializeField] private Image _itemIcon;
-    [SerializeField] private TextMeshProUGUI _stackItemText;
+    [SerializeField] protected Image _itemIcon;
+    [SerializeField] protected TextMeshProUGUI _stackItemText;
 
     public int GetSlotID() => this._slotID;
     public void SetSlotID(int id) => this._slotID = id;
+    public Image GetItemIcon() => this._itemIcon;
+    public TextMeshProUGUI GetStackText() => this._stackItemText;
+
     public void SetItemUI(ItemStack item)
     {
         this._itemUI = item;
         SetUI();
     }
+    public ItemStack GetItemUI() => _itemUI;
 
     public void SetUI()
     {
         DisplayUI(_itemUI != null);
-        SetUIValue(_itemUI != null);
+        SetUIValue();
     }
 
     private void DisplayUI(bool active)
@@ -37,9 +41,9 @@ public class SlotView : MonoBehaviour
         }
     }
 
-    public void SetUIValue(bool value)
+    public void SetUIValue()
     {
-        if (value)
+        if (!_itemUI.IsEmpty())
         {
             this._itemIcon.sprite = this._itemUI.GetItem().GetItemIcon();
             this._stackItemText.text = "" + this._itemUI.GetStack() + "/" + this._itemUI.GetItem().GetMaxStacks();
@@ -50,4 +54,6 @@ public class SlotView : MonoBehaviour
             this._stackItemText.text = "0";
         }
     }
+
+    public bool IsEmpty() => this._itemUI.IsEmpty();
 }

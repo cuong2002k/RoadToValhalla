@@ -5,21 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class ItemStack
 {
-    [SerializeField] private int _slotID = -1;
     [SerializeField] private BaseItem _item = null;
     [SerializeField] private int _stack = 0;
 
     #region Constructer
     public ItemStack()
     {
-        this._slotID = -1;
-        this._item = null;
-        this._stack = 0;
-    }
-
-    public ItemStack(int slotID)
-    {
-        this._slotID = slotID;
         this._item = null;
         this._stack = 0;
     }
@@ -30,16 +21,9 @@ public class ItemStack
         this._stack = stack;
     }
 
-    public ItemStack(BaseItem item, int stack, int slotID)
-    {
-        this._slotID = slotID;
-        this._item = item;
-        this._stack = stack;
-    }
     #endregion
 
     #region Get & Set
-    public int GetSlotID() { return this._slotID; }
     public BaseItem GetItem() { return this._item; }
     public int GetStack() { return this._stack; }
 
@@ -52,6 +36,7 @@ public class ItemStack
     public void SetStack(int stack)
     {
         this._stack = stack;
+        if (this._stack == 0) this.Clear();
     }
 
     public void SetItem(BaseItem item)
@@ -75,11 +60,6 @@ public class ItemStack
     public bool IsItemEqual(ItemStack item)
     {
         return (item != null) && (item.GetItem() == this._item);
-    }
-
-    public bool CanAddTo()
-    {
-        return this._stack < this._item.GetMaxStacks();
     }
 
     #endregion
@@ -106,18 +86,16 @@ public class ItemStack
         if (this._stack < 1) Clear();
     }
 
-    public ItemStack Copy()
+    public ItemStack Copy(int stack)
     {
-        return new ItemStack(this._item, this._stack, this._slotID);
+        return new ItemStack(this._item, stack);
     }
 
     public ItemStack SplitStack(int stackToSplit)
     {
-
-        int stack = Mathf.Min(this._stack, stackToSplit);
-        ItemStack itemToSplit = this.Copy();
-        itemToSplit.SetStack(stack);
-        this.DecreaseStack(stack);
+        int stackSplit = Mathf.Min(this._stack, stackToSplit);
+        ItemStack itemToSplit = this.Copy(stackSplit);
+        itemToSplit.SetStack(stackSplit);
         return itemToSplit;
     }
 

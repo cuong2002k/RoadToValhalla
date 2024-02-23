@@ -1797,6 +1797,14 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: 7b9a2ab8502f35548b9151c01c1eef0b, type: 2}
+    - target: {fileID: 7180036608366947823, guid: 8a70773f7770c37448282505093c13e3, type: 3}
+      propertyPath: iconDrag
+      value: 
+      objectReference: {fileID: 9203367134120115654, guid: ed3788d8762695d4598ca2a8bc37058c, type: 3}
+    - target: {fileID: 7180036608366947823, guid: 8a70773f7770c37448282505093c13e3, type: 3}
+      propertyPath: stackDrag
+      value: 
+      objectReference: {fileID: 6750712611078267953, guid: cf948fbaed65ce24f82926b8e79aed90, type: 3}
     - target: {fileID: 7343176133856849477, guid: 8a70773f7770c37448282505093c13e3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

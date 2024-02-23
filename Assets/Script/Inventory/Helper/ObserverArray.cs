@@ -21,8 +21,13 @@ public class ObserverArray<T> : IObserverArray<T>
     {
         items = new T[size];
     }
+    public int Length => items.Length;
 
-    public T this[int index] => items[index];
+    public T this[int index]
+    {
+        get => items[index];
+        set => items[index] = value;
+    }
 
     public T Get(int index)
     {

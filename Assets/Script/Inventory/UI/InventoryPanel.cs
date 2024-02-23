@@ -10,16 +10,11 @@ public class InventoryPanel
     {
         slotUIPrefabs = Resources.Load<GameObject>("InventorySlotUI");
 
-        if (slotUIPrefabs != null) Debug.Log("Slot prefabs is null");
-        if (InventoryController.Instance.InventoryPrefabs != null) Debug.Log("inventory prefabs is null");
+        if (slotUIPrefabs == null) Debug.Log("Slot prefabs is null");
+        if (InventoryController.Instance.InventoryPrefabs == null) Debug.Log("inventory prefabs is null");
+
         _slotUIContainer = new List<SlotUI>(size);
-        Transform inventoryGroup = InventoryController.Instance.InventoryPrefabs.transform;
-        for (int index = 0; index < size; index++)
-        {
-            SlotUI slotUI = Object.Instantiate(slotUIPrefabs, inventoryGroup).GetComponent<SlotUI>();
-            slotUI.SetSlotID(index);
-            _slotUIContainer.Add(slotUI);
-        }
+        Initialize(size);
     }
 
     public void RefestInventoryUI(IList<ItemStack> items)
@@ -29,5 +24,23 @@ public class InventoryPanel
             _slotUIContainer[i].SetItemUI(items[i]);
         }
     }
+
+    private void Initialize(int size)
+    {
+        Transform inventoryGroup = InventoryController.Instance.InventoryPrefabs.transform;
+        for (int index = 0; index < size; index++)
+        {
+            SlotUI slotUI = Object.Instantiate(slotUIPrefabs, inventoryGroup).GetComponent<SlotUI>();
+            slotUI.SetSlotID(index);
+            _slotUIContainer.Add(slotUI);
+        }
+    }
+
+    public SlotUI this[int index]
+    {
+        get => _slotUIContainer[index];
+        set => _slotUIContainer[index] = value;
+    }
+
 }
 

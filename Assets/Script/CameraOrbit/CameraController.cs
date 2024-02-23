@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
     {
         canRotation = true;
     }
-   
+
     private void OnEnable()
     {
         InputManager.OpenInventoryEvent += HandlerRotationCheck;
@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
     {
         if (canRotation)
         {
-            mouseInput = InputManager.instance.MouseInput;
+            mouseInput = InputManager.Instance.MouseInput;
         }
     }
 
