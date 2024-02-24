@@ -9,12 +9,7 @@ public class InventoryPanel
     public InventoryPanel(int size)
     {
         slotUIPrefabs = Resources.Load<GameObject>("InventorySlotUI");
-
-        if (slotUIPrefabs == null) Debug.Log("Slot prefabs is null");
-        if (InventoryController.Instance.InventoryPrefabs == null) Debug.Log("inventory prefabs is null");
-
         _slotUIContainer = new List<SlotUI>(size);
-        Initialize(size);
     }
 
     public void RefestInventoryUI(IList<ItemStack> items)
@@ -25,9 +20,9 @@ public class InventoryPanel
         }
     }
 
-    private void Initialize(int size)
+    public void Initialize(int size, Transform transformSpawn)
     {
-        Transform inventoryGroup = InventoryController.Instance.InventoryPrefabs.transform;
+        Transform inventoryGroup = transformSpawn;
         for (int index = 0; index < size; index++)
         {
             SlotUI slotUI = Object.Instantiate(slotUIPrefabs, inventoryGroup).GetComponent<SlotUI>();

@@ -68,12 +68,15 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Player = this.gameObject;
+
         InputHandler = InputManager.Instance;
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         playerMachine.Inittialize(IdleState);
         _yVelocity.y = _groundedGravity;
+
     }
 
     private void Update()

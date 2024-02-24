@@ -17,12 +17,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _playerInventoryPanel;
     [SerializeField] private GameObject _craftingPanel;
 
-    public SlotUI slotMove;
-    public Image iconDrag;
-    public TextMeshProUGUI stackDrag;
+    [SerializeField] private GameObject _mousePoint;
 
     #region Inventory Handler
-    public static bool iDragHandler = false;
+    [HideInInspector] public SlotUI slotMove;
+    [HideInInspector] public Image iconDrag;
+    [HideInInspector] public TextMeshProUGUI stackDrag;
+    [HideInInspector] public static bool iDragHandler = false;
 
     #endregion
 
@@ -44,11 +45,13 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (UIManager.iDragHandler)
+        if (iDragHandler)
         {
             MoveSlotItem(Input.mousePosition, stackDrag.gameObject);
             MoveSlotItem(Input.mousePosition, iconDrag.gameObject);
         }
+
+        _mousePoint.gameObject.transform.position = Input.mousePosition;
 
     }
 
@@ -71,7 +74,9 @@ public class UIManager : MonoBehaviour
 
     public void OnClickHandler(SlotUI slot, PointerEventData eventData)
     {
+        // slot click is not empty
         if (slot.IsEmpty()) return;
+
         if (!iDragHandler)
         {
             iDragHandler = true;
@@ -86,28 +91,36 @@ public class UIManager : MonoBehaviour
             iconDrag = Instantiate(slotMove.GetItemIcon(), canvas.transform);
             stackDrag = Instantiate(slotMove.GetStackText(), canvas.transform);
             stackDrag.text = slotMove.GetItemUI().GetStack().ToString();
+
         }
     }
 
-
     public void OnDropHandler(int fromslotID, int toSlotID, InventoryModel fromInventory, InventoryModel toInventory)
     {
+
         ItemStack fromSlot = fromInventory[fromslotID];
         ItemStack toSlot = toInventory[toSlotID];
-
-        // slot drop is not empty
-        if (!toSlot.IsEmpty())
+        if (fromslotID == toSlotID && fromInventory == toInventory)
         {
+            SwapSlot(fromSlot, toSlot);
+        }
+        // slot drop is not empty
+        else if (!toSlot.IsEmpty())
+        {
+            // two slot contains equals item
             if (fromSlot.GetItem().Equals(toSlot.GetItem()))
             {
+                // can combine
                 if (toSlot.GetStackAvailable() >= fromSlot.GetStack())
                 {
-                    int stackRemaining = toSlot.AddStack(fromSlot.GetStack());
-                    fromSlot.SetStack(stackRemaining);
+                    int stackRemaing = toSlot.AddStack(fromSlot.GetStack());
+                    fromSlot.SetStack(stackRemaing);
+                    Debug.Log("Combine");
                 }
-                else
+                else if (fromSlot.GetStack() == this.slotMove.GetItemUI().GetStack())
                 {
                     SwapSlot(fromSlot, toSlot);
+                    Debug.Log("swap Not empty equal item");
                 }
             }
             else
@@ -115,6 +128,7 @@ public class UIManager : MonoBehaviour
                 if (fromSlot.GetStack() == this.slotMove.GetItemUI().GetStack())
                 {
                     SwapSlot(fromSlot, toSlot);
+                    Debug.Log("swap Not empty not equal full stack");
                 }
             }
         }
@@ -126,10 +140,12 @@ public class UIManager : MonoBehaviour
             {
                 toSlot.SetItemStack(slotMove.GetItemUI());
                 fromSlot.DecreaseStack(slotMove.GetItemUI().GetStack());
+                Debug.Log("split to empty slot");
             }
             else
             {
                 SwapSlot(fromSlot, toSlot);
+                Debug.Log("swap to empty slot");
             }
 
         }
@@ -138,6 +154,7 @@ public class UIManager : MonoBehaviour
         toInventory.Invoke();
         RestartMouseSlot();
     }
+
     public void RestartMouseSlot()
     {
         if (!iDragHandler) return;
@@ -150,8 +167,8 @@ public class UIManager : MonoBehaviour
     public void MoveSlotItem(Vector2 position, GameObject objectDrag)
     {
         if (!UIManager.iDragHandler) return;
-        Vector2 Size = new Vector2(45, 45);
-        objectDrag.transform.position = position - Size;
+        Vector2 Size = new Vector2(45, -45);
+        objectDrag.transform.position = position + Size;
     }
 
     public void SwapSlot(ItemStack fromSlot, ItemStack toSlot)
@@ -159,5 +176,19 @@ public class UIManager : MonoBehaviour
         ItemStack temp = new ItemStack(fromSlot.GetItem(), fromSlot.GetStack());
         fromSlot.SetItemStack(toSlot);
         toSlot.SetItemStack(temp);
+
     }
+
+    public void DropItemSlotUI()
+    {
+        if (this.slotMove != null)
+        {
+            int slotid = slotMove.GetSlotID();
+            ItemStack itemDrop = slotMove.Inventory[slotid];
+            itemDrop.DropItem(slotMove.GetItemUI());
+            this.slotMove.Inventory.Invoke();
+            this.RestartMouseSlot();
+        }
+    }
+
 }

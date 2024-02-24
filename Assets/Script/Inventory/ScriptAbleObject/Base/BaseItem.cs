@@ -10,14 +10,16 @@ public class BaseItem : ScriptableObject
     [SerializeField] protected int _maxStack = 1;
     [TextArea(2, 5)][SerializeField] protected string _description;
 
+    [SerializeField] private GameObject _itemPrefabs = null;
+
     #region getter & setter
 
-    public string GetItemName() { return this._itemName; }
-    public Sprite GetItemIcon() { return this._icon; }
-    public ItemType GetItemType() { return this._itemType; }
-    public int GetMaxStacks() { return this._maxStack; }
-    public string GetDescription() { return this._description; }
-
+    public string GetItemName() => this._itemName;
+    public Sprite GetItemIcon() => this._icon;
+    public ItemType GetItemType() => this._itemType;
+    public int GetMaxStacks() => this._maxStack;
+    public string GetDescription() => this._description;
+    public GameObject GetITemPrefabs() => this._itemPrefabs;
     #endregion
 
 }

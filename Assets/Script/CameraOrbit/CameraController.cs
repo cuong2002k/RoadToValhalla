@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     [Range(25f, 100f)] private float cameraUpandDownSpeed = 40f;
     [SerializeField]
     [Range(25f, 100f)] private float cameraLeftAndRightSpeed = 40f;
-    private float minimunLookAngle = -30f;
+    private float minimunLookAngle = -40f;
     private float maxLookAngle = 60f;
 
     [Header("Camera value")]

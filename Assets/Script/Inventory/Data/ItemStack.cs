@@ -24,8 +24,8 @@ public class ItemStack
     #endregion
 
     #region Get & Set
-    public BaseItem GetItem() { return this._item; }
-    public int GetStack() { return this._stack; }
+    public BaseItem GetItem() => this._item;
+    public int GetStack() => this._stack;
 
     public void SetItemStack(ItemStack item)
     {
@@ -59,7 +59,7 @@ public class ItemStack
 
     public bool IsItemEqual(ItemStack item)
     {
-        return (item != null) && (item.GetItem() == this._item);
+        return (item != null) && (item.GetItem().Equals(this._item));
     }
 
     #endregion
@@ -103,6 +103,15 @@ public class ItemStack
     {
         this._item = null;
         this._stack = 0;
+    }
+
+    public void DropItem(ItemStack itemToDrop)
+    {
+        Transform transformSpawn = GameManager.Instance.Player.transform;
+        ItemPickUp itemPickUp = Object.Instantiate(this._item.GetITemPrefabs()).GetComponent<ItemPickUp>();
+        itemPickUp.transform.position = transformSpawn.forward + new Vector3(0, 2f, 0);
+        itemPickUp.ItemStack.SetItemStack(itemToDrop);
+        this.DecreaseStack(itemToDrop.GetStack());
     }
 
 }

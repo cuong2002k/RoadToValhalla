@@ -16,7 +16,6 @@ public class SlotUI : SlotView, IPointerClickHandler
     public Action<SlotUI, PointerEventData> OnClickAction = delegate { };
     public Action<int, int, InventoryModel, InventoryModel> OnDropAction = delegate { };
 
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -27,9 +26,13 @@ public class SlotUI : SlotView, IPointerClickHandler
             }
             else
             {
-                OnDropAction?.Invoke(UIManager.Instance.slotMove.GetSlotID(), this._slotID, UIManager.Instance.slotMove.Inventory, this.Inventory);
-            }
 
+                int fromSlotID = UIManager.Instance.slotMove.GetSlotID();
+                int toSlotID = this._slotID;
+                InventoryModel fromInventory = UIManager.Instance.slotMove.Inventory;
+                InventoryModel toInventory = this.Inventory;
+                OnDropAction?.Invoke(fromSlotID, toSlotID, fromInventory, toInventory);
+            }
         }
     }
 

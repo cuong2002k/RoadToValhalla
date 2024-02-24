@@ -7,6 +7,7 @@ public class InventoryModel
 {
     [SerializeField] private ObserverArray<ItemStack> _inventory;
 
+    //event refest inventory UI
     public event Action<ItemStack[]> OnInventoryChange
     {
         add => _inventory.OnArrayChange += value;
@@ -31,13 +32,19 @@ public class InventoryModel
     public int AddItem(ItemStack item)
     {
         int stack = item.GetStack();
+        // find contain item slot => combine stack
         for (int i = 0; i < this._inventory.Length; i++)
         {
             if (stack == 0) return 0;
             if (this._inventory[i].IsEmpty()) continue;
-            stack = this._inventory[i].AddStack(stack);
+            if (_inventory[i].IsItemEqual(item))
+            {
+                stack = this._inventory[i].AddStack(stack);
+            }
+
         }
 
+        // find free slot => add to inventory
         for (int i = 0; i < this._inventory.Length; i++)
         {
             if (stack == 0) return 0;
@@ -47,6 +54,6 @@ public class InventoryModel
         }
         return stack;
     }
-    public bool TryRemove(ItemStack item) => _inventory.TryRemove(item);
+    //call event
     public void Invoke() => _inventory.Invoke();
 }

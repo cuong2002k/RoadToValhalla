@@ -58,7 +58,7 @@ public class ObserverArray<T> : IObserverArray<T>
         {
             if (items[i] == null) continue;
             if (!EqualityComparer<T>.Default.Equals(items[i], value)) continue;
-            this.items[i] = default;
+            this.items[i] = default(T);
             Invoke();
             return true;
         }
