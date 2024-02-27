@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private static Transform canvas;
     [SerializeField] private GameObject _playerInventoryPanel;
     [SerializeField] private GameObject _craftingPanel;
-
     [SerializeField] private GameObject _mousePoint;
 
     #region Inventory Handler
@@ -177,18 +176,6 @@ public class UIManager : MonoBehaviour
         fromSlot.SetItemStack(toSlot);
         toSlot.SetItemStack(temp);
 
-    }
-
-    public void DropItemSlotUI()
-    {
-        if (this.slotMove != null)
-        {
-            int slotid = slotMove.GetSlotID();
-            ItemStack itemDrop = slotMove.Inventory[slotid];
-            itemDrop.DropItem(slotMove.GetItemUI());
-            this.slotMove.Inventory.Invoke();
-            this.RestartMouseSlot();
-        }
     }
 
 }

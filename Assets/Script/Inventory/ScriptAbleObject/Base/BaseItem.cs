@@ -22,6 +22,16 @@ public class BaseItem : ScriptableObject
     public GameObject GetITemPrefabs() => this._itemPrefabs;
     #endregion
 
+    public virtual void Equip()
+    {
+        Debug.Log("Equip item " + this.name);
+    }
+
+    public virtual void UnEquip()
+    {
+        Debug.Log("UnEquip item " + this.name);
+    }
+
 }
 
 public enum ItemType

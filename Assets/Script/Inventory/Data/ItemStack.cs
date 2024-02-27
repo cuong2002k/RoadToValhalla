@@ -33,6 +33,12 @@ public class ItemStack
         this._stack = item.GetStack();
     }
 
+    public void SetItemStack(BaseItem item, int stack)
+    {
+        this._item = item;
+        this._stack = stack;
+    }
+
     public void SetStack(int stack)
     {
         this._stack = stack;
@@ -64,10 +70,10 @@ public class ItemStack
 
     #endregion
 
-
+    #region logic
     public int AddStack(int stackToAdd)
     {
-        if (this.GetStackAvailable() > stackToAdd)
+        if (this.GetStackAvailable() >= stackToAdd)
         {
             this._stack += stackToAdd;
             return 0;
@@ -105,13 +111,32 @@ public class ItemStack
         this._stack = 0;
     }
 
-    public void DropItem(ItemStack itemToDrop)
+    public void DropItem(ItemStack itemToDrop, Transform dropLocation, int stack)
     {
-        Transform transformSpawn = GameManager.Instance.Player.transform;
         ItemPickUp itemPickUp = Object.Instantiate(this._item.GetITemPrefabs()).GetComponent<ItemPickUp>();
-        itemPickUp.transform.position = transformSpawn.forward + new Vector3(0, 2f, 0);
-        itemPickUp.ItemStack.SetItemStack(itemToDrop);
-        this.DecreaseStack(itemToDrop.GetStack());
+        itemPickUp.transform.position = dropLocation.forward + new Vector3(0, 2f, 0);
+        itemPickUp.ItemStack.SetItemStack(itemToDrop.GetItem(), stack);
+        this.DecreaseStack(stack);
     }
+    #endregion
 
+    public void Equip()
+    {
+        if (this._item != null)
+        {
+            if (_item as EquipmentItem)
+            {
+                (_item as EquipmentItem).Equip();
+                this.Clear();
+            }
+            else if (_item as FoodItem)
+            {
+                (_item as FoodItem).Equip();
+            }
+            else
+            {
+                (_item as CraftItem).Equip();
+            }
+        }
+    }
 }

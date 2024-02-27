@@ -21,11 +21,12 @@ public class SlotView : MonoBehaviour
         this._itemUI = item;
         SetUI();
     }
+
     public ItemStack GetItemUI() => _itemUI;
 
     public void SetUI()
     {
-        DisplayUI(_itemUI != null);
+        DisplayUI(!_itemUI.IsEmpty());
         SetUIValue();
     }
 

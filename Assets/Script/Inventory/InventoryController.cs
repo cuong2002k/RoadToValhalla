@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class InventoryController : Container
 {
+    #region  Singleton
     public static InventoryController Instance;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;
@@ -18,21 +20,28 @@ public class InventoryController : Container
             Destroy(this.gameObject);
         }
     }
-    public BaseItem item;
-    public BaseItem items1;
+    #endregion
 
+
+    #region Unity Call Back
     protected override void Start()
     {
         base.Start();
-        _inventoryModel.AddItem(new ItemStack(item, 20));
-        _inventoryModel.AddItem(new ItemStack(items1, 20));
         _inventoryModel.Invoke();
     }
 
-    public void AddITem(ItemStack itemToAdd)
+    #endregion 
+
+    public int AddItem(ItemStack itemToAdd)
     {
-        _inventoryModel.AddItem(itemToAdd);
-        _inventoryModel.Invoke();
+        int stackRemaining = _inventoryModel.AddItem(itemToAdd);
+        RefestUI();
+        return stackRemaining;
+    }
+
+    public void RefestUI()
+    {
+        this._inventoryModel.Invoke();
     }
 
 }

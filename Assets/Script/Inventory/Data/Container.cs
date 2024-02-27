@@ -15,6 +15,11 @@ public class Container : MonoBehaviour
 
     #endregion
 
+    protected virtual void Awake()
+    {
+
+    }
+
     protected virtual void Start()
     {
         Initialize();
@@ -35,5 +40,5 @@ public class Container : MonoBehaviour
         }
     }
 
-    
+
 }

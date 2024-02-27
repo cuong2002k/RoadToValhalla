@@ -21,6 +21,7 @@ public class InventoryModel
         {
             _inventory[i] = new ItemStack();
         }
+        Debug.Log(_inventory.Length);
     }
 
     public ItemStack this[int index]
@@ -31,7 +32,9 @@ public class InventoryModel
     public void Swap(int source, int target) => _inventory.Swap(source, target);
     public int AddItem(ItemStack item)
     {
+
         int stack = item.GetStack();
+        Debug.Log(FindFirstFreeSlot());
         // find contain item slot => combine stack
         for (int i = 0; i < this._inventory.Length; i++)
         {
@@ -44,16 +47,35 @@ public class InventoryModel
 
         }
 
-        // find free slot => add to inventory
-        for (int i = 0; i < this._inventory.Length; i++)
+        // // find free slot => add to inventory
+        int indexFreeSlot = FindFirstFreeSlot();
+
+        if (indexFreeSlot != -1)
         {
-            if (stack == 0) return 0;
-            if (!this._inventory[i].IsEmpty()) continue;
-            this._inventory[i].SetItem(item.GetItem());
-            stack = this._inventory[i].AddStack(stack);
+            while (stack > 0)
+            {
+                this._inventory[indexFreeSlot].SetItem(item.GetItem());
+                stack = this._inventory[indexFreeSlot].AddStack(stack);
+            }
+            if (stack == 0)
+            {
+                return stack;
+            }
         }
+
+        Debug.Log("Full slot inventory");
         return stack;
     }
+
+    public int FindFirstFreeSlot()
+    {
+        for (int i = 0; i < _inventory.Length; i++)
+        {
+            if (_inventory[i].IsEmpty()) return i;
+        }
+        return -1;
+    }
+
     //call event
     public void Invoke() => _inventory.Invoke();
 }

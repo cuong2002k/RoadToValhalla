@@ -85,6 +85,10 @@ public class PlayerController : MonoBehaviour
         CurrentVelocity = _yVelocity;
         PlayerRotation();
         HandlerGrayvity();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     private void FixedUpdate()
@@ -163,9 +167,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(this.transform.position, playerData.groundCheckRadius);
+    }
+
+    public void Interact()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+        if (Physics.Raycast(ray, out hit, 5f))
+        {
+            IInteractable objectInteract = hit.transform.gameObject.GetComponent<IInteractable>();
+            if (objectInteract != null)
+            {
+                objectInteract.Interact();
+            }
+        }
     }
 }

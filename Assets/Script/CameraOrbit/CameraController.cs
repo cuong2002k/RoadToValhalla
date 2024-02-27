@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     // what is following?
     [SerializeField] private Transform focus = default;
 
-
     [SerializeField] private Transform pivotCameraTranform = default;
 
     [Header("Camera Settings")]
@@ -17,8 +16,8 @@ public class CameraController : MonoBehaviour
     [Range(25f, 100f)] private float cameraUpandDownSpeed = 40f;
     [SerializeField]
     [Range(25f, 100f)] private float cameraLeftAndRightSpeed = 40f;
-    private float minimunLookAngle = -40f;
-    private float maxLookAngle = 60f;
+    [SerializeField] private float minimunLookAngle = -40f;
+    [SerializeField] private float maxLookAngle = 60f;
 
     [Header("Camera value")]
     private Vector3 currentVelocity;

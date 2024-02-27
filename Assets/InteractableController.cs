@@ -22,16 +22,6 @@ public class InteractableController : MonoBehaviour
             {
                 _textSelectionInfor.text = objectSelect.GetNameItemSelect();
                 _textSelectionInfor.gameObject.SetActive(true);
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    IInteractable objectInteract = hit.transform.gameObject.GetComponent<IInteractable>();
-                    if (objectInteract != null)
-                    {
-                        objectInteract.Interact();
-                    }
-                }
-
             }
             else
             {

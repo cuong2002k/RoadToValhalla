@@ -7,7 +7,7 @@ using System;
 using TMPro;
 public class SlotUI : SlotView, IPointerClickHandler
 {
-    public InventoryModel Inventory { get; set; }
+    public InventoryModel Inventory { get; private set; }
     public void SetInventory(InventoryModel inventoryPanel)
     {
         this.Inventory = inventoryPanel;
@@ -33,6 +33,13 @@ public class SlotUI : SlotView, IPointerClickHandler
                 InventoryModel toInventory = this.Inventory;
                 OnDropAction?.Invoke(fromSlotID, toSlotID, fromInventory, toInventory);
             }
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            ItemStack equipItem = this.Inventory[this._slotID];
+            equipItem.Equip();
+            Inventory.Invoke();
         }
     }
 

@@ -5,11 +5,11 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
 {
     [SerializeField] ItemStack _item = new ItemStack();
-    private InventoryModel inventory;
+    [SerializeField] private InventoryController _inventory;
 
     private void Start()
     {
-        inventory = InventoryController.Instance.InventoryModel;
+        _inventory = InventoryController.Instance;
     }
 
     public ItemStack ItemStack
@@ -42,15 +42,17 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
 
     public void AddItemToInventory()
     {
-        if (_item != null)
+        if (!_item.IsEmpty())
         {
-            int stackRemaining = inventory.AddItem(_item);
-            inventory.Invoke();
+            int stackRemaining = _inventory.AddItem(_item);
+            _inventory.RefestUI();
             _item.SetStack(stackRemaining);
             if (stackRemaining == 0)
             {
                 Destroy(this.gameObject);
             }
+
         }
+
     }
 }
