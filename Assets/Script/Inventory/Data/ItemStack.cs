@@ -135,7 +135,7 @@ public class ItemStack
             }
             else
             {
-                (_item as CraftItem).Equip();
+                _item.Equip();
             }
         }
     }

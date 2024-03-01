@@ -9,6 +9,8 @@ public class PlayerState : IState
     protected PlayerMachine _playerMachine;
     protected string _aminBoolName;
 
+    protected float _startTime;
+
     public PlayerState(PlayerController player, PlayerMachine playerMachine, PlayerData playerData, string aminBoolName)
     {
         this._player = player;
@@ -22,6 +24,8 @@ public class PlayerState : IState
     {
         DoCheck();
         _player.PlayerAmin.SetBool(_aminBoolName, true);
+        _startTime = Time.time;
+        //_player.PlayerAmin.applyRootMotion = true;
         Debug.Log("Start state " + _aminBoolName);
     }
 
@@ -43,6 +47,8 @@ public class PlayerState : IState
     public override void OnExit()
     {
         _player.PlayerAmin.SetBool(_aminBoolName, false);
+        _startTime = 0f;
+        //_player.PlayerAmin.applyRootMotion = false;
         Debug.Log("Exit state " + _aminBoolName);
     }
 

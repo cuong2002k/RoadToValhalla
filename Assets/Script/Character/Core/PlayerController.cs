@@ -26,14 +26,14 @@ public class PlayerController : MonoBehaviour
     public PlayerInAirState InAirState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerLandState LandState { get; private set; }
-
+    public PlayerAttackState AttackState { get; private set; }
 
     #endregion
 
     #region other variable
     public Vector3 CurrentVelocity { get; private set; }
     private Vector3 _moveDirection;
-    private float _rotationSpeed = 10f;
+    private float _rotationSpeed = 5f;
     [SerializeField] private Vector3 _yVelocity = Vector3.zero;
 
     #endregion
@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         LandState = new PlayerLandState(this, playerMachine, playerData, "Land");
         JumpState = new PlayerJumpState(this, playerMachine, playerData, "Jump");
         InAirState = new PlayerInAirState(this, playerMachine, playerData, "InAir");
+        AttackState = new PlayerAttackState(this, playerMachine, playerData, "Attack");
     }
 
     private void Start()
@@ -185,4 +186,5 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
 }

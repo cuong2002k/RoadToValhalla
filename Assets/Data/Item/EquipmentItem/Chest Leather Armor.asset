@@ -17,8 +17,8 @@ MonoBehaviour:
   _itemType: 2
   _maxStack: 1
   _description: Chest Leather Armor
-  _itemPrefabs: {fileID: 6213179630400706666, guid: 36f8f7600f0ba1c4db26953b43a4319d, type: 3}
+  _itemObject: {fileID: 6213179630400706666, guid: 36f8f7600f0ba1c4db26953b43a4319d, type: 3}
   _equipmentType: 1
   _attackModifier: 1
-  _armorModifier: 1
+  _armorModifier: 3
   _equipmentMesh: {fileID: 7497151007666427146, guid: abc70b28a31dd59429cad2e5e26238c3, type: 3}

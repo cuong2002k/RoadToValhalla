@@ -8,8 +8,8 @@ public class PlayerGroundedState : PlayerState
     protected bool _isJumping;
     protected bool _isSprinting;
     protected bool _isCround;
+    protected bool _isAttack;
     protected bool _groundCheck;
-
     public PlayerGroundedState(PlayerController player, PlayerMachine playerMachine, PlayerData playerData, string aminBoolName)
     : base(player, playerMachine, playerData, aminBoolName)
     {
@@ -26,6 +26,10 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
         HandlerAllInput();
         _player.PlayerAmin.SetBool("Grounded", _groundCheck);
+        if (_isAttack)
+        {
+            _playerMachine.ChangeState(_player.AttackState);
+        }
         if (_isJumping && _groundCheck && _player.CurrentVelocity.y <= 0.1f)
         {
             _playerMachine.ChangeState(_player.JumpState);
@@ -51,6 +55,7 @@ public class PlayerGroundedState : PlayerState
         _isJumping = _player.InputHandler.JumpInput;
         _isSprinting = _player.InputHandler.ShiftInput;
         _isCround = _player.InputHandler.CroundInput;
+        _isAttack = _player.InputHandler.AttackInput;
     }
 
 

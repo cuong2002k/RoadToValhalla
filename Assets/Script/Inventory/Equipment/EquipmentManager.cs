@@ -20,10 +20,13 @@ public class EquipmentManager : MonoBehaviour
     #endregion
 
     #region Equipment tranfrom
-    [SerializeField] private Transform _bodyTranform;
-    [SerializeField] private Transform _hipsTranform;
+
+    private CharacterMesh characterMesh;
+
     #endregion
+
     [SerializeField] private EquipmentItem[] _currentEquipment;
+    [SerializeField] private SkinnedMeshRenderer[] _currentSkinnedMesh;
 
     // old item and new item
     public Action<EquipmentItem, EquipmentItem> OnChangeEquipmentItem;
@@ -34,6 +37,8 @@ public class EquipmentManager : MonoBehaviour
     {
         int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
         _currentEquipment = new EquipmentItem[size];
+        _currentSkinnedMesh = new SkinnedMeshRenderer[size];
+        characterMesh = GetComponent<CharacterMesh>();
     }
 
     public void Equip(EquipmentItem equipmentItem)
@@ -43,9 +48,20 @@ public class EquipmentManager : MonoBehaviour
         if (this._currentEquipment[index] != null)
         {
             EquipmentItem oldEquipment = _currentEquipment[index];
+            Destroy(_currentSkinnedMesh[index].gameObject);
+            _currentSkinnedMesh[index] = null;
             InventoryController.Instance.AddItem(new ItemStack(oldEquipment, 1));
+
+            OnChangeEquipmentItem?.Invoke(null, oldEquipment);
         }
         this._currentEquipment[index] = equipmentItem;
+        OnChangeEquipmentItem?.Invoke(equipmentItem, null);
+        characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
 
     }
+
+
+
+
+
 }

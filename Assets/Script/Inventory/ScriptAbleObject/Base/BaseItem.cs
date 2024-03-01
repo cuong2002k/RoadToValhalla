@@ -10,7 +10,7 @@ public class BaseItem : ScriptableObject
     [SerializeField] protected int _maxStack = 1;
     [TextArea(2, 5)][SerializeField] protected string _description;
 
-    [SerializeField] private GameObject _itemPrefabs = null;
+    [SerializeField] protected GameObject _itemObject = null;
 
     #region getter & setter
 
@@ -19,7 +19,7 @@ public class BaseItem : ScriptableObject
     public ItemType GetItemType() => this._itemType;
     public int GetMaxStacks() => this._maxStack;
     public string GetDescription() => this._description;
-    public GameObject GetITemPrefabs() => this._itemPrefabs;
+    public GameObject GetITemPrefabs() => this._itemObject;
     #endregion
 
     public virtual void Equip()

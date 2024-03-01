@@ -16331,6 +16331,8 @@ GameObject:
   - component: {fileID: 1658801187100835250}
   - component: {fileID: 2838240440633496583}
   - component: {fileID: 6520529859805572320}
+  - component: {fileID: 4643341652262315955}
+  - component: {fileID: 1515197071268211899}
   m_Layer: 0
   m_Name: Man
   m_TagString: Untagged
@@ -16387,8 +16389,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -16403,13 +16405,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.24
+  m_Height: 1.7
+  m_Radius: 0.18
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.91, z: 0}
 --- !u!114 &1658801187100835250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16449,7 +16451,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444328ed1c84fde4ca4f0cf1ac340a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEquipment: []
+  _currentEquipment: []
+  _currentSkinnedMesh: []
+--- !u!114 &4643341652262315955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951727933152313532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82a4aa73d063b14695bf316b011e3eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyTranform: {fileID: 0}
+  originalMesh:
+  - {fileID: 7033215378661129298}
+  - {fileID: 7032935777262596158}
+  - {fileID: 7032355337009896440}
+  currentMesh: []
+--- !u!114 &1515197071268211899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951727933152313532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a42b12d0d59794a817446cd10259ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHp:
+    _baseStats: 100
+    modifiedBonus: 
+  _damage:
+    _baseStats: 15
+    modifiedBonus: 
+  _defense:
+    _baseStats: 0
+    modifiedBonus: 
 --- !u!1 &6951727943498061438
 GameObject:
   m_ObjectHideFlags: 0

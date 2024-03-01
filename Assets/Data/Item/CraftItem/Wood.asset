@@ -17,4 +17,4 @@ MonoBehaviour:
   _itemType: 3
   _maxStack: 10
   _description: Good for building.
-  _itemPrefabs: {fileID: 5088806096400972625, guid: 9adbae1fc66859746b96bf08e6c3e205, type: 3}
+  _itemObject: {fileID: 5088806096400972625, guid: 9adbae1fc66859746b96bf08e6c3e205, type: 3}

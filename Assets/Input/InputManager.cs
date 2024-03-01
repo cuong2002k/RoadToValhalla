@@ -6,18 +6,8 @@ using System;
 
 public class InputManager : MonoBehaviour
 {
+    #region Singleton 
     public static InputManager Instance;
-    public static event Action OpenInventoryEvent;
-    public Vector2 MouseInput { get; private set; }
-    private Vector2 movementInput;
-    public float XInput { get; private set; }
-    public float YInput { get; private set; }
-
-
-    public bool ShiftInput { get; private set; }
-    public bool JumpInput { get; private set; }
-    public bool CroundInput { get; private set; }
-
     private InputHandler inputActions;
     private void Awake()
     {
@@ -31,25 +21,54 @@ public class InputManager : MonoBehaviour
         }
         inputActions = new InputHandler();
     }
+
+    #endregion
+    public static event Action OpenInventoryEvent;
+
+    public Vector2 MouseInput { get; private set; }
+
+    #region Movement input
+    private Vector2 movementInput;
+    public float XInput { get; private set; }
+    public float YInput { get; private set; }
+    #endregion
+
+    public bool ShiftInput { get; private set; }
+    public bool JumpInput { get; private set; }
+    public bool CroundInput { get; private set; }
+    public bool AttackInput { get; private set; }
+
+
     private void OnEnable()
     {
 
         inputActions.Enable();
         if (inputActions != null)
         {
+            // movement input
             inputActions.Player.Movement.started += HandlerMovementInput;
             inputActions.Player.Movement.performed += HandlerMovementInput;
             inputActions.Player.Movement.canceled += HandlerMovementInput;
+            // get mouse movement input
             inputActions.Mouse.Mouse.performed += i => MouseInput = i.ReadValue<Vector2>();
 
+            // jumping input
             inputActions.Player.Jumping.started += HandlerJumpInput;
             inputActions.Player.Jumping.canceled += HandlerJumpInput;
 
+            // cround input
             inputActions.Player.Cround.started += HandlerCroundInput;
             inputActions.Player.Cround.canceled += HandlerCroundInput;
 
+            //Sprinting input
             inputActions.Player.Running.started += handlerShiftInput;
             inputActions.Player.Running.canceled += handlerShiftInput;
+
+            //Attack input
+            inputActions.Mouse.Attack.started += HandlerAttackInput;
+            inputActions.Mouse.Attack.canceled += HandlerAttackInput;
+
+
 
             inputActions.Player.Inventory.started += HandlerInventoryInput;
 
@@ -124,6 +143,19 @@ public class InputManager : MonoBehaviour
     public void ResetJumpInput()
     {
         JumpInput = false;
+    }
+
+    public void HandlerAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            AttackInput = true;
+        }
+
+        if (context.canceled)
+        {
+            AttackInput = false;
+        }
     }
 
 

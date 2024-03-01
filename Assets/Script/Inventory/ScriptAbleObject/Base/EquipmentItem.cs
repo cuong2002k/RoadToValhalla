@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
 public enum EquipmentType // slot equipment
 {
     Helmet,
@@ -19,6 +20,9 @@ public class EquipmentItem : BaseItem
     #region getter & setter
     public EquipmentType GetEquipmentType() => this._equipmentType;
     public SkinnedMeshRenderer GetEquipmentMesh() => this._equipmentMesh;
+    public int GetAttackModified() => this._attackModifier;
+
+    public int GetArmorModifier() => this._armorModifier;
 
     #endregion
 

@@ -21,7 +21,7 @@ public class InventoryModel
         {
             _inventory[i] = new ItemStack();
         }
-        Debug.Log(_inventory.Length);
+        
     }
 
     public ItemStack this[int index]
@@ -34,7 +34,6 @@ public class InventoryModel
     {
 
         int stack = item.GetStack();
-        Debug.Log(FindFirstFreeSlot());
         // find contain item slot => combine stack
         for (int i = 0; i < this._inventory.Length; i++)
         {
