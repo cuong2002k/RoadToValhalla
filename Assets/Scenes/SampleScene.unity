@@ -1215,8 +1215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftHand: {fileID: 718219750}
   _rightHand: {fileID: 1784947594}
-  _defaultWeapon: {fileID: 11400000, guid: aa38ee22779c89142b060ce235b2c810, type: 2}
-  _playerAnimator: {fileID: 0}
+  _defaultWeapon: {fileID: 0}
 --- !u!1001 &2032094308
 PrefabInstance:
   m_ObjectHideFlags: 0

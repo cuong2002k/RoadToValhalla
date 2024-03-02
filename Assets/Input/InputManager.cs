@@ -37,6 +37,7 @@ public class InputManager : MonoBehaviour
     public bool JumpInput { get; private set; }
     public bool CroundInput { get; private set; }
     public bool AttackInput { get; private set; }
+    public int HotBarInput { get; private set; }
 
 
     private void OnEnable()
@@ -69,8 +70,10 @@ public class InputManager : MonoBehaviour
             inputActions.Mouse.Attack.canceled += HandlerAttackInput;
 
 
-
             inputActions.Player.Inventory.started += HandlerInventoryInput;
+            inputActions.Player.HotBar.started += NumberKeyPressed;
+            inputActions.Player.HotBar.canceled += NumberKeyPressed;
+
 
         }
     }
@@ -158,5 +161,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void NumberKeyPressed(InputAction.CallbackContext context)
+    {
+        int keyNumber = int.Parse(context.control.name);
+        if (context.started)
+        {
+            HotBarInput = keyNumber;
+        }
+
+        if (context.canceled)
+        {
+            HotBarInput = -1;
+        }
+    }
 
 }

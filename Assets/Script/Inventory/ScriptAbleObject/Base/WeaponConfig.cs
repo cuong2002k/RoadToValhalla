@@ -53,15 +53,39 @@ public class WeaponConfig : BaseItem
 
     public void DestroyWeapon(Transform leftHand, Transform rightHand)
     {
-        Transform oldWepon = leftHand.Find(this._itemName);
-        if (oldWepon == null)
+        Transform oldWeapon = null;
+
+        if (_handEquip == HandEquip.LeftHand)
         {
-            oldWepon = rightHand.Find(this._itemName);
+            oldWeapon = leftHand.Find(this._itemName);
+            DestroyWeaponObject(oldWeapon);
+        }
+        else if (_handEquip == HandEquip.LeftHand)
+        {
+            oldWeapon = rightHand.Find(this._itemName);
+            DestroyWeaponObject(oldWeapon);
+        }
+        else if (_handEquip == HandEquip.AbothHand)
+        {
+            oldWeapon = leftHand.Find(this._itemName);
+            DestroyWeaponObject(oldWeapon);
+            oldWeapon = rightHand.Find(this._itemName);
+            DestroyWeaponObject(oldWeapon);
         }
 
-        if (oldWepon != null)
+    }
+
+    private void DestroyWeaponObject(Transform oldWeapon)
+    {
+        if (oldWeapon != null)
         {
-            Destroy(oldWepon.gameObject);
+            Destroy(oldWeapon.gameObject);
         }
+    }
+
+    public override void Equip()
+    {
+        base.Equip();
+        PlayerWeaponEquipment.Instance.SetWeapon(this);
     }
 }

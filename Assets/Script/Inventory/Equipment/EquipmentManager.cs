@@ -28,7 +28,7 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField] private EquipmentItem[] _currentEquipment;
     [SerializeField] private SkinnedMeshRenderer[] _currentSkinnedMesh;
 
-    // old item and new item
+    // Event to change Stats modifier when change equipment item
     public Action<EquipmentItem, EquipmentItem> OnChangeEquipmentItem;
     public Action<EquipmentItem, EquipmentItem> OnChangeUnEquipmentItem;
 
@@ -41,21 +41,28 @@ public class EquipmentManager : MonoBehaviour
         characterMesh = GetComponent<CharacterMesh>();
     }
 
+    // equipment item
     public void Equip(EquipmentItem equipmentItem)
     {
+        // get index with id of enum
         int index = (int)equipmentItem.GetEquipmentType();
-
+        //item contains in slot => destroy this
         if (this._currentEquipment[index] != null)
         {
             EquipmentItem oldEquipment = _currentEquipment[index];
             Destroy(_currentSkinnedMesh[index].gameObject);
             _currentSkinnedMesh[index] = null;
+            //add item to inventory
             InventoryController.Instance.AddItem(new ItemStack(oldEquipment, 1));
 
+            // call event update stats
             OnChangeEquipmentItem?.Invoke(null, oldEquipment);
         }
+        // set current equipment
         this._currentEquipment[index] = equipmentItem;
+        // call event update stats
         OnChangeEquipmentItem?.Invoke(equipmentItem, null);
+        // Update Mesh
         characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
 
     }

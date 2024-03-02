@@ -13,8 +13,6 @@ public class CharacterStats : MonoBehaviour
         EquipmentManager.Instance.OnChangeEquipmentItem += UpdateModified;
     }
 
-
-
     private void UpdateModified(EquipmentItem newItem, EquipmentItem oldItem)
     {
         if (newItem != null)
@@ -31,4 +29,6 @@ public class CharacterStats : MonoBehaviour
 
         // Debug.Log(_damage.GetStatsValue() + " " + _defense.GetStatsValue());
     }
+
+    
 }
