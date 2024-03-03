@@ -167,6 +167,7 @@ public class InputManager : MonoBehaviour
         if (context.started)
         {
             HotBarInput = keyNumber;
+            HotBarContainer.Instance.UseSlot(HotBarInput);
         }
 
         if (context.canceled)

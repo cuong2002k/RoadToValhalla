@@ -7,7 +7,10 @@ using System;
 using TMPro;
 public class SlotUI : SlotView, IPointerClickHandler
 {
+    [SerializeField] private Image _iconActive;
     public InventoryModel Inventory { get; private set; }
+    [SerializeField] Color _defaultColor;
+    [SerializeField] Color _activeColor;
     public void SetInventory(InventoryModel inventoryPanel)
     {
         this.Inventory = inventoryPanel;
@@ -15,6 +18,63 @@ public class SlotUI : SlotView, IPointerClickHandler
 
     public Action<SlotUI, PointerEventData> OnClickAction = delegate { };
     public Action<int, int, InventoryModel, InventoryModel> OnDropAction = delegate { };
+
+
+    public ItemStack GetItemUI() => _itemUI;
+    public void SetItemUI(ItemStack item)
+    {
+        this._itemUI = item;
+        SetUI();
+    }
+
+    public void SetUI()
+    {
+        DisplayUI(!_itemUI.IsEmpty());
+        SetUIValue();
+    }
+
+    private void DisplayUI(bool active)
+    {
+        if (_itemIcon == null) Debug.Log("ItemIcon is null");
+        if (_stackItemText == null) Debug.Log("ItemStackUI is null");
+
+        if (_itemIcon != null && _stackItemText != null)
+        {
+            this._itemIcon.gameObject.SetActive(active);
+            this._stackItemText.gameObject.SetActive(active);
+        }
+    }
+
+    public void SetUIValue()
+    {
+        if (!_itemUI.IsEmpty())
+        {
+            SetColorActive(_itemUI.GetActive());
+            this._itemIcon.sprite = this._itemUI.GetItem().GetItemIcon();
+            if (_itemUI.GetStack() <= 1) _stackItemText.gameObject.SetActive(false);
+            this._stackItemText.text = "" + this._itemUI.GetStack() + "/" + this._itemUI.GetItem().GetMaxStacks();
+
+        }
+        else
+        {
+            SetColorActive(false);
+            this._itemIcon.sprite = null;
+            this._stackItemText.text = "0";
+        }
+    }
+
+    public void SetColorActive(bool active)
+    {
+        if (active)
+        {
+            _iconActive.color = _activeColor;
+        }
+        else
+        {
+            _iconActive.color = _defaultColor;
+        }
+    }
+
 
     public void OnPointerClick(PointerEventData eventData)
     {

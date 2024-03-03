@@ -7,7 +7,7 @@ public class ItemStack
 {
     [SerializeField] private BaseItem _item = null;
     [SerializeField] private int _stack = 0;
-
+    [SerializeField] private bool _isActive = false;
     #region Constructer
     public ItemStack()
     {
@@ -19,18 +19,27 @@ public class ItemStack
     {
         this._item = item;
         this._stack = stack;
+        this._isActive = false;
     }
 
+    public ItemStack(BaseItem item, int stack, bool isActive)
+    {
+        this._item = item;
+        this._stack = stack;
+        this._isActive = isActive;
+    }
     #endregion
 
     #region Get & Set
     public BaseItem GetItem() => this._item;
     public int GetStack() => this._stack;
-
+    public bool GetActive() => this._isActive;
+    public bool SetActive(bool value) => this._isActive = value;
     public void SetItemStack(ItemStack item)
     {
         this._item = item.GetItem();
         this._stack = item.GetStack();
+        this._isActive = item.GetActive();
     }
 
     public void SetItemStack(BaseItem item, int stack)
@@ -109,6 +118,7 @@ public class ItemStack
     {
         this._item = null;
         this._stack = 0;
+        this._isActive = false;
     }
 
     public void DropItem(ItemStack itemToDrop, Transform dropLocation, int stack)
@@ -136,7 +146,14 @@ public class ItemStack
             else
             {
                 _item.Equip();
+                this._isActive = true;
             }
         }
+    }
+
+    public void UnEquip()
+    {
+        this._isActive = false;
+        (_item as WeaponConfig).UnEquip();
     }
 }

@@ -18,14 +18,6 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
         set => this._item = value;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            AddItemToInventory();
-        }
-    }
-
     public string GetNameItemSelect()
     {
         return _item.GetItem().GetItemName();

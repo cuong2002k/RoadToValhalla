@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4459ff458eed4f742ae271b30c1793bb, type: 3}
+  m_Name: Rapier
+  m_EditorClassIdentifier: 
+  _itemName: Rapier
+  _icon: {fileID: 21300000, guid: 2a2ad8f921afd77458fb312a9ab7a732, type: 3}
+  _itemType: 2
+  _maxStack: 1
+  _description: Good
+  _itemObject: {fileID: 4448383462614344294, guid: 3a1e027005f5ab24c95dd8c3f2dffd9d, type: 3}
+  _animationOverride: {fileID: 22100000, guid: 66ffb1eb517bf6d4695a2b62e3eb0798, type: 2}
+  _handEquip: 1
+  _dameWeapon: 20
+  _weponObject: {fileID: 7217715998019414160, guid: 5eaafc3c3197abf489248c2d86bfdf0c, type: 3}

@@ -16,7 +16,7 @@ MonoBehaviour:
   sprintingSpeed: 5
   jumpHeight: 2
   croundSpeed: 1
-  groundCheckRadius: 0.1
+  groundCheckRadius: 0.05
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 64

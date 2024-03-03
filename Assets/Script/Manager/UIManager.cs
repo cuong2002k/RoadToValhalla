@@ -99,6 +99,7 @@ public class UIManager : MonoBehaviour
 
         ItemStack fromSlot = fromInventory[fromslotID];
         ItemStack toSlot = toInventory[toSlotID];
+
         if (fromslotID == toSlotID && fromInventory == toInventory)
         {
             SwapSlot(fromSlot, toSlot);
@@ -114,12 +115,12 @@ public class UIManager : MonoBehaviour
                 {
                     int stackRemaing = toSlot.AddStack(fromSlot.GetStack());
                     fromSlot.SetStack(stackRemaing);
-                    Debug.Log("Combine");
+
                 }
                 else if (fromSlot.GetStack() == this.slotMove.GetItemUI().GetStack())
                 {
                     SwapSlot(fromSlot, toSlot);
-                    Debug.Log("swap Not empty equal item");
+
                 }
             }
             else
@@ -127,7 +128,6 @@ public class UIManager : MonoBehaviour
                 if (fromSlot.GetStack() == this.slotMove.GetItemUI().GetStack())
                 {
                     SwapSlot(fromSlot, toSlot);
-                    Debug.Log("swap Not empty not equal full stack");
                 }
             }
         }
@@ -139,12 +139,12 @@ public class UIManager : MonoBehaviour
             {
                 toSlot.SetItemStack(slotMove.GetItemUI());
                 fromSlot.DecreaseStack(slotMove.GetItemUI().GetStack());
-                Debug.Log("split to empty slot");
+
             }
             else
             {
                 SwapSlot(fromSlot, toSlot);
-                Debug.Log("swap to empty slot");
+
             }
 
         }
@@ -172,7 +172,7 @@ public class UIManager : MonoBehaviour
 
     public void SwapSlot(ItemStack fromSlot, ItemStack toSlot)
     {
-        ItemStack temp = new ItemStack(fromSlot.GetItem(), fromSlot.GetStack());
+        ItemStack temp = new ItemStack(fromSlot.GetItem(), fromSlot.GetStack(), fromSlot.GetActive());
         fromSlot.SetItemStack(toSlot);
         toSlot.SetItemStack(temp);
 

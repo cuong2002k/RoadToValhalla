@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     #region gravity
     private float _gravity = -9.81f;
-    private float _groundedGravity = -0.05f;
+    [SerializeField]private float _groundedGravity = -0.05f;
     private float _gravityForce = -9.81f;
     private float _fallStartVelocity = -5f;
 

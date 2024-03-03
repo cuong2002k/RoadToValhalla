@@ -40,5 +40,8 @@ public class Container : MonoBehaviour
         }
     }
 
-
+    public void Invoke()
+    {
+        _inventoryModel.Invoke();
+    }
 }

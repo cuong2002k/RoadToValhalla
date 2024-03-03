@@ -16,6 +16,7 @@ public class WeaponConfig : BaseItem
     [SerializeField] private int _dameWeapon = 0;
     [SerializeField] private GameObject _weponObject;
     public AnimatorOverrideController GetAnimatorOverride() => _animationOverride;
+    public HandEquip GetHandEquip() => this._handEquip;
     public void SpawnWeapon(Transform leftHand, Transform rightHand, Animator animator)
     {
         //destroy old Weapon
@@ -57,30 +58,33 @@ public class WeaponConfig : BaseItem
 
         if (_handEquip == HandEquip.LeftHand)
         {
-            oldWeapon = leftHand.Find(this._itemName);
-            DestroyWeaponObject(oldWeapon);
+
+            DestroyWeaponObject(leftHand);
         }
-        else if (_handEquip == HandEquip.LeftHand)
+        else if (_handEquip == HandEquip.RightHand)
         {
             oldWeapon = rightHand.Find(this._itemName);
-            DestroyWeaponObject(oldWeapon);
+            DestroyWeaponObject(rightHand);
         }
         else if (_handEquip == HandEquip.AbothHand)
         {
-            oldWeapon = leftHand.Find(this._itemName);
-            DestroyWeaponObject(oldWeapon);
-            oldWeapon = rightHand.Find(this._itemName);
-            DestroyWeaponObject(oldWeapon);
+            DestroyWeaponObject(leftHand);
+            DestroyWeaponObject(rightHand);
         }
 
     }
 
-    private void DestroyWeaponObject(Transform oldWeapon)
+    private void DestroyWeaponObject(Transform hand)
     {
-        if (oldWeapon != null)
+        for (int i = 0; i < hand.childCount; i++)
         {
-            Destroy(oldWeapon.gameObject);
+            Transform weapon = hand.transform.GetChild(i);
+            if (weapon != null)
+            {
+                Destroy(weapon.gameObject);
+            }
         }
+
     }
 
     public override void Equip()
@@ -88,4 +92,11 @@ public class WeaponConfig : BaseItem
         base.Equip();
         PlayerWeaponEquipment.Instance.SetWeapon(this);
     }
+
+    public override void UnEquip()
+    {
+        base.UnEquip();
+        PlayerWeaponEquipment.Instance.UnEquipWeapon(this);
+    }
+
 }
