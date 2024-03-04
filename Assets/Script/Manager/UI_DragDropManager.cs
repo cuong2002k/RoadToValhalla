@@ -4,19 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-public class UIManager : MonoBehaviour
+public class UI_DragDropManager : MonoBehaviour
 {
-    public static UIManager Instance;
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this.gameObject);
-    }
-
-    [SerializeField] private static Transform canvas;
-    [SerializeField] private GameObject _playerInventoryPanel;
-    [SerializeField] private GameObject _craftingPanel;
-    [SerializeField] private GameObject _mousePoint;
+    private Transform canvas;
 
     #region Inventory Handler
     [HideInInspector] public SlotUI slotMove;
@@ -32,15 +22,6 @@ public class UIManager : MonoBehaviour
         canvas = this.transform;
     }
 
-    private void OnEnable()
-    {
-        InputManager.OpenInventoryEvent += HandlerUIInput;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.OpenInventoryEvent -= HandlerUIInput;
-    }
 
     private void Update()
     {
@@ -50,25 +31,8 @@ public class UIManager : MonoBehaviour
             MoveSlotItem(Input.mousePosition, iconDrag.gameObject);
         }
 
-        _mousePoint.gameObject.transform.position = Input.mousePosition;
 
-    }
 
-    public void HandlerUIInput()
-    {
-        if (_playerInventoryPanel.activeSelf)
-        {
-            _playerInventoryPanel.SetActive(false);
-            _craftingPanel.SetActive(false);
-            RestartMouseSlot();
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            _playerInventoryPanel.SetActive(true);
-            _craftingPanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
-        }
     }
 
     public void OnClickHandler(SlotUI slot, PointerEventData eventData)
@@ -165,7 +129,7 @@ public class UIManager : MonoBehaviour
 
     public void MoveSlotItem(Vector2 position, GameObject objectDrag)
     {
-        if (!UIManager.iDragHandler) return;
+        if (!UI_DragDropManager.iDragHandler) return;
         Vector2 Size = new Vector2(45, -45);
         objectDrag.transform.position = position + Size;
     }
@@ -177,5 +141,7 @@ public class UIManager : MonoBehaviour
         toSlot.SetItemStack(temp);
 
     }
+
+
 
 }

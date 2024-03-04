@@ -19,6 +19,8 @@ public class EquipmentManager : MonoBehaviour
     }
     #endregion
 
+    private InventoryController _inventoryController;
+
     #region Equipment tranfrom
 
     private CharacterMesh characterMesh;
@@ -39,6 +41,7 @@ public class EquipmentManager : MonoBehaviour
         _currentEquipment = new EquipmentItem[size];
         _currentSkinnedMesh = new SkinnedMeshRenderer[size];
         characterMesh = GetComponent<CharacterMesh>();
+        _inventoryController = PlayerUIManager.Instance.InventoryController;
     }
 
     // equipment item
@@ -53,7 +56,7 @@ public class EquipmentManager : MonoBehaviour
             Destroy(_currentSkinnedMesh[index].gameObject);
             _currentSkinnedMesh[index] = null;
             //add item to inventory
-            InventoryController.Instance.AddItem(new ItemStack(oldEquipment, 1));
+            _inventoryController.AddItem(new ItemStack(oldEquipment, 1));
 
             // call event update stats
             OnChangeEquipmentItem?.Invoke(null, oldEquipment);

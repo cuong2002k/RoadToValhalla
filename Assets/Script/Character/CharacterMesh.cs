@@ -4,9 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterMesh : MonoBehaviour
 {
-    public Dictionary<int, int> test;
-
-    [SerializeField] private Transform _bodyTranform;
+    [SerializeField] 
+    private Transform _bodyTranform;
 
     [SerializeField]
     public SkinnedMeshRenderer[] originalMesh;

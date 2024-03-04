@@ -9,7 +9,7 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
 
     private void Start()
     {
-        _inventory = InventoryController.Instance;
+        _inventory = PlayerUIManager.Instance.InventoryController;
     }
 
     public ItemStack ItemStack

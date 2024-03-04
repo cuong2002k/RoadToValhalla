@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    EquipmentManager _equipmentMananger;
+
     [SerializeField] StatsModifield _maxHp;
     [SerializeField] StatsModifield _damage;
     [SerializeField] StatsModifield _defense;
 
-    private void Start()
+    private void Awake()
     {
-        EquipmentManager.Instance.OnChangeEquipmentItem += UpdateModified;
+        _equipmentMananger = GetComponent<EquipmentManager>();
+    }
+
+    private void OnEnable()
+    {
+        _equipmentMananger.OnChangeEquipmentItem += UpdateModified;
+    }
+
+    private void OnDisable()
+    {
+        _equipmentMananger.OnChangeEquipmentItem -= UpdateModified;
     }
 
     private void UpdateModified(EquipmentItem newItem, EquipmentItem oldItem)
@@ -30,5 +42,5 @@ public class CharacterStats : MonoBehaviour
         // Debug.Log(_damage.GetStatsValue() + " " + _defense.GetStatsValue());
     }
 
-    
+
 }

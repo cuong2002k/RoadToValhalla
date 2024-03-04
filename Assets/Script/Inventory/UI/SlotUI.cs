@@ -7,17 +7,26 @@ using System;
 using TMPro;
 public class SlotUI : SlotView, IPointerClickHandler
 {
+    private UI_DragDropManager _dragDropManager;
+
     [SerializeField] private Image _iconActive;
     public InventoryModel Inventory { get; private set; }
     [SerializeField] Color _defaultColor;
     [SerializeField] Color _activeColor;
-    public void SetInventory(InventoryModel inventoryPanel)
-    {
-        this.Inventory = inventoryPanel;
-    }
-
     public Action<SlotUI, PointerEventData> OnClickAction = delegate { };
     public Action<int, int, InventoryModel, InventoryModel> OnDropAction = delegate { };
+
+    private void Start()
+    {
+        _dragDropManager = GetComponentInParent<UI_DragDropManager>();
+    }
+
+
+    public void SetInventory(InventoryModel inventory)
+    {
+        this.Inventory = inventory;
+    }
+
 
 
     public ItemStack GetItemUI() => _itemUI;
@@ -80,16 +89,16 @@ public class SlotUI : SlotView, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (UIManager.Instance.slotMove == null)
+            if (_dragDropManager.slotMove == null)
             {
                 OnClickAction?.Invoke(this, eventData);
             }
             else
             {
 
-                int fromSlotID = UIManager.Instance.slotMove.GetSlotID();
+                int fromSlotID = _dragDropManager.slotMove.GetSlotID();
                 int toSlotID = this._slotID;
-                InventoryModel fromInventory = UIManager.Instance.slotMove.Inventory;
+                InventoryModel fromInventory = _dragDropManager.slotMove.Inventory;
                 InventoryModel toInventory = this.Inventory;
                 OnDropAction?.Invoke(fromSlotID, toSlotID, fromInventory, toInventory);
             }

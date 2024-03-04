@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &718219749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 718219750}
+  m_Layer: 0
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &718219750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718219749}
+  m_LocalRotation: {x: 0.48176366, y: 0.4817635, z: 0.5175944, w: 0.51759416}
+  m_LocalPosition: {x: -41.2, y: -2, z: 1.9}
+  m_LocalScale: {x: 100.000015, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6948391951890809344}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
+--- !u!1 &1674069375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1674069376}
+  m_Layer: 8
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1674069376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674069375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6948333716784032234}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1784947593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784947594}
+  m_Layer: 0
+  m_Name: RightHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784947594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784947593}
+  m_LocalRotation: {x: 0.49999988, y: -0.50000006, z: 0.5, w: -0.5000001}
+  m_LocalPosition: {x: 11.500012, y: 2, z: -2.900006}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6948282733897856200}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
 --- !u!1 &6951306336818609192
 GameObject:
   m_ObjectHideFlags: 0
@@ -11556,7 +11649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6950179517867660542
 Transform:
   m_ObjectHideFlags: 0
@@ -16328,14 +16421,16 @@ GameObject:
   - component: {fileID: 7001217291563921548}
   - component: {fileID: 1414348145099809856}
   - component: {fileID: 9095431244359890176}
+  - component: {fileID: 778248881897483424}
   - component: {fileID: 1658801187100835250}
   - component: {fileID: 2838240440633496583}
   - component: {fileID: 6520529859805572320}
   - component: {fileID: 4643341652262315955}
   - component: {fileID: 1515197071268211899}
-  m_Layer: 0
+  - component: {fileID: 5333260949510988392}
+  m_Layer: 8
   m_Name: Man
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16354,6 +16449,7 @@ Transform:
   m_Children:
   - {fileID: 6948151743830902970}
   - {fileID: 6949861049794735204}
+  - {fileID: 1674069376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16412,6 +16508,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.91, z: 0}
+--- !u!114 &778248881897483424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951727933152313532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b5e413879956441890f9a7f203b42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1658801187100835250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16427,6 +16535,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 8ff7900f56f93fa40b10b31a47ea6de9, type: 2}
   cameraObject: {fileID: 0}
   _yVelocity: {x: 0, y: 0, z: 0}
+  _groundedGravity: -0.05
 --- !u!114 &2838240440633496583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16465,7 +16574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82a4aa73d063b14695bf316b011e3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bodyTranform: {fileID: 0}
+  _bodyTranform: {fileID: 1674069376}
   originalMesh:
   - {fileID: 7033215378661129298}
   - {fileID: 7032935777262596158}
@@ -16492,6 +16601,23 @@ MonoBehaviour:
   _defense:
     _baseStats: 0
     modifiedBonus: 
+--- !u!114 &5333260949510988392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951727933152313532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5b6672c2b49e84d94d00ab8af8118c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftHand: {fileID: 0}
+  _rightHand: {fileID: 0}
+  _leftHandWeapon: {fileID: 0}
+  _rightHandWeapon: {fileID: 0}
+  _defaultAnimtor: {fileID: 0}
 --- !u!1 &6951727943498061438
 GameObject:
   m_ObjectHideFlags: 0
@@ -18323,7 +18449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6948128960148667086
 Transform:
   m_ObjectHideFlags: 0
@@ -43344,7 +43470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6604780049663604627
 Transform:
   m_ObjectHideFlags: 0

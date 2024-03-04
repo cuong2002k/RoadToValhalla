@@ -4,28 +4,16 @@ using UnityEngine;
 
 public class PlayerWeaponEquipment : MonoBehaviour
 {
-    #region 
-    public static PlayerWeaponEquipment Instance;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    #endregion
-
-
+    #region two hand player
     [SerializeField] private Transform _leftHand;
     [SerializeField] private Transform _rightHand;
     public Transform GetLeftHand() => this._leftHand;
     public Transform GetRightHand() => this._rightHand;
     [SerializeField] private WeaponConfig _leftHandWeapon;
     [SerializeField] private WeaponConfig _rightHandWeapon;
+
+    #endregion
+
     private Animator _playerAnimator;
     [SerializeField] private AnimatorOverrideController _defaultAnimtor;
 
@@ -72,12 +60,15 @@ public class PlayerWeaponEquipment : MonoBehaviour
 
     public bool HasItemLeftHand()
     {
-        return (_leftHand != null) && (_leftHand.childCount > 0);
+        return HasContainsItem(_leftHand);
     }
     public bool HasItemRightHand()
     {
-        return (_rightHand != null) && (_rightHand.childCount > 0);
+        return HasContainsItem(_rightHand);
     }
 
-
+    public bool HasContainsItem(Transform transform)
+    {
+        return (transform != null) && (transform.childCount > 0);
+    }
 }

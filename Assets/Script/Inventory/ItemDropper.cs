@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ItemDropper : MonoBehaviour
 {
-    UIManager _uIManager;
+    private UI_DragDropManager _dragDropManager;
     private void Start()
     {
-        _uIManager = UIManager.Instance;
+        _dragDropManager = PlayerUIManager.Instance.DragDropManager;
     }
     public void DropItemSpawner(ItemStack item, int stack)
     {
@@ -20,8 +20,8 @@ public class ItemDropper : MonoBehaviour
     public void DropItem(ItemStack item, int stack)
     {
         item.DropItem(item, GetDropLocation(), stack);
-        this._uIManager.slotMove.Inventory.Invoke();
-        _uIManager.RestartMouseSlot();
+        this._dragDropManager.slotMove.Inventory.Invoke();
+        _dragDropManager.RestartMouseSlot();
     }
 
     public Transform GetDropLocation()

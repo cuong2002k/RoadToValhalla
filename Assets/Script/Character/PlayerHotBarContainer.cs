@@ -2,35 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HotBarContainer : Container
+public class PlayerHotBarContainer : Container
 {
-    #region Singleton
-    public static HotBarContainer Instance;
-    #endregion
-    private InputManager inputManager;
     private PlayerWeaponEquipment weponManager;
     public int Hotbar = 0;
 
     protected override void Start()
     {
         base.Start();
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-        inputManager = InputManager.Instance;
-        weponManager = PlayerWeaponEquipment.Instance;
-    }
-
-    private void Update()
-    {
-        Hotbar = inputManager.HotBarInput;
-
+        weponManager = PlayerManager.Instance.PlayerWeaponEquipment;
     }
 
     public void UseSlot(int index)

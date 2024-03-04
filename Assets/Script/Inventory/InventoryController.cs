@@ -6,22 +6,6 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class InventoryController : Container
 {
-    #region  Singleton
-    public static InventoryController Instance;
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-    #endregion
-
 
     #region Unity Call Back
     protected override void Start()

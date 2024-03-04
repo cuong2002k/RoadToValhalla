@@ -35,7 +35,8 @@ public class EquipmentItem : BaseItem
     public override void UnEquip()
     {
         base.UnEquip();
-        InventoryController.Instance.AddItem(new ItemStack(this, 1));
+        InventoryController inventory = PlayerUIManager.Instance.InventoryController;
+        inventory.AddItem(new ItemStack(this, 1));
     }
 
 }

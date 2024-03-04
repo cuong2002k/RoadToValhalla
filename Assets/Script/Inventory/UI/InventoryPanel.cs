@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class InventoryPanel
+public class InventoryPanel : MonoBehaviour
 {
     [SerializeField] private List<SlotUI> _slotUIContainer;
     private GameObject slotUIPrefabs;
-    public InventoryPanel(int size)
+    private void Awake()
     {
         slotUIPrefabs = Resources.Load<GameObject>("InventorySlotUI");
-        _slotUIContainer = new List<SlotUI>(size);
     }
 
     public void RefestInventoryUI(IList<ItemStack> items)
@@ -22,6 +21,11 @@ public class InventoryPanel
 
     public void Initialize(int size, Transform transformSpawn)
     {
+        if (_slotUIContainer == null)
+        {
+            _slotUIContainer = new List<SlotUI>(size);
+        }
+
         Transform inventoryGroup = transformSpawn;
         for (int index = 0; index < size; index++)
         {

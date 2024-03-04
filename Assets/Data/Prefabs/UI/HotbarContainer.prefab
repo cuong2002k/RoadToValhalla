@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8585290403494969757}
   - component: {fileID: 852975804}
+  - component: {fileID: 3101366267457186202}
   m_Layer: 5
   m_Name: HotbarContainer
   m_TagString: Untagged
@@ -46,6 +47,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8585290403494969756}
   m_CullTransparentMesh: 1
+--- !u!114 &3101366267457186202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8585290403494969756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 741b1fd182003e241aa650d9a4658e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryModel:
+    _inventory:
+      items: []
+  _inventoryPanel: {fileID: 0}
+  _inventoryPrefabs: {fileID: 8585290404001355566}
+  _inventorySize: 6
+  Hotbar: 0
 --- !u!1 &8585290404001355566
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +79,7 @@ GameObject:
   - component: {fileID: 8585290404001355564}
   - component: {fileID: 1308838298}
   - component: {fileID: 1308838297}
-  - component: {fileID: 8904214347934251743}
+  - component: {fileID: 4924442110385608961}
   m_Layer: 5
   m_Name: HolderContainer
   m_TagString: Untagged
@@ -165,7 +185,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8904214347934251743
+--- !u!114 &4924442110385608961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,12 +194,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8585290404001355566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 741b1fd182003e241aa650d9a4658e55, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e82c3e8ca99a743bc6d89a55bd5134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryModel:
-    _inventory:
-      items: []
-  _inventoryPanel:
-    _slotUIContainer: []
-  _inventorySize: 25
+  _slotUIContainer: []
