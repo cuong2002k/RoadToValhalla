@@ -4,16 +4,35 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    EquipmentManager _equipmentMananger;
+    private PlayerHudManger _playerHubManager;
+    private EquipmentManager _equipmentMananger;
 
     [SerializeField] StatsModifield _maxHp;
+    [SerializeField] StatsModifield _maxStamina;
     [SerializeField] StatsModifield _damage;
     [SerializeField] StatsModifield _defense;
+
+
+    public ObserverValue<float> CurrentStamina;
+    private float _staminaCostRegerator = 2f;
+    private float _staminaRegeneratorDelay = 2f;
+    private float _staminaRegeneratorTimer = 0;
+    private float _staminaTick = 0;
 
     private void Awake()
     {
         _equipmentMananger = GetComponent<EquipmentManager>();
     }
+
+    private void Start()
+    {
+        _playerHubManager = PlayerUIManager.Instance.PlayerHubManager;
+
+        _playerHubManager.SetMaxStatsBar(_maxStamina.GetStatsValue());
+        CurrentStamina.Set(_maxStamina.GetStatsValue());
+        CurrentStamina.OnchangeValue += _playerHubManager.SetValueStatsBar;
+    }
+
 
     private void OnEnable()
     {
@@ -42,5 +61,36 @@ public class CharacterStats : MonoBehaviour
         // Debug.Log(_damage.GetStatsValue() + " " + _defense.GetStatsValue());
     }
 
+    private void Update()
+    {
+        RegeneratorStatmina();
+    }
+
+    private void RegeneratorStatmina()
+    {
+        if (InputManager.Instance.ShiftInput) return;
+        if (InputManager.Instance.AttackInput) return;
+        if (InputManager.Instance.JumpInput) return;
+
+        _staminaRegeneratorTimer += Time.deltaTime;
+        if (_staminaRegeneratorTimer >= _staminaRegeneratorDelay)
+        {
+            if (this.CurrentStamina.Value < _maxStamina.GetStatsValue())
+            {
+                _staminaTick += Time.deltaTime;
+                if (_staminaTick >= 0.3f)
+                {
+                    _staminaTick = 0f;
+                    this.CurrentStamina.Value += _staminaCostRegerator;
+                }
+            }
+        }
+
+    }
+
+    public void ResetRegeneratorStaminaTimer()
+    {
+        _staminaRegeneratorTimer = 0;
+    }
 
 }

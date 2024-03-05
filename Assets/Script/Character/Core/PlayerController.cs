@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public PlayerMachine playerMachine { get; private set; }
     public PlayerData playerData;
     [SerializeField] private GameObject cameraObject;
-
+    public PlayerHudManger PlayerHudManager { get; private set; }
+    public CharacterStats CharacterStats { get; private set; }
 
     #region Component
     public InputManager InputHandler { get; private set; }
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     #region gravity
     private float _gravity = -9.81f;
-    [SerializeField]private float _groundedGravity = -0.05f;
+    [SerializeField] private float _groundedGravity = -0.05f;
     private float _gravityForce = -9.81f;
     private float _fallStartVelocity = -5f;
 
@@ -75,9 +76,11 @@ public class PlayerController : MonoBehaviour
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
+        CharacterStats = GetComponent<CharacterStats>();
+        PlayerHudManager = PlayerUIManager.Instance.PlayerHubManager;
+
         playerMachine.Inittialize(IdleState);
         _yVelocity.y = _groundedGravity;
-
     }
 
     private void Update()

@@ -24,7 +24,7 @@ public class PlayerMoveState : PlayerGroundedState
         {
             _playerMachine.ChangeState(_player.CroundState);
         }
-        else if (inputMovement != Vector3.zero && _groundCheck && _isSprinting)
+        else if (inputMovement != Vector3.zero && _groundCheck && _isSprinting && _currentStamina >= _playerData.SprintingCost)
         {
             _playerMachine.ChangeState(_player.SprintState);
         }

@@ -16,14 +16,11 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        PlayerWeaponEquipment = GetComponent<PlayerWeaponEquipment>();
     }
     #endregion
 
     [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
 
-    private void Start()
-    {
-        PlayerWeaponEquipment = GetComponent<PlayerWeaponEquipment>();
-    }
 
 }

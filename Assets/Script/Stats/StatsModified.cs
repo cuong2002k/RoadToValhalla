@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 [System.Serializable]
 public class StatsModifield
 {
@@ -14,7 +15,6 @@ public class StatsModifield
         modifiedBonus.ForEach(value => finalStats += value);
         return finalStats;
     }
-
     public void AddModified(int valueToAdd)
     {
         if (valueToAdd > 0)

@@ -6,19 +6,44 @@ using UnityEngine.UI;
 public class UI_StatsBar : MonoBehaviour
 {
     private Slider _statsSlider;
-    private void Start()
+    private RectTransform _rectranform;
+    private float _timeChangeValue = 0.5f;
+
+    private void Awake()
     {
         _statsSlider = GetComponent<Slider>();
-    }
+        _rectranform = GetComponent<RectTransform>();
+        ///
+    }/// 
+
 
     // update value
-    public void SetStatsValue(int newValue)
+    public void SetStatsValue(float newValue)
     {
-        _statsSlider.value = newValue;
+        StartCoroutine(SmoothSlide(newValue));
     }
+
     // set max value
-    public void SetMaxStats(int maxValue)
+    public void SetMaxStats(float maxValue)
     {
         _statsSlider.maxValue = maxValue;
+        _statsSlider.value = maxValue;
+        _rectranform.sizeDelta = new Vector2(maxValue * 2, _rectranform.sizeDelta.y);
+
+
+
+    }
+
+    IEnumerator SmoothSlide(float newvalue)
+    {
+        float currentTime = 0;
+        while (currentTime < _timeChangeValue)
+        {
+            yield return new WaitForEndOfFrame();
+            float currentStamina = _statsSlider.value;
+            float value = Mathf.Lerp(currentStamina, newvalue, currentTime / _timeChangeValue);
+            _statsSlider.value = value;
+            currentTime += Time.deltaTime;
+        }
     }
 }

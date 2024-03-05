@@ -10,6 +10,7 @@ public class PlayerGroundedState : PlayerState
     protected bool _isCround;
     protected bool _isAttack;
     protected bool _groundCheck;
+    protected float _currentStamina;
     public PlayerGroundedState(PlayerController player, PlayerMachine playerMachine, PlayerData playerData, string aminBoolName)
     : base(player, playerMachine, playerData, aminBoolName)
     {
@@ -25,12 +26,13 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
         HandlerAllInput();
+        _currentStamina = _player.CharacterStats.CurrentStamina.Value;
         _player.PlayerAmin.SetBool("Grounded", _groundCheck);
-        if (_isAttack)
+        if (_isAttack && _currentStamina >= _playerData.AttackCost)
         {
             _playerMachine.ChangeState(_player.AttackState);
         }
-        if (_isJumping && _groundCheck && _player.CurrentVelocity.y <= 0.1f)
+        if (_isJumping && _groundCheck && _player.CurrentVelocity.y <= 0.1f && _currentStamina >= _playerData.JumpCost)
         {
             _playerMachine.ChangeState(_player.JumpState);
         }

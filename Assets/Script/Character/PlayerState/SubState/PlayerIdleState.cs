@@ -24,13 +24,17 @@ public class PlayerIdleState : PlayerGroundedState
         {
             _playerMachine.ChangeState(_player.CroundState);
         }
-        else if (inputMovement != Vector3.zero && _groundCheck && _isSprinting)
-        {
-            _playerMachine.ChangeState(_player.SprintState);
-        }
         else if (inputMovement != Vector3.zero && _groundCheck)
         {
-            _playerMachine.ChangeState(_player.MoveState);
+            if (_groundCheck && _isSprinting && this._currentStamina >= _playerData.SprintingCost)
+            {
+                _playerMachine.ChangeState(_player.SprintState);
+            }
+            else if (inputMovement != Vector3.zero)
+            {
+                _playerMachine.ChangeState(_player.MoveState);
+            }
         }
+
     }
 }

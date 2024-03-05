@@ -5,14 +5,13 @@ using UnityEngine;
 public class PlayerHudManger : MonoBehaviour
 {
     [SerializeField] private UI_StatsBar _UIStatsBar;
-
-    public void SetValueStatsBar(int newValue)
+    public void SetValueStatsBar(float newValue)
     {
         this._UIStatsBar.SetStatsValue(newValue);
     }
 
-    public void SetMaxStatsBar(int maxValue)
+    public void SetMaxStatsBar(float maxValue)
     {
-        this._UIStatsBar.SetStatsValue(maxValue);
+        this._UIStatsBar.SetMaxStats(maxValue);
     }
 }

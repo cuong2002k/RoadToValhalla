@@ -16,9 +16,16 @@ public class PlayerUIManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        PlayerHubManager = GetComponentInChildren<PlayerHudManger>();
+        InventoryController = GetComponentInChildren<InventoryController>();
+        HotBarContainer = GetComponentInChildren<PlayerHotBarContainer>();
+        DragDropManager = GetComponent<UI_DragDropManager>();
     }
     #endregion
+
     #region Component
+    // [HideInInspector]
     [HideInInspector] public PlayerHudManger PlayerHubManager;
     [HideInInspector] public InventoryController InventoryController;
     [HideInInspector] public PlayerHotBarContainer HotBarContainer;
@@ -29,13 +36,7 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private GameObject _craftingPanel;
     [SerializeField] private GameObject _mousePoint;
 
-    private void Start()
-    {
-        PlayerHubManager = GetComponentInChildren<PlayerHudManger>();
-        InventoryController = GetComponentInChildren<InventoryController>();
-        HotBarContainer = GetComponentInChildren<PlayerHotBarContainer>();
-        DragDropManager = GetComponent<UI_DragDropManager>();
-    }
+
     private void OnEnable()
     {
         InputManager.OpenInventoryEvent += HandlerUIInput;
