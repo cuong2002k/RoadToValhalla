@@ -13,8 +13,8 @@ public class UI_StatsBar : MonoBehaviour
     {
         _statsSlider = GetComponent<Slider>();
         _rectranform = GetComponent<RectTransform>();
-        ///
-    }/// 
+
+    }
 
 
     // update value
@@ -29,9 +29,6 @@ public class UI_StatsBar : MonoBehaviour
         _statsSlider.maxValue = maxValue;
         _statsSlider.value = maxValue;
         _rectranform.sizeDelta = new Vector2(maxValue * 2, _rectranform.sizeDelta.y);
-
-
-
     }
 
     IEnumerator SmoothSlide(float newvalue)

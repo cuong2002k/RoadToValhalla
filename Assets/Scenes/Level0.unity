@@ -896,6 +896,53 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1094440363014653012, guid: 9f97d467be5ea7148a3496e1b77bf171, type: 3}
   m_PrefabInstance: {fileID: 1094440364136734320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1315585854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315585856}
+  - component: {fileID: 1315585855}
+  m_Layer: 0
+  m_Name: SaveLoadSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1315585855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315585854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8a9fe8351a2c94cb27413f98da6b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    SaveName: 
+    CurrentLevel: 
+--- !u!4 &1315585856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315585854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25, y: 5.8070865, z: 25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1387591548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6213179630400706668, guid: 36f8f7600f0ba1c4db26953b43a4319d, type: 3}
@@ -2096,10 +2143,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5268604884922396091, guid: 77e75738f9192c248a663aad04be8e31, type: 3}
-      propertyPath: distanceToRay
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5268604884922396091, guid: 77e75738f9192c248a663aad04be8e31, type: 3}
       propertyPath: _textSelectionInfor
       value: 
       objectReference: {fileID: 612461538125482108}
@@ -2155,7 +2198,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3076060173780405658, guid: 77e75738f9192c248a663aad04be8e31, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 77e75738f9192c248a663aad04be8e31, type: 3}
 --- !u!1001 &8819305108577611406
 PrefabInstance:

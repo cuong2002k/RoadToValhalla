@@ -36,6 +36,14 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private GameObject _craftingPanel;
     [SerializeField] private GameObject _mousePoint;
 
+    private void Start()
+    {
+        _playerInventoryPanel.SetActive(false);
+        _craftingPanel.SetActive(false);
+        DragDropManager.RestartMouseSlot();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
 
     private void OnEnable()
     {
@@ -54,19 +62,12 @@ public class PlayerUIManager : MonoBehaviour
 
     public void HandlerUIInput()
     {
-        if (_playerInventoryPanel.activeSelf)
-        {
-            _playerInventoryPanel.SetActive(false);
-            _craftingPanel.SetActive(false);
-            DragDropManager.RestartMouseSlot();
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            _playerInventoryPanel.SetActive(true);
-            _craftingPanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
-        }
+
+        _playerInventoryPanel.SetActive(!_playerInventoryPanel.activeSelf);
+        _craftingPanel.SetActive(!_craftingPanel.activeSelf);
+        DragDropManager.RestartMouseSlot();
+        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.Confined : CursorLockMode.Locked;
+
     }
 
 }
