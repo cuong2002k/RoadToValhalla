@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class BaseItem : ScriptableObject
+public class BaseItem : ScriptableObject, ISerializationCallbackReceiver
 {
+    [SerializeField] public string ID = null;
     [SerializeField] protected string _itemName;
     [SerializeField] protected Sprite _icon;
     [SerializeField] protected ItemType _itemType;
@@ -32,6 +33,18 @@ public class BaseItem : ScriptableObject
         Debug.Log("UnEquip item " + this.name);
     }
 
+    public void OnBeforeSerialize()
+    {
+        if (ID == null)
+        {
+            ID = System.Guid.NewGuid().ToString();
+        }
+    }
+
+    public void OnAfterDeserialize()
+    {
+
+    }
 }
 
 public enum ItemType

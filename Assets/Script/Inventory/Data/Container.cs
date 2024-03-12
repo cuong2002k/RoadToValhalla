@@ -13,27 +13,27 @@ public class Container : MonoBehaviour
     // Inventory UI
     [SerializeField] protected InventoryPanel _inventoryPanel;
     [SerializeField] protected GameObject _inventoryPrefabs;
-    [SerializeField] protected int _inventorySize = 25;
+    [SerializeField] protected int _inventorySize = 24;
 
     #endregion
 
 
     protected virtual void Awake()
     {
-
+        _inventoryPanel = GetComponentInChildren<InventoryPanel>();
+        _dragDropManager = GetComponentInParent<UI_DragDropManager>();
+        StartCoroutine(Initialize());
     }
 
     protected virtual void Start()
     {
-        _inventoryPanel = GetComponentInChildren<InventoryPanel>();
-        _dragDropManager = GetComponentInParent<UI_DragDropManager>();
-        Initialize();
+
     }
 
-    protected void Initialize()
+    IEnumerator Initialize()
     {
-        _inventoryModel = new InventoryModel(_inventorySize);
         _inventoryPanel.Initialize(_inventorySize, _inventoryPrefabs.transform);
+        _inventoryModel = new InventoryModel(_inventorySize);
         _inventoryModel.OnInventoryChange += this._inventoryPanel.RefestInventoryUI;
 
         for (int i = 0; i < _inventorySize; i++)
@@ -45,6 +45,8 @@ public class Container : MonoBehaviour
                 _inventoryPanel[i].OnDropAction += _dragDropManager.OnDropHandler;
             }
         }
+        Invoke();
+        yield return null;
     }
 
     public void Invoke()

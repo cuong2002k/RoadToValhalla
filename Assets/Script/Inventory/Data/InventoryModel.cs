@@ -6,6 +6,7 @@ using System;
 public class InventoryModel
 {
     [SerializeField] private ObserverArray<ItemStack> _inventory;
+    [SerializeField] private InventoryData _inventoryData = new InventoryData();
 
     //event refest inventory UI
     public event Action<ItemStack[]> OnInventoryChange
@@ -21,8 +22,40 @@ public class InventoryModel
         {
             _inventory[i] = new ItemStack();
         }
-        
     }
+
+    public void Bind(InventoryData inventoryData, int size)
+    {
+        this._inventoryData = inventoryData;
+        this._inventoryData.size = size;
+        bool isNew = inventoryData.size == 0 || inventoryData.items == null;
+        if (isNew)
+        {
+            _inventoryData.size = size;
+            _inventoryData.items = new ItemStack[size];
+            for (int i = 0; i < size; i++)
+            {
+                _inventoryData.items[i] = new ItemStack();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < inventoryData.items.Length; i++)
+            {
+                if (inventoryData.items[i].IsEmpty()) continue;
+                BaseItem item = ItemDatabase.GetItemWithID(inventoryData.items[i].Id);
+                if (item != null)
+                {
+                    inventoryData.items[i].SetItemStack(item, inventoryData.items[i].GetStack());
+                }
+            }
+        }
+        this._inventory.Items = _inventoryData.items;
+        Invoke();
+        Debug.Log("Bind Inventory Data");
+    }
+
+
 
     public ItemStack this[int index]
     {

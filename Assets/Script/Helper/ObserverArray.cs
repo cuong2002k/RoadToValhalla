@@ -16,7 +16,14 @@ public class ObserverArray<T> : IObserverArray<T>
 {
     [SerializeField] private T[] items;
     public event Action<T[]> OnArrayChange = delegate { };
-
+    public T[] Items
+    {
+        get => items;
+        set
+        {
+            items = value;
+        }
+    }
     public ObserverArray(int size)
     {
         items = new T[size];

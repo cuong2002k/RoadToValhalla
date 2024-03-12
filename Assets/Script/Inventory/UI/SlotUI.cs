@@ -38,6 +38,7 @@ public class SlotUI : SlotView, IPointerClickHandler
 
     public void SetUI()
     {
+        if(_itemUI == null) return;
         DisplayUI(!_itemUI.IsEmpty());
         SetUIValue();
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class EquipmentManager : MonoBehaviour
+public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
 {
     #region Singleton
     public static EquipmentManager Instance;
@@ -16,6 +16,9 @@ public class EquipmentManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        _characterMesh = GetComponent<CharacterMesh>();
+        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
+        _currentEquipment = new EquipmentItem[size];
     }
     #endregion
 
@@ -23,24 +26,19 @@ public class EquipmentManager : MonoBehaviour
 
     #region Equipment tranfrom
 
-    private CharacterMesh characterMesh;
-
+    private CharacterMesh _characterMesh;
+    [SerializeField] private EquipmentData _equipmentData = new EquipmentData();
     #endregion
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
 
     [SerializeField] private EquipmentItem[] _currentEquipment;
-    [SerializeField] private SkinnedMeshRenderer[] _currentSkinnedMesh;
 
     // Event to change Stats modifier when change equipment item
     public Action<EquipmentItem, EquipmentItem> OnChangeEquipmentItem;
     public Action<EquipmentItem, EquipmentItem> OnChangeUnEquipmentItem;
 
-
     private void Start()
     {
-        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
-        _currentEquipment = new EquipmentItem[size];
-        _currentSkinnedMesh = new SkinnedMeshRenderer[size];
-        characterMesh = GetComponent<CharacterMesh>();
         _inventoryController = PlayerUIManager.Instance.InventoryController;
     }
 
@@ -53,8 +51,6 @@ public class EquipmentManager : MonoBehaviour
         if (this._currentEquipment[index] != null)
         {
             EquipmentItem oldEquipment = _currentEquipment[index];
-            Destroy(_currentSkinnedMesh[index].gameObject);
-            _currentSkinnedMesh[index] = null;
             //add item to inventory
             _inventoryController.AddItem(new ItemStack(oldEquipment, 1));
 
@@ -66,12 +62,39 @@ public class EquipmentManager : MonoBehaviour
         // call event update stats
         OnChangeEquipmentItem?.Invoke(equipmentItem, null);
         // Update Mesh
-        characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
-
+        _characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
     }
 
+    public void Bind(EquipmentData data)
+    {
+        _equipmentData = data;
+        bool isNew = _equipmentData.EquipData == null || _equipmentData == null;
+        if (isNew)
+        {
+            int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
+            _equipmentData.EquipData = new EquipmentItem[size];
+        }
+        else
+        {
+            for (int i = 0; i < _equipmentData.EquipData.Length; i++)
+            {
+                if (_equipmentData.EquipData[i] == null) continue;
+                EquipmentItem equipmentItem = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i].ID) as EquipmentItem;
+                if (equipmentItem != null)
+                {
+                    Equip(equipmentItem);
+                    _equipmentData.EquipData[i] = equipmentItem;
+                }
 
-
-
+            }
+        }
+        this._currentEquipment = _equipmentData.EquipData;
+    }
+}
+[System.Serializable]
+public class EquipmentData : ISaveData
+{
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
+    public EquipmentItem[] EquipData;
 
 }

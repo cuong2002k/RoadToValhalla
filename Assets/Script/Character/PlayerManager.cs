@@ -7,8 +7,10 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
 {
     #region Singleton
     public static PlayerManager Instance;
-    public Guid id { get; set; } = System.Guid.NewGuid();
-    public PlayerGameData playerData = new PlayerGameData();
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
+    public PlayerGameData _playerData = new PlayerGameData();
+    [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
+
     private void Awake()
     {
         if (Instance == null)
@@ -20,31 +22,31 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
             Destroy(this.gameObject);
         }
         PlayerWeaponEquipment = GetComponent<PlayerWeaponEquipment>();
-    }
-    #endregion  
 
+    }
+    #endregion
     public void Bind(PlayerGameData playerData)
     {
-        this.playerData = playerData;
-        this.playerData.id = id;
-        transform.position = playerData.position;
-        transform.rotation = playerData.rotation;
-    }
-    private void Update()
-    {
-        playerData.position = transform.position;
-        playerData.rotation = transform.rotation;
+        this._playerData = playerData;
+        transform.position = _playerData.position;
     }
 
-    [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
+    private void LateUpdate()
+    {
+        _playerData.position = transform.position;
+    }
 
 
 }
 [Serializable]
 public class PlayerGameData : ISaveData
 {
-    public Guid id { get; set; } = System.Guid.NewGuid();
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
     public Vector3 position;
-    public Quaternion rotation;
+
+    public PlayerGameData()
+    {
+        position = Vector3.zero;
+    }
 
 }

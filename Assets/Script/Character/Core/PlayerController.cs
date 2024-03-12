@@ -70,8 +70,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.Player = this.gameObject;
-
         InputHandler = InputManager.Instance;
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();

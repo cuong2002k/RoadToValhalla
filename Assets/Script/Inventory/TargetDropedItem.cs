@@ -10,7 +10,7 @@ public class TargetDropedItem : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        _player = GameManager.Instance.Player;
+        _player = PlayerManager.Instance.gameObject;
         _itemDropper = _player.GetComponent<ItemDropper>();
         _dragDropManager = PlayerUIManager.Instance.DragDropManager;
     }
@@ -18,10 +18,10 @@ public class TargetDropedItem : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (_dragDropManager.slotMove == null) return;
+
         int slotid = _dragDropManager.slotMove.GetSlotID();
         ItemStack itemDrop = _dragDropManager.slotMove.Inventory[slotid];
         int stackToDrop = _dragDropManager.slotMove.GetItemUI().GetStack();
         _itemDropper.DropItemSpawner(itemDrop, stackToDrop);
-
     }
 }

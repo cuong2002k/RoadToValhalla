@@ -6,7 +6,7 @@ public class JsonSerializer : ISerializer
 {
     public string Serialize<T>(T obj)
     {
-        return JsonUtility.ToJson(obj);
+        return JsonUtility.ToJson(obj, true);
     }
 
     public T DeSerialize<T>(string json)

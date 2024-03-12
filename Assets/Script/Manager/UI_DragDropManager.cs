@@ -18,7 +18,6 @@ public class UI_DragDropManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(this);
         canvas = this.transform;
     }
 
@@ -30,9 +29,6 @@ public class UI_DragDropManager : MonoBehaviour
             MoveSlotItem(Input.mousePosition, stackDrag.gameObject);
             MoveSlotItem(Input.mousePosition, iconDrag.gameObject);
         }
-
-
-
     }
 
     public void OnClickHandler(SlotUI slot, PointerEventData eventData)

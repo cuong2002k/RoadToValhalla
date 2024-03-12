@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHotBarContainer : Container
+public class PlayerHotBarContainer : Container, IBind<InventoryData>
 {
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
     private PlayerWeaponEquipment weponManager;
     public int Hotbar = 0;
+
 
     protected override void Start()
     {
         base.Start();
-        weponManager = PlayerManager.Instance.PlayerWeaponEquipment;
+        if (PlayerUIManager.Instance != null)
+            weponManager = PlayerManager.Instance.PlayerWeaponEquipment;
     }
 
     public void UseSlot(int index)
@@ -69,5 +72,10 @@ public class PlayerHotBarContainer : Container
                 }
             }
         }
+    }
+
+    public void Bind(InventoryData data)
+    {
+        this._inventoryModel.Bind(data, this._inventorySize);
     }
 }

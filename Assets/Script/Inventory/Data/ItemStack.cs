@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemStack
 {
+    [field: SerializeField] public string Id;
     [SerializeField] private BaseItem _item = null;
     [SerializeField] private int _stack = 0;
     [SerializeField] private bool _isActive = false;
@@ -20,6 +21,7 @@ public class ItemStack
         this._item = item;
         this._stack = stack;
         this._isActive = false;
+        this.Id = item.ID;
     }
 
     public ItemStack(BaseItem item, int stack, bool isActive)
@@ -27,6 +29,7 @@ public class ItemStack
         this._item = item;
         this._stack = stack;
         this._isActive = isActive;
+        this.Id = item.ID;
     }
     #endregion
 
@@ -40,12 +43,14 @@ public class ItemStack
         this._item = item.GetItem();
         this._stack = item.GetStack();
         this._isActive = item.GetActive();
+        this.Id = item.Id;
     }
 
     public void SetItemStack(BaseItem item, int stack)
     {
         this._item = item;
         this._stack = stack;
+        this.Id = item.ID;
     }
 
     public void SetStack(int stack)
@@ -57,6 +62,7 @@ public class ItemStack
     public void SetItem(BaseItem item)
     {
         this._item = item;
+        this.Id = item.ID;
     }
 
     public int GetStackAvailable()
@@ -119,6 +125,7 @@ public class ItemStack
         this._item = null;
         this._stack = 0;
         this._isActive = false;
+        this.Id = "";
     }
 
     public void DropItem(ItemStack itemToDrop, Transform dropLocation, int stack)

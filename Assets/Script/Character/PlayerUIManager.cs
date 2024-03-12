@@ -6,7 +6,7 @@ public class PlayerUIManager : MonoBehaviour
 {
     #region Singleton
     public static PlayerUIManager Instance;
-    private void Awake()
+    protected void Awake()
     {
         if (Instance == null)
         {
@@ -16,14 +16,12 @@ public class PlayerUIManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         PlayerHubManager = GetComponentInChildren<PlayerHudManger>();
         InventoryController = GetComponentInChildren<InventoryController>();
         HotBarContainer = GetComponentInChildren<PlayerHotBarContainer>();
         DragDropManager = GetComponent<UI_DragDropManager>();
     }
     #endregion
-
     #region Component
     // [HideInInspector]
     [HideInInspector] public PlayerHudManger PlayerHubManager;

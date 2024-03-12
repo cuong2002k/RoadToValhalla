@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     #region Singleton
     [HideInInspector] public static GameManager Instance;
-    public GameObject Player;
     private void Awake()
     {
         if (Instance == null)
@@ -17,6 +16,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(this);
     }
     #endregion
 

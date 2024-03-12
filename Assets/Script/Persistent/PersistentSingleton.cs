@@ -5,7 +5,7 @@ using UnityEngine;
 public class PersistentSingleton<T> : MonoBehaviour where T : Component
 {
     protected static T instance;
-    public T Instance
+    public static T Instance
     {
         get
         {

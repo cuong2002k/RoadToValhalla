@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterMesh : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private Transform _bodyTranform;
 
     [SerializeField]
@@ -12,11 +12,13 @@ public class CharacterMesh : MonoBehaviour
 
     [SerializeField]
     private SkinnedMeshRenderer[] currentMesh;
+    private GameObject[] currentEquipmentObject;
 
-    private void Start()
+    private void Awake()
     {
         int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
         currentMesh = new SkinnedMeshRenderer[size];
+        currentEquipmentObject = new GameObject[size];
     }
 
     public void EquipSkinnedMesh(EquipmentType type, SkinnedMeshRenderer skinnedMesh)
@@ -24,15 +26,15 @@ public class CharacterMesh : MonoBehaviour
         int index = (int)type;
         if (currentMesh[index] != null)
         {
-            Destroy(currentMesh[index].gameObject);
+            Destroy(currentEquipmentObject[index]);
             currentMesh[index] = null;
         }
-
-        SkinnedMeshRenderer skinnedMeshSpawn = Instantiate(skinnedMesh, _bodyTranform);
+        GameObject equipmentSpawn = Instantiate(skinnedMesh, _bodyTranform).gameObject;
+        SkinnedMeshRenderer skinnedMeshSpawn = equipmentSpawn.GetComponent<SkinnedMeshRenderer>();
         skinnedMeshSpawn.rootBone = GetRootBone(type);
         skinnedMeshSpawn.bones = GetBones(type);
         currentMesh[index] = skinnedMesh;
-
+        currentEquipmentObject[index] = equipmentSpawn;
     }
 
     private Transform[] GetBones(EquipmentType type)

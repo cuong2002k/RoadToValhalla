@@ -26,7 +26,7 @@ public class PlayerState : IState
         _player.PlayerAmin.SetBool(_aminBoolName, true);
         _startTime = Time.time;
         //_player.PlayerAmin.applyRootMotion = true;
-        Debug.Log("Start state " + _aminBoolName);
+        //Debug.Log("Start state " + _aminBoolName);
     }
 
     public override void DoCheck()
@@ -49,7 +49,7 @@ public class PlayerState : IState
         _player.PlayerAmin.SetBool(_aminBoolName, false);
         _startTime = 0f;
         //_player.PlayerAmin.applyRootMotion = false;
-        Debug.Log("Exit state " + _aminBoolName);
+        //Debug.Log("Exit state " + _aminBoolName);
     }
 
     protected bool HasAnimationFinished(string animationName)
