@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 4
   sprintingSpeed: 5
+  SprintingCost: 5
   jumpHeight: 2
+  JumpCost: 20
   croundSpeed: 1
-  groundCheckRadius: 0.05
+  groundCheckRadius: 0.2
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 64
+  AttackCost: 15

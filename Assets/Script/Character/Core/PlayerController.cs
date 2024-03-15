@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public PlayerData playerData;
     [SerializeField] private GameObject cameraObject;
     public PlayerHudManger PlayerHudManager { get; private set; }
-    public CharacterStats CharacterStats { get; private set; }
+    public PlayerStatsManager CharacterStats { get; private set; }
 
     #region Component
     public InputManager InputHandler { get; private set; }
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
+    public PlayerDeathState DeathState { get; private set; }
 
     #endregion
 
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         JumpState = new PlayerJumpState(this, playerMachine, playerData, "Jump");
         InAirState = new PlayerInAirState(this, playerMachine, playerData, "InAir");
         AttackState = new PlayerAttackState(this, playerMachine, playerData, "Attack");
+        DeathState = new PlayerDeathState(this, playerMachine, playerData, "Death");
     }
 
     private void Start()
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
-        CharacterStats = GetComponent<CharacterStats>();
+        CharacterStats = GetComponent<PlayerStatsManager>();
         PlayerHudManager = PlayerUIManager.Instance.PlayerHubManager;
 
         playerMachine.Inittialize(IdleState);
@@ -114,6 +116,24 @@ public class PlayerController : MonoBehaviour
         _moveDirection.Normalize();
         _moveDirection.y = 0;
         _controller.Move(_moveDirection * moveSpeed * Time.deltaTime);
+
+        if (InputHandler.XInput != 0 || InputHandler.YInput != 0 && OnSlope())
+        {
+            _controller.Move(Vector3.down * _controller.height / 2 * 3f * Time.deltaTime);
+        }
+
+    }
+
+    private float AdjustVelocityToSlope()
+    {
+        float moveY = 0;
+        Ray ray = new Ray(this.transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit outhit, 0.2f))
+        {
+            if (outhit.normal.normalized.y < 1) moveY = outhit.normal.normalized.y;
+            else moveY = 0;
+        }
+        return moveY;
     }
 
     /// <summary>
@@ -130,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerRotation()
     {
-
+        if (PlayerManager.Instance.IsDead) return;
         Quaternion lookDirection = Quaternion.Euler(cameraObject.transform.eulerAngles);
         transform.rotation = Quaternion.Slerp(this.transform.rotation, lookDirection, Time.deltaTime * _rotationSpeed);
 
@@ -142,7 +162,20 @@ public class PlayerController : MonoBehaviour
     public bool CheckIfGrounded()
     {
         //create sphere to check ground
-        return Physics.CheckSphere(this.transform.position, playerData.groundCheckRadius, playerData.whatIsGrounded);
+        // return Physics.CheckSphere(this.transform.position, playerData.groundCheckRadius, playerData.whatIsGrounded);
+        return _controller.isGrounded;
+
+    }
+
+    public bool OnSlope()
+    {
+        if (InputHandler.JumpInput) return false;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, _controller.height / 2 * 1.5f))
+        {
+            if (raycastHit.normal != Vector3.up) return true;
+        }
+        return false;
     }
     #endregion
 

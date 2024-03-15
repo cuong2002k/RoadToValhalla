@@ -28,7 +28,6 @@ public class PlayerHotBarContainer : Container, IBind<InventoryData>
                 WeaponConfig weapon = itemInSlot.GetItem() as WeaponConfig;
                 weponManager.UnEquipWeapon(weapon);
             }
-
         }
         else if (itemInSlot.GetItem() as WeaponConfig)
         {
@@ -48,7 +47,10 @@ public class PlayerHotBarContainer : Container, IBind<InventoryData>
                 }
             }
             itemInSlot.Equip();
-
+        }
+        else
+        {
+            itemInSlot.Equip();
         }
         this.Invoke();
 

@@ -20,6 +20,7 @@ public class PlayerUIManager : MonoBehaviour
         InventoryController = GetComponentInChildren<InventoryController>();
         HotBarContainer = GetComponentInChildren<PlayerHotBarContainer>();
         DragDropManager = GetComponent<UI_DragDropManager>();
+        PlayerPopUpManager = GetComponentInChildren<PlayerPopUpManager>();
     }
     #endregion
     #region Component
@@ -28,6 +29,7 @@ public class PlayerUIManager : MonoBehaviour
     [HideInInspector] public InventoryController InventoryController;
     [HideInInspector] public PlayerHotBarContainer HotBarContainer;
     [HideInInspector] public UI_DragDropManager DragDropManager;
+    [HideInInspector] public PlayerPopUpManager PlayerPopUpManager;
     #endregion
 
     [SerializeField] private GameObject _playerInventoryPanel;

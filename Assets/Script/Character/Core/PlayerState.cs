@@ -25,7 +25,6 @@ public class PlayerState : IState
         DoCheck();
         _player.PlayerAmin.SetBool(_aminBoolName, true);
         _startTime = Time.time;
-        //_player.PlayerAmin.applyRootMotion = true;
         //Debug.Log("Start state " + _aminBoolName);
     }
 
@@ -48,7 +47,6 @@ public class PlayerState : IState
     {
         _player.PlayerAmin.SetBool(_aminBoolName, false);
         _startTime = 0f;
-        //_player.PlayerAmin.applyRootMotion = false;
         //Debug.Log("Exit state " + _aminBoolName);
     }
 

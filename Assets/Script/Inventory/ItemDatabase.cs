@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "ItemDatabase", menuName = "Data/Item/ItemDatabase")]
 public static class ItemDatabase
 {
     private static Dictionary<string, BaseItem> ItemDatabae = null;
@@ -17,7 +16,7 @@ public static class ItemDatabase
     }
     public static BaseItem GetItemWithID(string id)
     {
-    
+
         if (ItemDatabae.ContainsKey(id))
         {
             return ItemDatabae[id];

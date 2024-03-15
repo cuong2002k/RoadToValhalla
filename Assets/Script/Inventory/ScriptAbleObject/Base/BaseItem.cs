@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class BaseItem : ScriptableObject, ISerializationCallbackReceiver
+public class BaseItem : ScriptableObject
 {
     [SerializeField] public string ID = null;
     [SerializeField] protected string _itemName;
@@ -33,17 +33,12 @@ public class BaseItem : ScriptableObject, ISerializationCallbackReceiver
         Debug.Log("UnEquip item " + this.name);
     }
 
-    public void OnBeforeSerialize()
+    protected virtual void OnValidate()
     {
-        if (ID == null)
+        if (string.IsNullOrEmpty(ID))
         {
             ID = System.Guid.NewGuid().ToString();
         }
-    }
-
-    public void OnAfterDeserialize()
-    {
-
     }
 }
 

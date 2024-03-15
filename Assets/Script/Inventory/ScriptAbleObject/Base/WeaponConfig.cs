@@ -90,7 +90,7 @@ public class WeaponConfig : BaseItem
     public override void Equip()
     {
         base.Equip();
-        PlayerManager.Instance.PlayerWeaponEquipment.SetWeapon(this);
+        PlayerManager.Instance.PlayerWeaponEquipment.EquipWeapon(this);
     }
 
     public override void UnEquip()

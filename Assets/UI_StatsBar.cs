@@ -8,6 +8,8 @@ public class UI_StatsBar : MonoBehaviour
     private Slider _statsSlider;
     private RectTransform _rectranform;
     private float _timeChangeValue = 0.5f;
+    private float newValue = 0;
+    private float velocity;
 
     private void Awake()
     {
@@ -16,19 +18,27 @@ public class UI_StatsBar : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        float valueChange = Mathf.SmoothDamp(_statsSlider.value, newValue, ref velocity, 10 * Time.deltaTime);
+        _statsSlider.value = valueChange;
+    }
 
     // update value
     public void SetStatsValue(float newValue)
     {
-        StartCoroutine(SmoothSlide(newValue));
+        this.newValue = newValue;
+        // StartCoroutine(SmoothSlide(newValue));
     }
 
     // set max value
-    public void SetMaxStats(float maxValue)
+    public void SetMaxStats(float maxValue, bool width = true)
     {
         _statsSlider.maxValue = maxValue;
         _statsSlider.value = maxValue;
-        _rectranform.sizeDelta = new Vector2(maxValue * 2, _rectranform.sizeDelta.y);
+        newValue = maxValue;
+        Vector2 newSize = width ? new Vector2(maxValue * 2, _rectranform.sizeDelta.y) : new Vector2(_rectranform.sizeDelta.x, maxValue * 2);
+        _rectranform.sizeDelta = newSize;
     }
 
     IEnumerator SmoothSlide(float newvalue)
@@ -36,11 +46,11 @@ public class UI_StatsBar : MonoBehaviour
         float currentTime = 0;
         while (currentTime < _timeChangeValue)
         {
-            yield return new WaitForEndOfFrame();
             float currentStamina = _statsSlider.value;
             float value = Mathf.Lerp(currentStamina, newvalue, currentTime / _timeChangeValue);
             _statsSlider.value = value;
             currentTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 }

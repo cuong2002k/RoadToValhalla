@@ -2,35 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
+public class PlayerStatsManager : CharacterStatsManager
 {
+
     private PlayerHudManger _playerHubManager;
     private EquipmentManager _equipmentMananger;
+    private PlayerManager _playerManager;
 
+    [Header("Stats base")]
     [SerializeField] StatsModifield _maxHp;
     [SerializeField] StatsModifield _maxStamina;
     [SerializeField] StatsModifield _damage;
     [SerializeField] StatsModifield _defense;
 
-
+    [Header("Stats Value")]
     public ObserverValue<float> CurrentStamina;
+    public ObserverValue<float> CurrentHealth;
+
+    [Header("Stamina Regenerator")]
     private float _staminaCostRegerator = 2f;
     private float _staminaRegeneratorDelay = 2f;
     private float _staminaRegeneratorTimer = 0;
     private float _staminaTick = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _equipmentMananger = GetComponent<EquipmentManager>();
+        _playerManager = GetComponent<PlayerManager>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _playerHubManager = PlayerUIManager.Instance.PlayerHubManager;
 
         _playerHubManager.SetMaxStatsBar(_maxStamina.GetStatsValue());
         CurrentStamina.Set(_maxStamina.GetStatsValue());
         CurrentStamina.OnchangeValue += _playerHubManager.SetValueStatsBar;
+
+        _playerHubManager.SetMaxHealthBar(_maxHp.GetStatsValue());
+        CurrentHealth.Set(_maxHp.GetStatsValue());
+        CurrentHealth.OnchangeValue += _playerHubManager.SetValueHealthBar;
+        CurrentHealth.OnchangeValue += CheckHeath;
     }
 
 
@@ -42,6 +56,9 @@ public class CharacterStats : MonoBehaviour
     private void OnDisable()
     {
         _equipmentMananger.OnChangeEquipmentItem -= UpdateModified;
+        CurrentHealth.OnchangeValue -= _playerHubManager.SetValueHealthBar;
+        CurrentStamina.OnchangeValue -= _playerHubManager.SetValueStatsBar;
+        CurrentHealth.OnchangeValue -= CheckHeath;
     }
 
     private void UpdateModified(EquipmentItem newItem, EquipmentItem oldItem)
@@ -61,9 +78,11 @@ public class CharacterStats : MonoBehaviour
         // Debug.Log(_damage.GetStatsValue() + " " + _defense.GetStatsValue());
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         RegeneratorStatmina();
+
     }
 
     private void RegeneratorStatmina()
@@ -93,4 +112,20 @@ public class CharacterStats : MonoBehaviour
         _staminaRegeneratorTimer = 0;
     }
 
+
+    public void CheckHeath(float Value)
+    {
+        if (Value <= 0)
+        {
+            //Debug.Log("check");
+            StartCoroutine(_playerManager.ProcessDeathEvent());
+        }
+    }
+
+
+    public void RestartStats()
+    {
+        CurrentStamina.Set(_maxStamina.GetStatsValue());
+        CurrentHealth.Set(_maxHp.GetStatsValue());
+    }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerWeaponEquipment : MonoBehaviour
 {
     #region two hand player
-    [SerializeField] private Transform _leftHand;
-    [SerializeField] private Transform _rightHand;
-    public Transform GetLeftHand() => this._leftHand;
-    public Transform GetRightHand() => this._rightHand;
+    [SerializeField] private Transform _leftHandTranform;
+    [SerializeField] private Transform _rightHandTranform;
+    public Transform GetLeftHand() => this._leftHandTranform;
+    public Transform GetRightHand() => this._rightHandTranform;
     [SerializeField] private WeaponConfig _leftHandWeapon;
     [SerializeField] private WeaponConfig _rightHandWeapon;
 
@@ -27,8 +27,14 @@ public class PlayerWeaponEquipment : MonoBehaviour
         weapon.SpawnWeapon(leftHand, rightHand, playerAnimator);
     }
 
-    public void SetWeapon(WeaponConfig weaponEquip)
+    public void EquipWeapon(WeaponConfig weaponEquip)
     {
+        if (weaponEquip == null)
+        {
+            Debug.LogError("weapon is not null");
+            return;
+        }
+        // check hand weapon
         if (weaponEquip.GetHandEquip() == HandEquip.LeftHand)
         {
             _leftHandWeapon = weaponEquip;
@@ -39,15 +45,15 @@ public class PlayerWeaponEquipment : MonoBehaviour
         }
         UpdateWeapon(weaponEquip);
     }
-
-    public void UpdateWeapon(WeaponConfig weapon)
+    // update weapon in hand
+    private void UpdateWeapon(WeaponConfig weapon)
     {
-        SpawnWeapon(_leftHand, _rightHand, _playerAnimator, weapon);
+        SpawnWeapon(_leftHandTranform, _rightHandTranform, _playerAnimator, weapon);
     }
 
     public void UnEquipWeapon(WeaponConfig weapon)
     {
-        weapon.DestroyWeapon(_leftHand, _rightHand);
+        weapon.DestroyWeapon(_leftHandTranform, _rightHandTranform);
         if (weapon.GetHandEquip() == HandEquip.LeftHand) _leftHandWeapon = null;
         else if (weapon.GetHandEquip() == HandEquip.RightHand) _rightHandWeapon = null;
         else
@@ -60,11 +66,12 @@ public class PlayerWeaponEquipment : MonoBehaviour
 
     public bool HasItemLeftHand()
     {
-        return HasContainsItem(_leftHand);
+        return HasContainsItem(_leftHandTranform);
     }
+
     public bool HasItemRightHand()
     {
-        return HasContainsItem(_rightHand);
+        return HasContainsItem(_rightHandTranform);
     }
 
     public bool HasContainsItem(Transform transform)

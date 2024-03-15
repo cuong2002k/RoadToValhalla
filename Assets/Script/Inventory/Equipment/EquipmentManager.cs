@@ -91,10 +91,4 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
         this._currentEquipment = _equipmentData.EquipData;
     }
 }
-[System.Serializable]
-public class EquipmentData : ISaveData
-{
-    public string id { get; set; } = System.Guid.NewGuid().ToString();
-    public EquipmentItem[] EquipData;
 
-}
