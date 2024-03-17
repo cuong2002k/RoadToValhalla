@@ -7,10 +7,14 @@ public class PlayerWeaponEquipment : MonoBehaviour
     #region two hand player
     [SerializeField] private Transform _leftHandTranform;
     [SerializeField] private Transform _rightHandTranform;
-    public Transform GetLeftHand() => this._leftHandTranform;
-    public Transform GetRightHand() => this._rightHandTranform;
+    public Transform GetLeftHandTranform() => this._leftHandTranform;
+    public Transform GetRightHandTranform() => this._rightHandTranform;
     [SerializeField] private WeaponConfig _leftHandWeapon;
     [SerializeField] private WeaponConfig _rightHandWeapon;
+    [SerializeField] private WeaponConfig _defaultWeapon;
+    public WeaponConfig LeftHandWeapon() => _leftHandWeapon;
+    public WeaponConfig RightHandWeapon() => _rightHandWeapon != null ? _rightHandWeapon : _defaultWeapon;
+
 
     #endregion
 

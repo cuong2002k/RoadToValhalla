@@ -13,11 +13,13 @@ public class PlayerSprintingState : PlayerGroundedState
     {
         base.OnEnter();
         _player.CharacterStats.ResetRegeneratorStaminaTimer();
+        WorldSFXManager.Instance.StopSFX();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        WorldSFXManager.Instance.PlaySprintSFX();
         if (inputMovement == Vector3.zero && _player.CurrentVelocity.y <= 0.1f)
         {
             _playerMachine.ChangeState(_player.IdleState);
@@ -32,6 +34,13 @@ public class PlayerSprintingState : PlayerGroundedState
         else
         {
             _playerMachine.ChangeState(_player.MoveState);
+
         }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        
     }
 }

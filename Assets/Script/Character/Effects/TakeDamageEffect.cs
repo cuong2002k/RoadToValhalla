@@ -13,11 +13,18 @@ public class TakeDamageEffect : InstanceEffects
         base.ProcessEffect(playerManager);
 
         TakeDamage(playerManager);
+        PlayBloodSplatter(playerManager);
     }
 
     private void TakeDamage(PlayerManager playerManager)
     {
         if (playerManager.IsDead) return;
         playerManager.PlayerStatsManager.CurrentHealth.Value -= PhysicsDamage;
+        WorldSFXManager.Instance.PlayRandomHitSFX();
+    }
+
+    private void PlayBloodSplatter(PlayerManager playerManager)
+    {
+        playerManager.PlayerEffectManager.PlayBloodSplatter(playerManager.transform);
     }
 }

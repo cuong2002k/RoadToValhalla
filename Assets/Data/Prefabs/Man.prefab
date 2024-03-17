@@ -17365,6 +17365,7 @@ MonoBehaviour:
   PlayerWeaponEquipment: {fileID: 0}
   PlayerStatsManager: {fileID: 0}
   PlayerController: {fileID: 0}
+  PlayerEffectManager: {fileID: 0}
   IsDead: 0
   Receive: 0
 --- !u!114 &1658801187100835250
@@ -17472,6 +17473,7 @@ MonoBehaviour:
   _rightHandTranform: {fileID: 1784947594}
   _leftHandWeapon: {fileID: 0}
   _rightHandWeapon: {fileID: 0}
+  _defaultWeapon: {fileID: 11400000, guid: 650278a492a00a24486718208c502884, type: 2}
   _defaultAnimtor: {fileID: 22100000, guid: d7bc9d1c065d07d4eb83f4e92767dd2d, type: 2}
 --- !u!114 &1911882050
 MonoBehaviour:

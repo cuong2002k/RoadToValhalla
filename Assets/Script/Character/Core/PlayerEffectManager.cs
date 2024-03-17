@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerEffectManager : CharacterEffectManager
 {
     private PlayerManager _playerManager;
+    [Header("Test => delete on time")]
     public InstanceEffects test;
     public bool testEffects;
-
     private void Start()
     {
         _playerManager = GetComponent<PlayerManager>();
@@ -26,6 +26,12 @@ public class PlayerEffectManager : CharacterEffectManager
     public override void ProcessInstanceEffect(InstanceEffects instanceEffects)
     {
         base.ProcessInstanceEffect(instanceEffects);
+        _playerManager.PlayerController.playerMachine.ChangeState(_playerManager.PlayerController.HurtState);
         instanceEffects.ProcessEffect(_playerManager);
+    }
+
+    public void PlayBloodSplatter(Transform contactPoint)
+    {
+        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint);
     }
 }

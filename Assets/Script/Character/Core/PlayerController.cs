@@ -8,14 +8,16 @@ public class PlayerController : MonoBehaviour
     public PlayerMachine playerMachine { get; private set; }
     public PlayerData playerData;
     [SerializeField] private GameObject cameraObject;
-    public PlayerHudManger PlayerHudManager { get; private set; }
-    public PlayerStatsManager CharacterStats { get; private set; }
 
     #region Component
     public InputManager InputHandler { get; private set; }
     public Animator PlayerAmin { get; private set; }
     private Rigidbody _playerRB;
     private CharacterController _controller;
+    public PlayerHudManger PlayerHudManager { get; private set; }
+    public PlayerStatsManager CharacterStats { get; private set; }
+
+    public PlayerWeaponEquipment PlayerWeapon { get; set; }
     #endregion
 
     #region Player State
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public PlayerLandState LandState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
     public PlayerDeathState DeathState { get; private set; }
+    public PlayerHurtState HurtState { get; private set; }
 
     #endregion
 
@@ -68,6 +71,7 @@ public class PlayerController : MonoBehaviour
         InAirState = new PlayerInAirState(this, playerMachine, playerData, "InAir");
         AttackState = new PlayerAttackState(this, playerMachine, playerData, "Attack");
         DeathState = new PlayerDeathState(this, playerMachine, playerData, "Death");
+        HurtState = new PlayerHurtState(this, playerMachine, playerData, "Hurt");
     }
 
     private void Start()
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         CharacterStats = GetComponent<PlayerStatsManager>();
+        PlayerWeapon = GetComponent<PlayerWeaponEquipment>();
         PlayerHudManager = PlayerUIManager.Instance.PlayerHubManager;
 
         playerMachine.Inittialize(IdleState);

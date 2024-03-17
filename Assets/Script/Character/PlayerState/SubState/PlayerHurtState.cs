@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHurtState : MonoBehaviour
+public class PlayerHurtState : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerHurtState(PlayerController player, PlayerMachine playerMachine, PlayerData playerData, string aminBoolName) : base(player, playerMachine, playerData, aminBoolName)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void LogicUpdate()
     {
-        
+        base.LogicUpdate();
+        if (HasAnimationFinished())
+        {
+            _playerMachine.ChangeState(_player.IdleState);
+        }
     }
 }

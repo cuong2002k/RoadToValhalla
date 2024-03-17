@@ -25,6 +25,7 @@ public class PlayerState : IState
         DoCheck();
         _player.PlayerAmin.SetBool(_aminBoolName, true);
         _startTime = Time.time;
+        WorldSFXManager.Instance.StopSFX();
         //Debug.Log("Start state " + _aminBoolName);
     }
 
@@ -47,7 +48,7 @@ public class PlayerState : IState
     {
         _player.PlayerAmin.SetBool(_aminBoolName, false);
         _startTime = 0f;
-        //Debug.Log("Exit state " + _aminBoolName);
+        WorldSFXManager.Instance.StopSFX();
     }
 
     protected bool HasAnimationFinished(string animationName)
@@ -55,6 +56,18 @@ public class PlayerState : IState
         // Check if the specified animation has completed
         AnimatorStateInfo stateInfo = _player.PlayerAmin.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
+    }
+
+    protected bool HasAnimationFinished()
+    {
+        Animator animator = _player.PlayerAmin;
+        AnimatorStateInfo animStateInfo;
+        float NTime;
+        bool animationFinished = false; ;
+        animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        NTime = animStateInfo.normalizedTime;
+        if (NTime > 1.0f) animationFinished = true;
+        return animationFinished;
     }
 
 }

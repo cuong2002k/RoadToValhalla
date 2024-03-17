@@ -19,6 +19,8 @@ public class PlayerAttackState : PlayerAbilityState
         this._player.PlayerAmin.applyRootMotion = true;
         _player.CharacterStats.ResetRegeneratorStaminaTimer();
         _player.CharacterStats.CurrentStamina.Value -= _playerData.AttackCost;
+        AudioClip attackSound = _player.PlayerWeapon.RightHandWeapon().GetAttackSound();
+        WorldSFXManager.Instance.PlaySoundFXOneShot(attackSound);
     }
     public override void LogicUpdate()
     {
@@ -32,8 +34,11 @@ public class PlayerAttackState : PlayerAbilityState
             _player.CharacterStats.CurrentStamina.Value -= _playerData.AttackCost;
             this._player.PlayerAmin.SetInteger("AttackCount", attackCount);
             _player.CharacterStats.ResetRegeneratorStaminaTimer();
+
+            AudioClip attackSound = _player.PlayerWeapon.RightHandWeapon().GetAttackSound();
+            WorldSFXManager.Instance.PlaySoundFXOneShot(attackSound);
         }
-        else if (checkAnimation() && !_isAttack && Time.time >= _startTime + _attackDelay + 0.2f)
+        else if (HasAnimationFinished() && !_isAttack && Time.time >= _startTime + _attackDelay + 0.2f)
         {
             this._playerMachine.ChangeState(_player.IdleState);
         }
@@ -45,15 +50,5 @@ public class PlayerAttackState : PlayerAbilityState
         this._player.PlayerAmin.applyRootMotion = false;
     }
 
-    private bool checkAnimation()
-    {
-        Animator animator = _player.PlayerAmin;
-        AnimatorStateInfo animStateInfo;
-        float NTime;
-        bool animationFinished = false; ;
-        animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        NTime = animStateInfo.normalizedTime;
-        if (NTime > 1.0f) animationFinished = true;
-        return animationFinished;
-    }
+
 }

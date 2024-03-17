@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
     [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
     [HideInInspector] public PlayerStatsManager PlayerStatsManager;
     [HideInInspector] public PlayerController PlayerController;
+    [HideInInspector] public PlayerEffectManager PlayerEffectManager;
+
 
     public bool IsDead = false;
     public bool Receive = false;
@@ -29,6 +31,7 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
         PlayerWeaponEquipment = GetComponent<PlayerWeaponEquipment>();
         PlayerStatsManager = GetComponent<PlayerStatsManager>();
         PlayerController = GetComponent<PlayerController>();
+        PlayerEffectManager = GetComponent<PlayerEffectManager>();
 
     }
     #endregion
@@ -58,6 +61,7 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
 
         this.PlayerController.playerMachine.ChangeState(PlayerController.DeathState);
         PlayerUIManager.Instance.PlayerPopUpManager.ShowDeadPopUp();
+        WorldSFXManager.Instance.PlayDeadSFX();
         yield return new WaitForSeconds(3f);
     }
 

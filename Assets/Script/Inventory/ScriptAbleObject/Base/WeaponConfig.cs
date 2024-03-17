@@ -17,6 +17,16 @@ public class WeaponConfig : BaseItem
     [SerializeField] private GameObject _weponObject;
     public AnimatorOverrideController GetAnimatorOverride() => _animationOverride;
     public HandEquip GetHandEquip() => this._handEquip;
+    [SerializeField] private AudioClip[] _attackSound;
+    public AudioClip GetAttackSound()
+    {
+        if (_attackSound.Length > 0)
+        {
+            int randomValue = Random.Range(0, _attackSound.Length);
+            return _attackSound[randomValue];
+        }
+        return null;
+    }
     public void SpawnWeapon(Transform leftHand, Transform rightHand, Animator animator)
     {
         //destroy old Weapon

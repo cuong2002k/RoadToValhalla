@@ -10,12 +10,18 @@ public class PlayerMoveState : PlayerGroundedState
     string aminBoolName) : base(player, playerMachine, playerData, aminBoolName)
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+    }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         _player.PlayerAmin.SetFloat("Horizontal", inputMovement.x);
         _player.PlayerAmin.SetFloat("Vertical", inputMovement.z);
+
         if (inputMovement == Vector3.zero && _player.CurrentVelocity.y <= 0.1f)
         {
             _playerMachine.ChangeState(_player.IdleState);
@@ -31,6 +37,7 @@ public class PlayerMoveState : PlayerGroundedState
         else
         {
             _player.SetMovementVelocity(_playerData.walkSpeed);
+            WorldSFXManager.Instance.PlayWalkSFX();
         }
 
     }
@@ -41,5 +48,9 @@ public class PlayerMoveState : PlayerGroundedState
 
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
 
+    }
 }

@@ -20,7 +20,9 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
 
     public string GetNameItemSelect()
     {
-        return _item.GetItem().GetItemName();
+        if (_item != null)
+            return _item.GetItem().GetItemName();
+        return "";
     }
 
     public void Interact()

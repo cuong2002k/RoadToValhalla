@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4459ff458eed4f742ae271b30c1793bb, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  ID: d42ae441-a7e2-47e9-9a5f-e0a38f332b24
   _itemName: Sword
   _icon: {fileID: 21300000, guid: 2a2ad8f921afd77458fb312a9ab7a732, type: 3}
   _itemType: 2
   _maxStack: 1
   _description: Sword are strong
   _itemObject: {fileID: 2244557795260631466, guid: bbed135e89e6a6f4e994ff4c1e3ffed1, type: 3}
-  _animationOverride: {fileID: 22100000, guid: 66ffb1eb517bf6d4695a2b62e3eb0798, type: 2}
+  _animationOverride: {fileID: 22100000, guid: c291ca157ecc1dc48965549de6cbab84, type: 2}
   _handEquip: 1
   _dameWeapon: 15
   _weponObject: {fileID: 7080340656463805033, guid: a1c0f5f9c3b3d1c47b5c89f356c4133a, type: 3}
+  _attackSound:
+  - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}
+  - {fileID: 8300000, guid: 4d4ef7516a431934681038a3dc391e55, type: 3}
