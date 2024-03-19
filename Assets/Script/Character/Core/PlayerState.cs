@@ -8,9 +8,7 @@ public class PlayerState : IState
     protected PlayerData _playerData;
     protected PlayerMachine _playerMachine;
     protected string _aminBoolName;
-
     protected float _startTime;
-
     public PlayerState(PlayerController player, PlayerMachine playerMachine, PlayerData playerData, string aminBoolName)
     {
         this._player = player;
@@ -26,7 +24,7 @@ public class PlayerState : IState
         _player.PlayerAmin.SetBool(_aminBoolName, true);
         _startTime = Time.time;
         WorldSFXManager.Instance.StopSFX();
-        //Debug.Log("Start state " + _aminBoolName);
+        Debug.Log("Start state " + _aminBoolName);
     }
 
     public override void DoCheck()
@@ -36,7 +34,7 @@ public class PlayerState : IState
 
     public override void LogicUpdate()
     {
-
+        HandlerInput();
     }
 
     public override void PhysicUpdate()
@@ -70,4 +68,5 @@ public class PlayerState : IState
         return animationFinished;
     }
 
+    protected virtual void HandlerInput() { }
 }

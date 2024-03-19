@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerEffectManager : CharacterEffectManager
 {
-    private PlayerManager _playerManager;
     [Header("Test => delete on time")]
+    private PlayerManager _playerManager;
     public InstanceEffects test;
     public bool testEffects;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _playerManager = GetComponent<PlayerManager>();
     }
 
@@ -23,15 +24,14 @@ public class PlayerEffectManager : CharacterEffectManager
         }
     }
 
+
+    // process effect
     public override void ProcessInstanceEffect(InstanceEffects instanceEffects)
     {
         base.ProcessInstanceEffect(instanceEffects);
-        _playerManager.PlayerController.playerMachine.ChangeState(_playerManager.PlayerController.HurtState);
-        instanceEffects.ProcessEffect(_playerManager);
+        if (!_playerManager.IsDead)
+            _playerManager.PlayerController.playerMachine.ChangeState(_playerManager.PlayerController.HurtState);
     }
 
-    public void PlayBloodSplatter(Transform contactPoint)
-    {
-        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint);
-    }
+
 }

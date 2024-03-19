@@ -80,8 +80,6 @@ public class CameraController : MonoBehaviour
         Quaternion targetAngleUD = Quaternion.Euler(cameraRotation);
         pivotCameraTranform.localRotation = targetAngleUD;
 
-
-
     }
 
     private void HandlerRotationCheck()

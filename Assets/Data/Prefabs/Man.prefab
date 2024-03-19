@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718219750}
+  - component: {fileID: 5112489434466967645}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -31,6 +32,20 @@ Transform:
   m_Father: {fileID: 6948391951890809344}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
+--- !u!114 &5112489434466967645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718219749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa25806b388ee1746a9bcc3672fcc8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponManager: {fileID: 0}
+  handEquip: 0
 --- !u!1 &1674069375
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784947594}
+  - component: {fileID: 5858269555071233495}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -93,6 +109,20 @@ Transform:
   m_Father: {fileID: 6948282733897856200}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 180, y: -90, z: 90}
+--- !u!114 &5858269555071233495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784947593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa25806b388ee1746a9bcc3672fcc8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponManager: {fileID: 0}
+  handEquip: 1
 --- !u!1 &6951306336818609192
 GameObject:
   m_ObjectHideFlags: 0
@@ -17360,13 +17390,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b5e413879956441890f9a7f203b42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDead: 0
+  CharacterEffectManager: {fileID: 0}
+  CharacterStatsManager: {fileID: 0}
   _playerData:
     position: {x: 0, y: 0, z: 0}
   PlayerWeaponEquipment: {fileID: 0}
   PlayerStatsManager: {fileID: 0}
   PlayerController: {fileID: 0}
   PlayerEffectManager: {fileID: 0}
-  IsDead: 0
   Receive: 0
 --- !u!114 &1658801187100835250
 MonoBehaviour:
@@ -17469,12 +17501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5b6672c2b49e84d94d00ab8af8118c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftHandTranform: {fileID: 718219750}
-  _rightHandTranform: {fileID: 1784947594}
+  _leftHandInstance: {fileID: 0}
+  _rightHandInstance: {fileID: 0}
   _leftHandWeapon: {fileID: 0}
   _rightHandWeapon: {fileID: 0}
   _defaultWeapon: {fileID: 11400000, guid: 650278a492a00a24486718208c502884, type: 2}
-  _defaultAnimtor: {fileID: 22100000, guid: d7bc9d1c065d07d4eb83f4e92767dd2d, type: 2}
 --- !u!114 &1911882050
 MonoBehaviour:
   m_ObjectHideFlags: 0

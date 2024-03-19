@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
+public class PlayerManager : CharacterManager, IBind<PlayerGameData>
 {
     #region Singleton
     public static PlayerManager Instance;
@@ -11,14 +11,13 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
     public PlayerGameData _playerData = new PlayerGameData();
     [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
     [HideInInspector] public PlayerStatsManager PlayerStatsManager;
+    
     [HideInInspector] public PlayerController PlayerController;
     [HideInInspector] public PlayerEffectManager PlayerEffectManager;
 
-
-    public bool IsDead = false;
     public bool Receive = false;
 
-    private void Awake()
+    protected override void Awake()
     {
         if (Instance == null)
         {
@@ -41,7 +40,7 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
         transform.position = _playerData.position;
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (Receive)
         {
@@ -49,7 +48,7 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
         }
     }
 
-    private void LateUpdate()
+    protected override void LateUpdate()
     {
         _playerData.position = transform.position;
     }
@@ -64,7 +63,6 @@ public class PlayerManager : MonoBehaviour, IBind<PlayerGameData>
         WorldSFXManager.Instance.PlayDeadSFX();
         yield return new WaitForSeconds(3f);
     }
-
 
     public void PlayerReceive()
     {

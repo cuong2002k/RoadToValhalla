@@ -27,75 +27,6 @@ public class WeaponConfig : BaseItem
         }
         return null;
     }
-    public void SpawnWeapon(Transform leftHand, Transform rightHand, Animator animator)
-    {
-        //destroy old Weapon
-        DestroyWeapon(leftHand, rightHand);
-        if (_weponObject != null)
-        {
-            Transform locationSpawn = GetLocationSpawn(leftHand, rightHand);
-            GameObject weaponSpawn = Instantiate(this._weponObject, locationSpawn);
-            weaponSpawn.name = this._itemName;
-            Debug.Log("Spawn weapon");
-        }
-
-        var animatorOverride = animator.runtimeAnimatorController as AnimatorOverrideController;
-
-        if (_animationOverride != null)
-        {
-            animator.runtimeAnimatorController = _animationOverride;
-        }
-        else if (animatorOverride != null)
-        {
-            animator.runtimeAnimatorController = animatorOverride;
-        }
-
-    }
-
-    public Transform GetLocationSpawn(Transform leftHand, Transform rightHand)
-    {
-        Transform transformToGet = leftHand;
-        if (this._handEquip == HandEquip.RightHand)
-        {
-            transformToGet = rightHand;
-        }
-        return transformToGet;
-    }
-
-    public void DestroyWeapon(Transform leftHand, Transform rightHand)
-    {
-        Transform oldWeapon = null;
-
-        if (_handEquip == HandEquip.LeftHand)
-        {
-
-            DestroyWeaponObject(leftHand);
-        }
-        else if (_handEquip == HandEquip.RightHand)
-        {
-            oldWeapon = rightHand.Find(this._itemName);
-            DestroyWeaponObject(rightHand);
-        }
-        else if (_handEquip == HandEquip.AbothHand)
-        {
-            DestroyWeaponObject(leftHand);
-            DestroyWeaponObject(rightHand);
-        }
-
-    }
-
-    private void DestroyWeaponObject(Transform hand)
-    {
-        for (int i = 0; i < hand.childCount; i++)
-        {
-            Transform weapon = hand.transform.GetChild(i);
-            if (weapon != null)
-            {
-                Destroy(weapon.gameObject);
-            }
-        }
-
-    }
 
     public override void Equip()
     {
@@ -106,7 +37,8 @@ public class WeaponConfig : BaseItem
     public override void UnEquip()
     {
         base.UnEquip();
-        PlayerManager.Instance.PlayerWeaponEquipment.UnEquipWeapon(this);
     }
 
+    public GameObject GetWeaponObject() => this._weponObject;
+    public int GetDamage() => _dameWeapon;
 }

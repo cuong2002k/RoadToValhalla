@@ -12,6 +12,8 @@ public class PlayerAbilityState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        _currentStamina = _currentStamina = _player.CharacterStats.CurrentStamina.Value;
+        _currentStamina = _currentStamina = _player.PlayerStats.CurrentStamina.Value;
     }
+
+
 }

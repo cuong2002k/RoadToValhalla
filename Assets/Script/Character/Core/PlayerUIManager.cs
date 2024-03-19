@@ -58,11 +58,18 @@ public class PlayerUIManager : MonoBehaviour
     private void Update()
     {
         _mousePoint.gameObject.transform.position = Input.mousePosition;
+        if (PlayerManager.Instance.IsDead)
+        {
+            _playerInventoryPanel.SetActive(false);
+            _craftingPanel.SetActive(false);
+            DragDropManager.RestartMouseSlot();
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void HandlerUIInput()
     {
-
+        if (PlayerManager.Instance.IsDead) return;
         _playerInventoryPanel.SetActive(!_playerInventoryPanel.activeSelf);
         _craftingPanel.SetActive(!_craftingPanel.activeSelf);
         DragDropManager.RestartMouseSlot();

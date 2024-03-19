@@ -83,7 +83,6 @@ public class InputManager : MonoBehaviour
         inputActions.Disable();
     }
 
-
     public void HandlerMovementInput(InputAction.CallbackContext context)
     {
         //read value from context
@@ -167,6 +166,7 @@ public class InputManager : MonoBehaviour
         if (context.started)
         {
             HotBarInput = keyNumber;
+            if (PlayerManager.Instance.IsDead) return;
             PlayerUIManager.Instance.HotBarContainer.UseSlot(HotBarInput);
         }
 

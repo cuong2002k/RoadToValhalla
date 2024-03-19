@@ -25,8 +25,8 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        HandlerAllInput();
-        _currentStamina = _player.CharacterStats.CurrentStamina.Value;
+        HandlerInput();
+        _currentStamina = _player.PlayerStats.CurrentStamina.Value;
         _player.PlayerAmin.SetBool("Grounded", _groundCheck);
         if (_isAttack && _currentStamina >= _playerData.AttackCost)
         {
@@ -49,8 +49,9 @@ public class PlayerGroundedState : PlayerState
     }
 
 
-    protected void HandlerAllInput()
+    protected override void HandlerInput()
     {
+        base.HandlerInput();
         // movement input
         inputMovement = new Vector3(_player.InputHandler.XInput, 0f, _player.InputHandler.YInput);
         // jump input

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class InstanceEffects : ScriptableObject
 {
-
-    public virtual void ProcessEffect(PlayerManager playerManager)
-    {
-
-    }
+    // active effect use for any character
+    public virtual void ProcessEffect(CharacterManager playerManager) { }
 }

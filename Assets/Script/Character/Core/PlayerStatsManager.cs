@@ -9,16 +9,6 @@ public class PlayerStatsManager : CharacterStatsManager
     private EquipmentManager _equipmentMananger;
     private PlayerManager _playerManager;
 
-    [Header("Stats base")]
-    [SerializeField] StatsModifield _maxHp;
-    [SerializeField] StatsModifield _maxStamina;
-    [SerializeField] StatsModifield _damage;
-    [SerializeField] StatsModifield _defense;
-
-    [Header("Stats Value")]
-    public ObserverValue<float> CurrentStamina;
-    public ObserverValue<float> CurrentHealth;
-
     [Header("Stamina Regenerator")]
     private float _staminaCostRegerator = 2f;
     private float _staminaRegeneratorDelay = 2f;
@@ -112,16 +102,13 @@ public class PlayerStatsManager : CharacterStatsManager
         _staminaRegeneratorTimer = 0;
     }
 
-
     public void CheckHeath(float Value)
     {
         if (Value <= 0)
         {
-            //Debug.Log("check");
             StartCoroutine(_playerManager.ProcessDeathEvent());
         }
     }
-
 
     public void RestartStats()
     {

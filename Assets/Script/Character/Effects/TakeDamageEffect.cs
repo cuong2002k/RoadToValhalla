@@ -8,23 +8,27 @@ public class TakeDamageEffect : InstanceEffects
     [Header("Damage")]
     public int PhysicsDamage = 0;
 
-    public override void ProcessEffect(PlayerManager playerManager)
+    public override void ProcessEffect(CharacterManager playerManager)
     {
         base.ProcessEffect(playerManager);
-
-        TakeDamage(playerManager);
-        PlayBloodSplatter(playerManager);
+        if (playerManager.IsDead) return; // if character dead is not thing
+        CaculatorDamage(playerManager);
+        PlayDameVFX(playerManager);
+        PlayeSoundFX();
     }
 
-    private void TakeDamage(PlayerManager playerManager)
+    private void CaculatorDamage(CharacterManager playerManager)
     {
-        if (playerManager.IsDead) return;
-        playerManager.PlayerStatsManager.CurrentHealth.Value -= PhysicsDamage;
+        playerManager.CharacterStatsManager.CurrentHealth.Value -= PhysicsDamage;
+    }
+
+    private void PlayDameVFX(CharacterManager playerManager)
+    {
+        playerManager.CharacterEffectManager.PlayBloodSplatter(playerManager.transform);
+    }
+
+    private void PlayeSoundFX()
+    {
         WorldSFXManager.Instance.PlayRandomHitSFX();
-    }
-
-    private void PlayBloodSplatter(PlayerManager playerManager)
-    {
-        playerManager.PlayerEffectManager.PlayBloodSplatter(playerManager.transform);
     }
 }

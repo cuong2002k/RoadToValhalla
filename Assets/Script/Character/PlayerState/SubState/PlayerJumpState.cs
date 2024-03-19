@@ -14,8 +14,8 @@ public class PlayerJumpState : PlayerAbilityState
         base.OnEnter();
         _player.InputHandler.ResetJumpInput();
         _player.SetJumpVelocity();
-        _player.CharacterStats.ResetRegeneratorStaminaTimer();
-        _player.CharacterStats.CurrentStamina.Value -= this._playerData.JumpCost;
+        _player.PlayerStats.ResetRegeneratorStaminaTimer();
+        _player.PlayerStats.CurrentStamina.Value -= this._playerData.JumpCost;
 
     }
 

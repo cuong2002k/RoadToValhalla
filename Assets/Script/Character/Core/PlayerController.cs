@@ -7,15 +7,17 @@ public class PlayerController : MonoBehaviour
     public PlayerState playerState { get; private set; }
     public PlayerMachine playerMachine { get; private set; }
     public PlayerData playerData;
-    [SerializeField] private GameObject cameraObject;
+    [SerializeField] private CameraController cameraObject;
 
     #region Component
     public InputManager InputHandler { get; private set; }
     public Animator PlayerAmin { get; private set; }
+    public PlayerHudManger PlayerHudManager { get; private set; }
+    public PlayerStatsManager PlayerStats { get; private set; }
+    public PlayerManager PlayerManager { get; private set; }
     private Rigidbody _playerRB;
     private CharacterController _controller;
-    public PlayerHudManger PlayerHudManager { get; private set; }
-    public PlayerStatsManager CharacterStats { get; private set; }
+
 
     public PlayerWeaponEquipment PlayerWeapon { get; set; }
     #endregion
@@ -77,10 +79,11 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InputHandler = InputManager.Instance;
+        cameraObject = GetComponentInChildren<CameraController>();
         _playerRB = GetComponent<Rigidbody>();
         PlayerAmin = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
-        CharacterStats = GetComponent<PlayerStatsManager>();
+        PlayerStats = GetComponent<PlayerStatsManager>();
         PlayerWeapon = GetComponent<PlayerWeaponEquipment>();
         PlayerHudManager = PlayerUIManager.Instance.PlayerHubManager;
 

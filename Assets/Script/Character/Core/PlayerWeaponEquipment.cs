@@ -4,31 +4,71 @@ using UnityEngine;
 
 public class PlayerWeaponEquipment : MonoBehaviour
 {
+    private PlayerManager _playerManager;
+    private Animator _playerAnimator;
+
     #region two hand player
-    [SerializeField] private Transform _leftHandTranform;
-    [SerializeField] private Transform _rightHandTranform;
-    public Transform GetLeftHandTranform() => this._leftHandTranform;
-    public Transform GetRightHandTranform() => this._rightHandTranform;
+    [SerializeField] private WeaponInstance _leftHandInstance;
+    [SerializeField] private WeaponInstance _rightHandInstance;
     [SerializeField] private WeaponConfig _leftHandWeapon;
     [SerializeField] private WeaponConfig _rightHandWeapon;
     [SerializeField] private WeaponConfig _defaultWeapon;
-    public WeaponConfig LeftHandWeapon() => _leftHandWeapon;
+
+    public WeaponConfig LeftHandWeapon() => _leftHandWeapon != null ? _leftHandWeapon : _defaultWeapon;
+
     public WeaponConfig RightHandWeapon() => _rightHandWeapon != null ? _rightHandWeapon : _defaultWeapon;
 
+    public WeaponInstance RightHandWeaponInstance
+    {
+        get
+        {
+            if (_rightHandInstance == null)
+            {
+                EquipWeapon(_defaultWeapon);
+            }
+            return _rightHandInstance;
+        }
+    }
 
+    public WeaponInstance LeftHandWeaponInstance
+    {
+        get
+        {
+            if (_leftHandInstance == null)
+            {
+                EquipWeapon(_defaultWeapon);
+            }
+            return _leftHandInstance;
+        }
+    }
     #endregion
 
-    private Animator _playerAnimator;
-    [SerializeField] private AnimatorOverrideController _defaultAnimtor;
+
+    private void Awake()
+    {
+        InitWeaponInstance();
+    }
 
     private void Start()
     {
         _playerAnimator = GetComponent<Animator>();
+        _playerManager = GetComponent<PlayerManager>();
+        EquipWeapon(_defaultWeapon);
     }
 
-    private void SpawnWeapon(Transform leftHand, Transform rightHand, Animator playerAnimator, WeaponConfig weapon)
+    public void InitWeaponInstance()
     {
-        weapon.SpawnWeapon(leftHand, rightHand, playerAnimator);
+        foreach (WeaponInstance weaponInstance in GetComponentsInChildren<WeaponInstance>())
+        {
+            if (weaponInstance.handEquip == HandEquip.LeftHand)
+            {
+                _leftHandInstance = weaponInstance;
+            }
+            else if (weaponInstance.handEquip == HandEquip.RightHand)
+            {
+                _rightHandInstance = weaponInstance;
+            }
+        }
     }
 
     public void EquipWeapon(WeaponConfig weaponEquip)
@@ -42,44 +82,75 @@ public class PlayerWeaponEquipment : MonoBehaviour
         if (weaponEquip.GetHandEquip() == HandEquip.LeftHand)
         {
             _leftHandWeapon = weaponEquip;
+            _leftHandInstance.UploadWeapon(LeftHandWeapon(), _playerManager);
         }
         else if (weaponEquip.GetHandEquip() == HandEquip.RightHand)
         {
             _rightHandWeapon = weaponEquip;
+            _rightHandInstance.UploadWeapon(RightHandWeapon(), _playerManager);
         }
-        UpdateWeapon(weaponEquip);
-    }
-    // update weapon in hand
-    private void UpdateWeapon(WeaponConfig weapon)
-    {
-        SpawnWeapon(_leftHandTranform, _rightHandTranform, _playerAnimator, weapon);
-    }
-
-    public void UnEquipWeapon(WeaponConfig weapon)
-    {
-        weapon.DestroyWeapon(_leftHandTranform, _rightHandTranform);
-        if (weapon.GetHandEquip() == HandEquip.LeftHand) _leftHandWeapon = null;
-        else if (weapon.GetHandEquip() == HandEquip.RightHand) _rightHandWeapon = null;
         else
         {
-            _leftHandWeapon = null;
-            _rightHandWeapon = null;
+            _leftHandWeapon = weaponEquip;
+            _rightHandWeapon = weaponEquip;
+            _leftHandInstance.UploadWeapon(LeftHandWeapon(), _playerManager);
+            _rightHandInstance.UploadWeapon(RightHandWeapon(), _playerManager);
         }
-        _playerAnimator.runtimeAnimatorController = _defaultAnimtor;
+        if (RightHandWeapon().GetAnimatorOverride() != null)
+        {
+            _playerAnimator.runtimeAnimatorController = RightHandWeapon().GetAnimatorOverride();
+        }
+
     }
 
     public bool HasItemLeftHand()
     {
-        return HasContainsItem(_leftHandTranform);
+        return HasContainsItem(_leftHandInstance);
     }
 
     public bool HasItemRightHand()
     {
-        return HasContainsItem(_rightHandTranform);
+        return HasContainsItem(_rightHandInstance);
     }
 
-    public bool HasContainsItem(Transform transform)
+    public bool HasContainsItem(WeaponInstance weaponInstance)
     {
-        return (transform != null) && (transform.childCount > 0);
+        return (transform != null) && (weaponInstance.transform.childCount > 0);
+    }
+
+    public void UnEquipWeapon(WeaponConfig weaponConfig)
+    {
+        if (weaponConfig.GetHandEquip() == HandEquip.LeftHand)
+        {
+            UnLoadLeftHand();
+            _leftHandInstance.UploadWeapon(_defaultWeapon, _playerManager);
+        }
+        else if (weaponConfig.GetHandEquip() == HandEquip.RightHand)
+        {
+            UnloadRightHand();
+            _rightHandInstance.UploadWeapon(_defaultWeapon, _playerManager);
+        }
+        else
+        {
+            UnLoadLeftHand();
+            UnloadRightHand();
+            _leftHandInstance.UploadWeapon(_defaultWeapon, _playerManager);
+            _rightHandInstance.UploadWeapon(_defaultWeapon, _playerManager);
+        }
+
+        _playerAnimator.runtimeAnimatorController = RightHandWeapon().GetAnimatorOverride();
+
+    }
+
+    private void UnLoadLeftHand()
+    {
+        _leftHandWeapon = _defaultWeapon;
+        _leftHandInstance.UnloadWeapon();
+    }
+
+    private void UnloadRightHand()
+    {
+        _rightHandWeapon = _defaultWeapon;
+        _rightHandInstance.UnloadWeapon();
     }
 }

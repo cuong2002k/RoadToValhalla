@@ -12,7 +12,7 @@ public class PlayerSprintingState : PlayerGroundedState
     public override void OnEnter()
     {
         base.OnEnter();
-        _player.CharacterStats.ResetRegeneratorStaminaTimer();
+        _player.PlayerStats.ResetRegeneratorStaminaTimer();
         WorldSFXManager.Instance.StopSFX();
     }
 
@@ -29,7 +29,7 @@ public class PlayerSprintingState : PlayerGroundedState
             _player.PlayerAmin.SetFloat("Horizontal", inputMovement.x * 2f);
             _player.PlayerAmin.SetFloat("Vertical", inputMovement.z * 2f);
             _player.SetMovementVelocity(_playerData.sprintingSpeed);
-            _player.CharacterStats.CurrentStamina.Value -= _playerData.SprintingCost * Time.deltaTime;
+            _player.PlayerStats.CurrentStamina.Value -= _playerData.SprintingCost * Time.deltaTime;
         }
         else
         {
@@ -41,6 +41,6 @@ public class PlayerSprintingState : PlayerGroundedState
     public override void OnExit()
     {
         base.OnExit();
-        
+
     }
 }

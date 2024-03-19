@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    protected bool groundCheck;
-    protected Vector3 inputMovement;
+    protected bool _groundCheck;
+    protected Vector3 _movementInput;
 
 
     public PlayerInAirState(PlayerController player,
@@ -20,15 +20,13 @@ public class PlayerInAirState : PlayerState
     {
         base.DoCheck();
         // check grounded
-        groundCheck = _player.CheckIfGrounded();
+        _groundCheck = _player.CheckIfGrounded();
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        inputMovement = new Vector3(_player.InputHandler.XInput, 0f, _player.InputHandler.YInput);
-
         // player is ground
-        if (groundCheck && _player.CurrentVelocity.y < 0.01f)
+        if (_groundCheck && _player.CurrentVelocity.y < 0.01f)
         {
             _playerMachine.ChangeState(_player.LandState);
         }
@@ -43,5 +41,9 @@ public class PlayerInAirState : PlayerState
         base.PhysicUpdate();
     }
 
-
+    protected override void HandlerInput()
+    {
+        base.HandlerInput();
+        _movementInput = new Vector3(_player.InputHandler.XInput, 0f, _player.InputHandler.YInput);
+    }
 }
