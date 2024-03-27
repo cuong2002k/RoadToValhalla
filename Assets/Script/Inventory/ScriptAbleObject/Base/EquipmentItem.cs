@@ -29,7 +29,7 @@ public class EquipmentItem : BaseItem
     public override void Equip()
     {
         base.Equip();
-        EquipmentManager.Instance.Equip(this);
+        PlayerManager.Instance.EquipmentManager.Equip(this);
     }
 
     public override void UnEquip()

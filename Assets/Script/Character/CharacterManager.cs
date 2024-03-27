@@ -19,4 +19,10 @@ public class CharacterManager : MonoBehaviour
     protected virtual void Update() { }
     protected virtual void LateUpdate() { }
 
+    public virtual IEnumerator ProcessDeathEvent()
+    {
+        // PlayerStatsManager.CurrentHealth.Value = 0;
+        this.IsDead = true;
+        yield return new WaitForSeconds(3f);
+    }
 }

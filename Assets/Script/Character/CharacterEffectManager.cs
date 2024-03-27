@@ -5,19 +5,22 @@ using UnityEngine;
 public class CharacterEffectManager : MonoBehaviour
 {
     protected CharacterManager characterManager;
-    protected virtual void Start()
+    protected virtual void Awake()
     {
+
         characterManager = GetComponent<CharacterManager>();
     }
-    public virtual void ProcessInstanceEffect(InstanceEffects instanceEffects)
+    protected virtual void Start()
     {
-        if (characterManager == null) Debug.Log("Null character Manager");
-        else
-            instanceEffects.ProcessEffect(characterManager);
     }
 
-    public void PlayBloodSplatter(Transform contactPoint)
+    public virtual void ProcessInstanceEffect(InstanceEffects instanceEffects)
     {
-        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint);
+        instanceEffects.ProcessEffect(characterManager);
+    }
+
+    public void PlayBloodSplatter(Vector3 contactPoint)
+    {
+        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint, Quaternion.identity);
     }
 }

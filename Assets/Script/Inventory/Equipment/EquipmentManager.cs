@@ -4,38 +4,27 @@ using UnityEngine;
 using System;
 public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
 {
-    #region Singleton
-    public static EquipmentManager Instance;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-        _characterMesh = GetComponent<CharacterMesh>();
-        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
-        _currentEquipment = new EquipmentItem[size];
-    }
-    #endregion
-
+    public string id { get; set; } = System.Guid.NewGuid().ToString();
     private InventoryController _inventoryController;
 
-    #region Equipment tranfrom
+    #region Equipment tranform
 
     private CharacterMesh _characterMesh;
     [SerializeField] private EquipmentData _equipmentData = new EquipmentData();
-    #endregion
-    public string id { get; set; } = System.Guid.NewGuid().ToString();
 
+    #endregion
     [SerializeField] private EquipmentItem[] _currentEquipment;
 
     // Event to change Stats modifier when change equipment item
     public Action<EquipmentItem, EquipmentItem> OnChangeEquipmentItem;
     public Action<EquipmentItem, EquipmentItem> OnChangeUnEquipmentItem;
+
+    private void Awake()
+    {
+        _characterMesh = GetComponent<CharacterMesh>();
+        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
+        _currentEquipment = new EquipmentItem[size];
+    }
 
     private void Start()
     {
@@ -65,6 +54,7 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
         _characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
     }
 
+    //bind data
     public void Bind(EquipmentData data)
     {
         _equipmentData = data;

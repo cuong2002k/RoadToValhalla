@@ -20,7 +20,7 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
 
     public string GetNameItemSelect()
     {
-        if (_item != null)
+        if (_item != null && !_item.IsEmpty())
             return _item.GetItem().GetItemName();
         return "";
     }
@@ -45,8 +45,6 @@ public class ItemPickUp : MonoBehaviour, ISelectable, IInteractable
             {
                 Destroy(this.gameObject);
             }
-
         }
-
     }
 }

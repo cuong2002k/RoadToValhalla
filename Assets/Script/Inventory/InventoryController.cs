@@ -9,7 +9,6 @@ using System;
 public class InventoryController : Container, IBind<InventoryData>
 {
     [field: SerializeField] public string id { get; set; } = System.Guid.NewGuid().ToString();
-    [SerializeField] private BaseItem _item;
 
     #region Unity Call Back
     protected override void Awake()
@@ -40,6 +39,7 @@ public class InventoryController : Container, IBind<InventoryData>
         _inventoryModel.Bind(data, this._inventorySize);
         data.id = this.id;
     }
+    
 }
 
 

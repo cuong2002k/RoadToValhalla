@@ -7,6 +7,7 @@ public class TakeDamageEffect : InstanceEffects
 {
     [Header("Damage")]
     public int PhysicsDamage = 0;
+    public Vector3 targetPoint;
 
     public override void ProcessEffect(CharacterManager playerManager)
     {
@@ -24,7 +25,7 @@ public class TakeDamageEffect : InstanceEffects
 
     private void PlayDameVFX(CharacterManager playerManager)
     {
-        playerManager.CharacterEffectManager.PlayBloodSplatter(playerManager.transform);
+        playerManager.CharacterEffectManager.PlayBloodSplatter(targetPoint);
     }
 
     private void PlayeSoundFX()
