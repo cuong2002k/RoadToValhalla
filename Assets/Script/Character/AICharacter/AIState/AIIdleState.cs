@@ -13,10 +13,10 @@ public class AIIdleState : AIBaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        // if (Time.time >= _startTime + _idleTimer)
-        // {
-        //     _aiMachine.ChangeState(_aiControl.WanderState);
-        // }
+        if (_aiControl.PlayerTarget != null && _aiControl.isRunning)
+        {
+            _aiControl.AiMachine.ChangeState(_aiControl.ChaseState);
+        }
     }
 
 

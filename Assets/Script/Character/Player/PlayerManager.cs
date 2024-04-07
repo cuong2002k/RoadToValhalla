@@ -70,5 +70,14 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
         this.PlayerStatsManager.RestartStats();
     }
 
+    public override void TakeDamage(WeaponConfig weaponConfig, int physicDame, Vector3 contactPoint)
+    {
+        base.TakeDamage(weaponConfig, physicDame, contactPoint);
+        TakeDamageEffect.targetPoint = contactPoint;
+        TakeDamageEffect.PhysicsDamage = physicDame;
+        TakeDamageEffect takeDamageEffect = Instantiate(TakeDamageEffect) as TakeDamageEffect;
+        CharacterEffectManager.ProcessInstanceEffect(takeDamageEffect);
+    }
+
 }
 

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c608e2260f2f8b4baa287d62d1cddfd, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  ID: 96308d16-8922-4fa6-8fc8-d5d1e7c6bb60
   _itemName: Wood
   _icon: {fileID: 21300000, guid: 7ac0fae22a3f76e49b9954c5df7c5c44, type: 3}
   _itemType: 3
   _maxStack: 10
   _description: Good for building.
-  _itemObject: {fileID: 5088806096400972625, guid: 9adbae1fc66859746b96bf08e6c3e205, type: 3}
+  _itemObject: {fileID: 7538554111015881017, guid: 4c9f85e4bf4c4be49a3af899c29abf26, type: 3}

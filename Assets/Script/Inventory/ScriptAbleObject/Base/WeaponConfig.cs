@@ -8,6 +8,15 @@ public enum HandEquip
     RightHand,
     AbothHand
 }
+public enum WeaponType
+{
+    AXE,
+    SWORD,
+    PICKAXE,
+    POW,
+    MAGIC,
+    PUNCH
+}
 [CreateAssetMenu(fileName = "New Weapon Config", menuName = "Data/ItemSO/Weapon Config")]
 public class WeaponConfig : BaseItem
 {
@@ -15,6 +24,7 @@ public class WeaponConfig : BaseItem
     [SerializeField] private HandEquip _handEquip;
     [SerializeField] private int _dameWeapon = 0;
     [SerializeField] private GameObject _weponObject;
+    [SerializeField] private WeaponType _weaponType;
     public AnimatorOverrideController GetAnimatorOverride() => _animationOverride;
     public HandEquip GetHandEquip() => this._handEquip;
     [SerializeField] private AudioClip[] _attackSound;
@@ -41,4 +51,5 @@ public class WeaponConfig : BaseItem
 
     public GameObject GetWeaponObject() => this._weponObject;
     public int GetDamage() => _dameWeapon;
+    public WeaponType GetWeaponType() => _weaponType;
 }

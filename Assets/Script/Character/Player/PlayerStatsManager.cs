@@ -8,6 +8,10 @@ public class PlayerStatsManager : CharacterStatsManager
     private PlayerHudManger _playerHubManager;
     private EquipmentManager _equipmentMananger;
     private PlayerManager _playerManager;
+    [SerializeField] protected StatsModifield _damage;
+    [SerializeField] protected StatsModifield _defense;
+    [SerializeField] protected StatsModifield _maxStamina;
+    public ObserverValue<float> CurrentStamina;
 
     [Header("Stamina Regenerator")]
     private float _staminaCostRegerator = 2f;

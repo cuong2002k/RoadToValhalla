@@ -6,6 +6,6 @@ public class DestroyVFX : MonoBehaviour
 {
     private void Start()
     {
-        Destroy(this.gameObject, 4f);
+        Destroy(this.gameObject, 0.2f);
     }
 }

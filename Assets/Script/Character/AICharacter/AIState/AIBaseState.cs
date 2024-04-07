@@ -30,7 +30,13 @@ public class AIBaseState : IState
     }
     public override void DoCheck() { }
 
-    public override void LogicUpdate() { }
+    public override void LogicUpdate()
+    {
+        if (CanAttack() && _aiControl.AttackCountDown.Timer <= 0)
+        {
+            _aiMachine.ChangeState(_aiControl.AttackState);
+        }
+    }
 
     public override void PhysicUpdate() => DoCheck();
 
@@ -51,4 +57,21 @@ public class AIBaseState : IState
         return animationFinished;
     }
 
+    protected bool HasAnimationFinished(string animationName)
+    {
+        // Check if the specified animation has completed
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
+    }
+
+    public bool CanAttack()
+    {
+        if (_aiControl.PlayerTarget == null) return false;
+        float remainingDistance = Vector3.Distance(_aiControl.PlayerTarget.position, _aiControl.transform.position);
+        if (remainingDistance <= _aiControl.attackRange)
+        {
+            return true;
+        }
+        return false;
+    }
 }

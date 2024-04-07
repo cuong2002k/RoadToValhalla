@@ -26,6 +26,8 @@ public class AIWanderState : AIBaseState
             _navMeshAgent.destination = GetDestinationPoint();
         }
         _aiControl.transform.rotation = _navMeshAgent.transform.rotation;
+        _navMeshAgent.transform.localPosition = Vector3.zero;
+        _navMeshAgent.transform.localRotation = Quaternion.identity;
         // else
         // {
         //     if (Vector3.Distance(finalPosition, _aiControl.transform.position) < 0.5f)

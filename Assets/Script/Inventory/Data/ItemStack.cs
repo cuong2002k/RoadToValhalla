@@ -132,7 +132,7 @@ public class ItemStack
     {
         ItemPickUp itemPickUp = Object.Instantiate(this._item.GetITemPrefabs()).GetComponent<ItemPickUp>();
         itemPickUp.transform.position = dropLocation.forward + new Vector3(0, 2f, 0);
-        itemPickUp.ItemStack.SetItemStack(itemToDrop.GetItem(), stack);
+        itemPickUp.SetItemDrop(itemToDrop);
         this.DecreaseStack(stack);
     }
     #endregion

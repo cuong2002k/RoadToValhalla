@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4459ff458eed4f742ae271b30c1793bb, type: 3}
+  m_Name: PickAxe
+  m_EditorClassIdentifier: 
+  ID: bc3bb0da-71da-4e39-99b5-37097b4c90a8
+  _itemName: PickAxe
+  _icon: {fileID: 21300000, guid: d29db5788cf3bc44a9c3c3d206ef68b3, type: 3}
+  _itemType: 2
+  _maxStack: 1
+  _description: PickAxe
+  _itemObject: {fileID: 1804565129421674304, guid: 5fadc0b471e1a8940904b3a39ee42c79, type: 3}
+  _animationOverride: {fileID: 22100000, guid: 6f45412758e644e4885bd5f7d24e5686, type: 2}
+  _handEquip: 1
+  _dameWeapon: 15
+  _weponObject: {fileID: 1273598319470290348, guid: 1214d5077bb7f024fb9b0ee4bb3e7425, type: 3}
+  _weaponType: 2
+  _attackSound:
+  - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}
+  - {fileID: 8300000, guid: 4d4ef7516a431934681038a3dc391e55, type: 3}

@@ -155,4 +155,25 @@ public class PlayerWeaponEquipment : MonoBehaviour
         _rightHandWeapon = _defaultWeapon;
         _rightHandInstance.UnloadWeapon();
     }
+
+    public void OpenLeftCollider()
+    {
+        LeftHandWeaponInstance.ActiveColliderDamage();
+    }
+
+    public void OpenRightCollider()
+    {
+        RightHandWeaponInstance.ActiveColliderDamage();
+    }
+
+    public void DisableLeftCollider()
+    {
+        LeftHandWeaponInstance.DisableColliderDamage();
+    }
+
+    public void DisableRightCollider()
+    {
+        RightHandWeaponInstance.DisableColliderDamage();
+    }
+
 }

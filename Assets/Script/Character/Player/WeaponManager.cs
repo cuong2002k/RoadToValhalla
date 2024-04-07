@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private DameCollider _dameCollider;
+    
     private void Awake()
     {
         _dameCollider = GetComponentInChildren<DameCollider>();

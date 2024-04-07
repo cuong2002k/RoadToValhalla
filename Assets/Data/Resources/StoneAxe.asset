@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4459ff458eed4f742ae271b30c1793bb, type: 3}
+  m_Name: StoneAxe
+  m_EditorClassIdentifier: 
+  ID: e0034e9b-896f-4b8d-8a24-6ae8862b81e4
+  _itemName: Stone Axe
+  _icon: {fileID: 21300000, guid: 1db2b2cd3dfe88b4280dda3af619ea97, type: 3}
+  _itemType: 2
+  _maxStack: 1
+  _description: Stone Axe
+  _itemObject: {fileID: 4675688905088040727, guid: 18cf95cebddd0934198a8b8c70e20e2a, type: 3}
+  _animationOverride: {fileID: 22100000, guid: 6f45412758e644e4885bd5f7d24e5686, type: 2}
+  _handEquip: 1
+  _dameWeapon: 12
+  _weponObject: {fileID: 4575664836228964465, guid: 1ec2cce87f3537a4ba79ef54fd12b953, type: 3}
+  _weaponType: 0
+  _attackSound:
+  - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}
+  - {fileID: 8300000, guid: 4d4ef7516a431934681038a3dc391e55, type: 3}

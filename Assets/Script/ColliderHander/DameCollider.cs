@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class DameCollider : MonoBehaviour
 {
-    public int physicDame = 0;
+    private int _physicDame = 0;
     private Collider _colliderDamage;
-    private CharacterManager CausingCharacterManager;
+    private CharacterManager _CausingCharacterManager;
+    private List<CharacterManager> _characterDamaged = new List<CharacterManager>();
+    private Vector3 _contactPoint;
+    private WeaponConfig _weapon;
 
-    [Header("Test")]
-    public TakeDamageEffect TakeDamageEffect;
+    // [Header("Test")]
+    // public TakeDamageEffect TakeDamageEffect;
 
-    private void Start()
+    private void Awake()
     {
         _colliderDamage = GetComponent<Collider>();
         _colliderDamage.enabled = false;
@@ -19,16 +22,26 @@ public class DameCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CharacterManager characterManager = other.GetComponent<CharacterManager>();
-        if (characterManager == CausingCharacterManager) return;
+        CharacterManager characterManager = other.gameObject.GetComponentInParent<CharacterManager>();
+        if (_characterDamaged.Contains(characterManager)) return;
+        _characterDamaged.Add(characterManager);
         if (characterManager != null)
         {
-            TakeDamageEffect.targetPoint = other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
-            TakeDamageEffect.PhysicsDamage = physicDame;
-            characterManager.CharacterEffectManager.ProcessInstanceEffect(TakeDamageEffect);
-            DisableDamage();
+            if (characterManager == _CausingCharacterManager) return;
+            _contactPoint = other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
+            // TakeDamage(characterManager);
+            characterManager.TakeDamage(_weapon, _physicDame, _contactPoint);
         }
     }
+
+    // private void TakeDamage(CharacterManager characterManager)
+    // {
+    //     TakeDamageEffect.targetPoint = contactPoint;
+    //     TakeDamageEffect.PhysicsDamage = physicDame;
+    //     TakeDamageEffect takeDamageEffect = Instantiate(TakeDamageEffect);
+    //     characterManager.CharacterEffectManager.ProcessInstanceEffect(takeDamageEffect);
+    // }
+
 
     public void EnableDamage()
     {
@@ -38,12 +51,14 @@ public class DameCollider : MonoBehaviour
     public void DisableDamage()
     {
         _colliderDamage.enabled = false;
+        _characterDamaged.Clear();
     }
 
     public void SetWeaponDamage(WeaponConfig weapon, CharacterManager characterManager)
     {
-        physicDame = weapon.GetDamage();
-        CausingCharacterManager = characterManager;
+        _weapon = weapon;
+        _physicDame = weapon.GetDamage();
+        _CausingCharacterManager = characterManager;
     }
 
 }

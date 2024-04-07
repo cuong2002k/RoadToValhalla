@@ -23,6 +23,7 @@ MonoBehaviour:
   _handEquip: 1
   _dameWeapon: 15
   _weponObject: {fileID: 7080340656463805033, guid: a1c0f5f9c3b3d1c47b5c89f356c4133a, type: 3}
+  _weaponType: 1
   _attackSound:
   - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}
   - {fileID: 8300000, guid: 4d4ef7516a431934681038a3dc391e55, type: 3}

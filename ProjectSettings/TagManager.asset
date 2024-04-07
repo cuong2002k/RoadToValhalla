@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Grounded
   - Item
-  - Player
+  - Chacracter
   - DameCollider
   - HitCollider
   - 

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class AIAttackState : MonoBehaviour
+public class AIAttackState : AIBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public AIAttackState(AIControlManager aiControl, NavMeshAgent navMesh, Animator animator, string hasAmin) : base(aiControl, navMesh, animator, hasAmin)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public override void LogicUpdate()
     {
-        
+        base.LogicUpdate();
+        if (HasAnimationFinished(_hasAmin))
+        {
+            _aiMachine.ChangeState(_aiControl.ChaseState);
+        }
     }
 }

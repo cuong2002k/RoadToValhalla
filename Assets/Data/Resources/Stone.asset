@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c608e2260f2f8b4baa287d62d1cddfd, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
+  ID: 17378196-1426-4486-9a04-a8ff33ce4952
   _itemName: Stone
   _icon: {fileID: 21300000, guid: e23c9f2fbf3792f449d46e7305d48298, type: 3}
   _itemType: 3
   _maxStack: 10
   _description: Good for building.
-  _itemObject: {fileID: 7695939669328770039, guid: 3720e10a9d93961448c282749b1e01c8, type: 3}
+  _itemObject: {fileID: 8691388618392710390, guid: 114cf7603e2406c43be312077d7a899b, type: 3}

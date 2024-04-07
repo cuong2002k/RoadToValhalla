@@ -5,31 +5,28 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Damage Effect", menuName = "CharacterEffect/Take Damage Effect")]
 public class TakeDamageEffect : InstanceEffects
 {
-    [Header("Damage")]
-    public int PhysicsDamage = 0;
-    public Vector3 targetPoint;
 
-    public override void ProcessEffect(CharacterManager playerManager)
+    public override void ProcessEffect(CharacterManager entity)
     {
-        base.ProcessEffect(playerManager);
-        if (playerManager.IsDead) return; // if character dead is not thing
-        CaculatorDamage(playerManager);
-        PlayDameVFX(playerManager);
+        base.ProcessEffect(entity);
+        if (entity.IsDead) return; // if character dead is not thing
+        CaculatorDamage(entity);
+        PlayVFX(targetPoint);
         PlayeSoundFX();
     }
 
-    private void CaculatorDamage(CharacterManager playerManager)
+    protected override void CaculatorDamage(CharacterManager entity)
     {
-        playerManager.CharacterStatsManager.CurrentHealth.Value -= PhysicsDamage;
+        entity.CharacterStatsManager.CurrentHealth.Value -= PhysicsDamage;
     }
 
-    private void PlayDameVFX(CharacterManager playerManager)
-    {
-        playerManager.CharacterEffectManager.PlayBloodSplatter(targetPoint);
-    }
-
-    private void PlayeSoundFX()
+    protected override void PlayeSoundFX()
     {
         WorldSFXManager.Instance.PlayRandomHitSFX();
+    }
+
+    protected override void PlayVFX(Vector3 contactPoint)
+    {
+        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint, Quaternion.identity);
     }
 }
