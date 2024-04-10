@@ -138,7 +138,7 @@ public class InputManager : MonoBehaviour
     {
         if (context.started)
         {
-            OpenInventoryEvent?.Invoke();
+            // OpenInventoryEvent?.Invoke();
         }
     }
 
@@ -151,7 +151,7 @@ public class InputManager : MonoBehaviour
     {
         if (context.started)
         {
-            AttackInput = true;
+            AttackInput = !BuildingSystem.instance.isBuilding && !BuildingSystem.instance.isDestroy;
         }
 
         if (context.canceled)

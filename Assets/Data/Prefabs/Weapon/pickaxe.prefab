@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 174546985296058704}
   - component: {fileID: 304363466131419268}
   - component: {fileID: 6610240044605697330}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: DameCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,6 +12,7 @@ public class WeaponInstance : MonoBehaviour
     public void UploadWeapon(WeaponConfig weapon, CharacterManager characterManager)
     {
         UnloadWeapon();
+        
         _weaponInstance = Instantiate(weapon.GetWeaponObject(), this.transform);
         _weaponInstance.transform.SetParent(this.transform);
         _weaponManager = _weaponInstance.GetComponent<WeaponManager>();

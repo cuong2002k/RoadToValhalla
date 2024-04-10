@@ -8,19 +8,19 @@ public static class ItemDatabase
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
     public static void Initialized()
     {
-        // try
-        // {
-        //     ItemDatabae = new Dictionary<string, BaseItem>();
-        //     var baseItems = Resources.LoadAll<BaseItem>("");
-        //     foreach (BaseItem item in baseItems)
-        //     {
-        //         ItemDatabae.Add(item.ID, item);
-        //     }
-        // }
-        // catch (IOException ex)
-        // {
-
-        // }
+        try
+        {
+            ItemDatabae = new Dictionary<string, BaseItem>();
+            var baseItems = Resources.LoadAll<BaseItem>("");
+            foreach (BaseItem item in baseItems)
+            {
+                ItemDatabae.Add(item.ID, item);
+            }
+        }
+        catch (IOException ex)
+        {
+            Debug.Log(ex);
+        }
     }
     public static BaseItem GetItemWithID(string id)
     {

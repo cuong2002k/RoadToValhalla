@@ -26,10 +26,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591484008910155088}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5190909558637695758}
   m_Father: {fileID: 0}
@@ -143,8 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc7cf963dfa90d4690e2de2d1428e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicDame: 0
-  TakeDamageEffect: {fileID: 11400000, guid: eb376073418383e489a4031b2925241c, type: 2}
 --- !u!65 &775069078514230211
 BoxCollider:
   m_ObjectHideFlags: 0

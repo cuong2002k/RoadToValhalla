@@ -45,15 +45,15 @@ public class PlayerUIManager : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        InputManager.OpenInventoryEvent += HandlerUIInput;
-    }
+    // private void OnEnable()
+    // {
+    //     InputManager.OpenInventoryEvent += HandlerUIInput;
+    // }
 
-    private void OnDisable()
-    {
-        InputManager.OpenInventoryEvent -= HandlerUIInput;
-    }
+    // private void OnDisable()
+    // {
+    //     InputManager.OpenInventoryEvent -= HandlerUIInput;
+    // }
 
     private void Update()
     {
@@ -65,16 +65,23 @@ public class PlayerUIManager : MonoBehaviour
             DragDropManager.RestartMouseSlot();
             Cursor.lockState = CursorLockMode.Locked;
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            HandlerUIInput(!_playerInventoryPanel.activeInHierarchy);
+        }
     }
 
-    public void HandlerUIInput()
+    public void HandlerUIInput(bool active)
     {
         if (PlayerManager.Instance.IsDead) return;
-        _playerInventoryPanel.SetActive(!_playerInventoryPanel.activeSelf);
-        _craftingPanel.SetActive(!_craftingPanel.activeSelf);
+        _playerInventoryPanel.SetActive(active);
+        _craftingPanel.SetActive(active);
         DragDropManager.RestartMouseSlot();
-        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.Confined : CursorLockMode.Locked;
-
+        Camera.main.transform.root.GetComponent<PlayerController>().enabled = !active;
+        Camera.main.transform.GetComponentInParent<CameraController>().enabled = !active;
+        Cursor.visible = active;
+        Cursor.lockState = active ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
 }

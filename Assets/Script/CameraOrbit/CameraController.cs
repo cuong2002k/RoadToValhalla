@@ -30,15 +30,15 @@ public class CameraController : MonoBehaviour
         canRotation = true;
     }
 
-    private void OnEnable()
-    {
-        InputManager.OpenInventoryEvent += HandlerRotationCheck;
-    }
+    // private void OnEnable()
+    // {
+    //     InputManager.OpenInventoryEvent += HandlerRotationCheck;
+    // }
 
-    private void OnDisable()
-    {
-        InputManager.OpenInventoryEvent -= HandlerRotationCheck;
-    }
+    // private void OnDisable()
+    // {
+    //     InputManager.OpenInventoryEvent -= HandlerRotationCheck;
+    // }
 
     private void Update()
     {
@@ -82,8 +82,8 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private void HandlerRotationCheck()
-    {
-        canRotation = !canRotation;
-    }
+    // private void HandlerRotationCheck()
+    // {
+    //     canRotation = !canRotation;
+    // }
 }

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1264845256049708972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264845256049708974}
+  - component: {fileID: 1264845256049708973}
+  m_Layer: 0
+  m_Name: BuildingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1264845256049708974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264845256049708972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.72, y: 2.2, z: 9.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264845256049708973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264845256049708972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e798c0321bf4d4d8811338a6168b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorGameObject:
+  - {fileID: 7644162147404817415, guid: 349524bd4c6d6174782d0930397a3ecc, type: 3}
+  wallGameObject:
+  - {fileID: 5086621937760574780, guid: e313391196c17f14fbbd7da0b9fdde74, type: 3}
+  - {fileID: 3281906793689947111, guid: 31f4a493d083145488685fff3679ef97, type: 3}
+  isDestroy: 0
+  LastHitDestroyTranform: {fileID: 0}
+  selectBuildTyte: 1
+  connectorLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  ghostMaterialValid: {fileID: 2100000, guid: ed16488b5cc71ad499d580caff4f7a53, type: 2}
+  ghostMaterialInvalid: {fileID: 2100000, guid: 1329fe0f4d370894e9b0561c486f62d2, type: 2}
+  connectOverlabRadius: 2
+  maxGroundAngle: 45
+  isBuilding: 0
+  currentBuildingIndex: 0
+  ghostBuildGameObject: {fileID: 0}
+  isGhostInValidPosition: 0
+  modelParent: {fileID: 0}

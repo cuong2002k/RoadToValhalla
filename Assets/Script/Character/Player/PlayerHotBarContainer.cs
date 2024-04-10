@@ -18,7 +18,6 @@ public class PlayerHotBarContainer : Container, IBind<InventoryData>
 
     public void UseSlot(int index)
     {
-
         ItemStack itemInSlot = this._inventoryModel[index - 1];
         if (itemInSlot.GetActive())
         {
