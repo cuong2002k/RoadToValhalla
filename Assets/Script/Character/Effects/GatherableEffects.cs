@@ -29,6 +29,6 @@ public class GatherableEffects : InstanceEffects
 
     protected override void PlayVFX(Vector3 contactPoint)
     {
-        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.BloodPletterVFX, contactPoint, Quaternion.identity);
+        GameObject bloodVFX = Instantiate(WorldVFXManager.Instance.ChopTreeVFX, contactPoint, Quaternion.identity);
     }
 }

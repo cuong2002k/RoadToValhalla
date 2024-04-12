@@ -31,6 +31,6 @@ public class CharacterManager : MonoBehaviour, IDamage
 
     public virtual void TakeDamage(WeaponConfig weaponConfig, int physicDame, Vector3 contactPoint)
     {
-
+        
     }
 }

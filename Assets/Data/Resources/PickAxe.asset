@@ -22,7 +22,7 @@ MonoBehaviour:
   _animationOverride: {fileID: 22100000, guid: 6f45412758e644e4885bd5f7d24e5686, type: 2}
   _handEquip: 1
   _dameWeapon: 15
-  _weponObject: {fileID: 1273598319470290348, guid: 1214d5077bb7f024fb9b0ee4bb3e7425, type: 3}
+  _weponObject: {fileID: 3738255076481722226, guid: 091d14a26038cb34e8f8c03f3212574d, type: 3}
   _weaponType: 2
   _attackSound:
   - {fileID: 8300000, guid: 482611fe6bc559142a00be6e726b4862, type: 3}

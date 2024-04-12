@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CountDownTimer
 {
+    float baseTimer = 0;
     float timer = 0f;
     public float Timer => this.timer;
     public CountDownTimer(float timer)
     {
-        this.timer = timer;
+        this.baseTimer = timer;
+        this.timer = this.baseTimer;
     }
     public void Tick(float deltaTime)
     {
@@ -16,5 +18,10 @@ public class CountDownTimer
         {
             timer -= deltaTime;
         }
+    }
+
+    public void Reset()
+    {
+        this.timer = this.baseTimer;
     }
 }

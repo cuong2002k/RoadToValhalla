@@ -13,11 +13,16 @@ public class TakeDamageEffect : InstanceEffects
         CaculatorDamage(entity);
         PlayVFX(targetPoint);
         PlayeSoundFX();
+
     }
 
     protected override void CaculatorDamage(CharacterManager entity)
     {
-        entity.CharacterStatsManager.CurrentHealth.Value -= PhysicsDamage;
+        int finalDamage = PhysicsDamage - entity.CharacterStatsManager.Defense.GetStatsValue();
+        if (finalDamage <= 0) finalDamage = 1;
+        else finalDamage = Random.Range(Mathf.Max(0, finalDamage - 5), finalDamage);
+        entity.CharacterStatsManager.CurrentHealth.Value -= finalDamage;
+        WorldVFXManager.Instance.CreatePopupDamage(targetPoint, finalDamage);
     }
 
     protected override void PlayeSoundFX()

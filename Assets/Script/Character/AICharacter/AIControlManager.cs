@@ -9,7 +9,7 @@ public class AIControlManager : MonoBehaviour
     [Header("Data")]
     public float detectionRadius = 10.0f;
     public float detectionAngle = 90.0f;
-    public float attackRange = 2f;
+    public float attackRange = 1.5f;
     public float attackTimer = 2f;
     public CountDownTimer AttackCountDown;
     public float timeFocus = 5f;
@@ -42,6 +42,9 @@ public class AIControlManager : MonoBehaviour
     private readonly string Hurt = "Hurt";
     private readonly string Attack = "Attack";
 
+    public CharacterAIManager characterAIManager { get; private set; }
+
+
 
 
 
@@ -51,6 +54,7 @@ public class AIControlManager : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         AiMachine = new AIMachine(); // create state machine
+        characterAIManager = GetComponent<CharacterAIManager>();
     }
 
     private void Start()
@@ -95,7 +99,7 @@ public class AIControlManager : MonoBehaviour
             Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
             {
                 PlayerTarget = _playerManager.transform;
-                return true;
+                return !_playerManager.IsDead;
             }
         }
 

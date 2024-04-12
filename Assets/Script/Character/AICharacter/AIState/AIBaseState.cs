@@ -35,6 +35,7 @@ public class AIBaseState : IState
         if (CanAttack() && _aiControl.AttackCountDown.Timer <= 0)
         {
             _aiMachine.ChangeState(_aiControl.AttackState);
+            _aiControl.AttackCountDown.Reset();
         }
     }
 
@@ -70,7 +71,7 @@ public class AIBaseState : IState
         float remainingDistance = Vector3.Distance(_aiControl.PlayerTarget.position, _aiControl.transform.position);
         if (remainingDistance <= _aiControl.attackRange)
         {
-            return true;
+            return !_aiControl.characterAIManager.IsDead;
         }
         return false;
     }

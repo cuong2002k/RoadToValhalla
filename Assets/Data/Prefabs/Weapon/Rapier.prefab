@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05948025, y: 0.979658, z: 0.12456051}
-  m_Center: {x: 0.00009947643, y: 0.632876, z: -0.003530454}
+  m_Size: {x: 0.05948025, y: 1.1782185, z: 0.24907525}
+  m_Center: {x: 0.00009947643, y: 0.6606814, z: 0.008038901}
 --- !u!114 &5802152536087707576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,8 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc7cf963dfa90d4690e2de2d1428e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicDame: 0
-  TakeDamageEffect: {fileID: 11400000, guid: eb376073418383e489a4031b2925241c, type: 2}
 --- !u!1 &7217715998019414160
 GameObject:
   m_ObjectHideFlags: 0

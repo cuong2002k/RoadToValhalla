@@ -29,19 +29,10 @@ public class DameCollider : MonoBehaviour
         {
             if (characterManager == _CausingCharacterManager) return;
             _contactPoint = other.gameObject.GetComponent<Collider>().ClosestPoint(transform.position);
-            // TakeDamage(characterManager);
             characterManager.TakeDamage(_weapon, _physicDame, _contactPoint);
+            
         }
     }
-
-    // private void TakeDamage(CharacterManager characterManager)
-    // {
-    //     TakeDamageEffect.targetPoint = contactPoint;
-    //     TakeDamageEffect.PhysicsDamage = physicDame;
-    //     TakeDamageEffect takeDamageEffect = Instantiate(TakeDamageEffect);
-    //     characterManager.CharacterEffectManager.ProcessInstanceEffect(takeDamageEffect);
-    // }
-
 
     public void EnableDamage()
     {
