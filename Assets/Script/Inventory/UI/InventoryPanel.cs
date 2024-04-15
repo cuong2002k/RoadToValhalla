@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryPanel : MonoBehaviour
 {
     [SerializeField] private List<SlotUI> _slotUIContainer;
-    private GameObject slotUIPrefabs;
+    [SerializeField] private GameObject slotUIPrefabs;
     private void Awake()
     {
         slotUIPrefabs = Resources.Load<GameObject>("InventorySlotUI");
@@ -39,6 +39,14 @@ public class InventoryPanel : MonoBehaviour
     {
         get => _slotUIContainer[index];
         set => _slotUIContainer[index] = value;
+    }
+
+    public void Clear()
+    {
+        foreach (SlotUI slotUI in _slotUIContainer)
+        {
+            Destroy(slotUI.gameObject);
+        }
     }
 
 }

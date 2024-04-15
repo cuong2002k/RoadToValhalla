@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    private UI_DragDropManager _dragDropManager;
+    [SerializeField] protected UI_DragDropManager _dragDropManager;
 
     #region Inventory
     // Inventory data
@@ -30,12 +30,11 @@ public class Container : MonoBehaviour
 
     }
 
-    IEnumerator Initialize()
+    protected IEnumerator Initialize()
     {
-        _inventoryPanel.Initialize(_inventorySize, _inventoryPrefabs.transform);
         _inventoryModel = new InventoryModel(_inventorySize);
+        _inventoryPanel.Initialize(_inventorySize, _inventoryPrefabs.transform);
         _inventoryModel.OnInventoryChange += this._inventoryPanel.RefestInventoryUI;
-
         for (int i = 0; i < _inventorySize; i++)
         {
             _inventoryPanel[i].SetInventory(this._inventoryModel);

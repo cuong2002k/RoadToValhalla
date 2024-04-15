@@ -130,8 +130,8 @@ public class ItemStack
 
     public void DropItem(ItemStack itemToDrop, Transform dropLocation, int stack)
     {
-        ItemPickUp itemPickUp = Object.Instantiate(this._item.GetITemPrefabs()).GetComponent<ItemPickUp>();
-        itemPickUp.transform.position = dropLocation.forward + new Vector3(0, 2f, 0);
+        ItemPickUp itemPickUp = Object.Instantiate(this._item.GetITemPrefabs(), dropLocation.position, Quaternion.identity).GetComponent<ItemPickUp>();
+        itemPickUp.transform.position += (dropLocation.forward * 2) + new Vector3(0, 2f, 0);
         itemPickUp.SetItemDrop(itemToDrop);
         this.DecreaseStack(stack);
     }
@@ -150,7 +150,7 @@ public class ItemStack
             {
                 (_item as FoodItem).Equip();
             }
-            else
+            else if (_item as WeaponConfig)
             {
                 _item.Equip();
                 this._isActive = true;

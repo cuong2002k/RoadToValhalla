@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slotID: 0
   _itemUI:
+    Id: 
     _item: {fileID: 0}
     _stack: 0
     _isActive: 0

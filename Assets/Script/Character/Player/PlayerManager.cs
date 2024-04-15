@@ -8,14 +8,12 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
     #region Singleton
     public static PlayerManager Instance;
     public string id { get; set; } = System.Guid.NewGuid().ToString();
-    public PlayerGameData _playerData = new PlayerGameData();
+    public PlayerGameData PlayerData = new PlayerGameData();
     [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
     [HideInInspector] public PlayerStatsManager PlayerStatsManager;
     [HideInInspector] public PlayerController PlayerController;
     [HideInInspector] public PlayerEffectManager PlayerEffectManager;
     [HideInInspector] public EquipmentManager EquipmentManager;
-
-    public bool Receive = false;
 
     protected override void Awake()
     {
@@ -35,23 +33,22 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
 
     }
     #endregion
+
+    //bind data
     public void Bind(PlayerGameData playerData)
     {
-        this._playerData = playerData;
-        transform.position = _playerData.position;
+        this.PlayerData = playerData;
+        transform.position = PlayerData.position;
     }
 
     protected override void Update()
     {
-        if (Receive)
-        {
-            PlayerReceive();
-        }
+
     }
 
     protected override void LateUpdate()
     {
-        _playerData.position = transform.position;
+        PlayerData.position = transform.position;
     }
 
     public override IEnumerator ProcessDeathEvent()
@@ -59,15 +56,21 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
         this.PlayerController.playerMachine.ChangeState(PlayerController.DeathState);
         PlayerUIManager.Instance.PlayerPopUpManager.ShowDeadPopUp();
         WorldSFXManager.Instance.PlayDeadSFX();
-        return base.ProcessDeathEvent();
+        yield return StartCoroutine(base.ProcessDeathEvent());
+        PlayerReceive();
     }
 
     public void PlayerReceive()
     {
-        Receive = false;
         IsDead = false;
         this.PlayerController.playerMachine.ChangeState(PlayerController.IdleState);
         this.PlayerStatsManager.RestartStats();
+        this.transform.position = PlayerData.respawnPosition;
+    }
+
+    public void SetRespawnPos(Vector3 position)
+    {
+        PlayerData.respawnPosition = position;
     }
 
     public override void TakeDamage(WeaponConfig weaponConfig, int physicDame, Vector3 contactPoint)

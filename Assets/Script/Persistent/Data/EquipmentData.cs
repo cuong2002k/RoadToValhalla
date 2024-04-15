@@ -6,6 +6,6 @@ using UnityEngine;
 public class EquipmentData : ISaveData
 {
     public string id { get; set; } = System.Guid.NewGuid().ToString();
-    public EquipmentItem[] EquipData;
+    public string[] EquipData;
 
 }

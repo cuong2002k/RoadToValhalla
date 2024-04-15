@@ -41,18 +41,12 @@ public class AIControlManager : MonoBehaviour
     private readonly string Death = "Death";
     private readonly string Hurt = "Hurt";
     private readonly string Attack = "Attack";
-
     public CharacterAIManager characterAIManager { get; private set; }
-
-
-
-
 
     private void Awake()
     {
         _navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-
         AiMachine = new AIMachine(); // create state machine
         characterAIManager = GetComponent<CharacterAIManager>();
     }
@@ -98,13 +92,27 @@ public class AIControlManager : MonoBehaviour
             if (Vector3.Dot(PlayerPos.normalized, this.transform.forward) >
             Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
             {
-                PlayerTarget = _playerManager.transform;
+                SetTarget();
                 return !_playerManager.IsDead;
             }
         }
 
         return false;
     }
+
+    public void SetTarget()
+    {
+        PlayerTarget = !_playerManager.IsDead ? _playerManager.transform : null;
+    }
+
+    public bool InLook()
+    {
+        Vector3 EnemyPos = this.transform.position;
+        Vector3 PlayerPos = _playerManager.transform.position - EnemyPos;
+        return Vector3.Dot(PlayerPos.normalized, this.transform.forward) >
+                Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad);
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

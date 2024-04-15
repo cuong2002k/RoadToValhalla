@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2561798734511300276}
-  - component: {fileID: 1168136250922179018}
-  - component: {fileID: 3781931304216810869}
-  - component: {fileID: 8087973464451625351}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -35,54 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1168136250922179018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2561798734511300264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d271eb5568911b147a74e7f4924a0a06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3781931304216810869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2561798734511300264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb5b0322341d386498dc74d57b620d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDead: 0
-  TakeDamageEffect: {fileID: 11400000, guid: 057d2a665ece56b42bc60f0dce14cc86, type: 2}
-  CharacterEffectManager: {fileID: 0}
-  CharacterStatsManager: {fileID: 0}
-  _weaponType: 2
-  _logWoodPrefabs: {fileID: 8691388618392710390, guid: 114cf7603e2406c43be312077d7a899b, type: 3}
-  _itemDrop: {fileID: 11400000, guid: 6b4847c9abe36be4cb58cc4e2f2ec68c, type: 2}
---- !u!114 &8087973464451625351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2561798734511300264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 007a321e48494ab4f824eb3c11797fc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHp:
-    _baseStats: 50
-    modifiedBonus: 
-  CurrentHealth:
-    value: 0
 --- !u!1001 &508135658804756967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,6 +42,10 @@ PrefabInstance:
     - target: {fileID: 8146109238360309931, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
       propertyPath: m_Name
       value: EA03_Environment_Rock_BIG_Head_01b_PRE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146245471365275655, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8149650638859986467, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
       propertyPath: m_RootOrder
@@ -156,24 +109,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
---- !u!1 &8503228761770737996 stripped
+--- !u!1 &8502802319700189664 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8146109238360309931, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8146245471365275655, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}
   m_PrefabInstance: {fileID: 508135658804756967}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1065346258775261467
+--- !u!65 &2460616324489962631
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8503228761770737996}
+  m_GameObject: {fileID: 8502802319700189664}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.59622425, y: 0.4253669, z: 0.5903118}
-  m_Center: {x: 0.005346987, y: 0.05269672, z: -0.0027638276}
+  m_Size: {x: 0.47689173, y: 0.49720997, z: 0.47269577}
+  m_Center: {x: -0.027623441, y: 0.02458326, z: -0.026524385}
+--- !u!114 &1092623492728432980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502802319700189664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d271eb5568911b147a74e7f4924a0a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2840966810690635574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502802319700189664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5b0322341d386498dc74d57b620d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDead: 0
+  TakeDamageEffect: {fileID: 11400000, guid: 057d2a665ece56b42bc60f0dce14cc86, type: 2}
+  CharacterEffectManager: {fileID: 0}
+  CharacterStatsManager: {fileID: 0}
+  _weaponType: 2
+  _logWoodPrefabs: {fileID: 8691388618392710390, guid: 114cf7603e2406c43be312077d7a899b, type: 3}
+  _itemDrop: {fileID: 11400000, guid: 6b4847c9abe36be4cb58cc4e2f2ec68c, type: 2}
+--- !u!114 &6967402544031380345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502802319700189664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007a321e48494ab4f824eb3c11797fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHp:
+    _baseStats: 50
+    modifiedBonus: 
+  _defense:
+    _baseStats: 0
+    modifiedBonus: 
+  CurrentHealth:
+    value: 0
 --- !u!4 &8508463680760620996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8149650638859986467, guid: 4d76b0199d76dfa438be5fdec7598fea, type: 3}

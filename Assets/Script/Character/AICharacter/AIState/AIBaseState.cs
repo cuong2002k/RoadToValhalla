@@ -71,7 +71,7 @@ public class AIBaseState : IState
         float remainingDistance = Vector3.Distance(_aiControl.PlayerTarget.position, _aiControl.transform.position);
         if (remainingDistance <= _aiControl.attackRange)
         {
-            return !_aiControl.characterAIManager.IsDead;
+            return !_aiControl.characterAIManager.IsDead && _aiControl.InLook();
         }
         return false;
     }

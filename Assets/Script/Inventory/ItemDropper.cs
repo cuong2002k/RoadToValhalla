@@ -26,6 +26,6 @@ public class ItemDropper : MonoBehaviour
 
     public Transform GetDropLocation()
     {
-        return this.transform;
+        return this.gameObject.transform;
     }
 }

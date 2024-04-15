@@ -6,6 +6,14 @@ using UnityEngine.EventSystems;
 using TMPro;
 public class UI_DragDropManager : MonoBehaviour
 {
+    public static UI_DragDropManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(this.gameObject);
+    }
+
     private Transform canvas;
 
     #region Inventory Handler

@@ -45,6 +45,7 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
 
             // call event update stats
             OnChangeEquipmentItem?.Invoke(null, oldEquipment);
+            _equipmentData.EquipData[index] = null;
         }
         // set current equipment
         this._currentEquipment[index] = equipmentItem;
@@ -52,6 +53,7 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
         OnChangeEquipmentItem?.Invoke(equipmentItem, null);
         // Update Mesh
         _characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
+        _equipmentData.EquipData[index] = equipmentItem.ID;
     }
 
     //bind data
@@ -59,26 +61,31 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
     {
         _equipmentData = data;
         bool isNew = _equipmentData.EquipData == null || _equipmentData == null;
+        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
         if (isNew)
         {
-            int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
-            _equipmentData.EquipData = new EquipmentItem[size];
+            _equipmentData.EquipData = new string[size];
         }
         else
         {
             for (int i = 0; i < _equipmentData.EquipData.Length; i++)
             {
                 if (_equipmentData.EquipData[i] == null) continue;
-                EquipmentItem equipmentItem = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i].ID) as EquipmentItem;
+                EquipmentItem equipmentItem = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i]) as EquipmentItem;
                 if (equipmentItem != null)
                 {
                     Equip(equipmentItem);
-                    _equipmentData.EquipData[i] = equipmentItem;
+                    _equipmentData.EquipData[i] = equipmentItem.ID;
                 }
 
             }
         }
-        this._currentEquipment = _equipmentData.EquipData;
+        EquipmentItem[] equipmentItems = new EquipmentItem[size];
+        for (int i = 0; i < size; i++)
+        {
+            equipmentItems[i] = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i]) as EquipmentItem;
+        }
+        this._currentEquipment = equipmentItems;
     }
 }
 

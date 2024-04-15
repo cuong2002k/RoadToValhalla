@@ -69,6 +69,7 @@ public class PlayerUIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             HandlerUIInput(!_playerInventoryPanel.activeInHierarchy);
+            ChestController.Instance.OpenChest(false);
         }
     }
 

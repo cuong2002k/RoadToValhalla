@@ -20,7 +20,7 @@ public class TakeDamageEffect : InstanceEffects
     {
         int finalDamage = PhysicsDamage - entity.CharacterStatsManager.Defense.GetStatsValue();
         if (finalDamage <= 0) finalDamage = 1;
-        else finalDamage = Random.Range(Mathf.Max(0, finalDamage - 5), finalDamage);
+        else finalDamage = Random.Range(Mathf.Max(0, finalDamage - 2), finalDamage);
         entity.CharacterStatsManager.CurrentHealth.Value -= finalDamage;
         WorldVFXManager.Instance.CreatePopupDamage(targetPoint, finalDamage);
     }

@@ -55,7 +55,20 @@ public class InventoryModel
         Debug.Log("Bind Inventory Data");
     }
 
-
+    public int CountItemStack(BaseItem item)
+    {
+        if (item == null) return 0;
+        int Count = 0;
+        for (int i = 0; i < _inventory.Length; i++)
+        {
+            if (_inventory[i].IsEmpty()) continue;
+            if (item.ID == _inventory[i].GetItem().ID)
+            {
+                Count += _inventory[i].GetStack();
+            }
+        }
+        return Count;
+    }
 
     public ItemStack this[int index]
     {
@@ -70,7 +83,10 @@ public class InventoryModel
         // find contain item slot => combine stack
         for (int i = 0; i < this._inventory.Length; i++)
         {
-            if (stack == 0) return 0;
+            if (stack == 0)
+            {
+                return 0;
+            }
             if (this._inventory[i].IsEmpty()) continue;
             if (_inventory[i].IsItemEqual(item))
             {
@@ -94,8 +110,35 @@ public class InventoryModel
                 return stack;
             }
         }
-
+        
         Debug.Log("Full slot inventory");
+        return stack;
+    }
+
+    public int MinusItem(BaseItem item, int stackToMinus)
+    {
+        int stack = stackToMinus;
+        // find contain item slot => combine stack
+        for (int i = 0; i < this._inventory.Length; i++)
+        {
+            if (stack == 0) return 0;
+            if (this._inventory[i].IsEmpty()) continue;
+            if (_inventory[i].Id == item.ID)
+            {
+                if (_inventory[i].GetStack() >= stack)
+                {
+                    this._inventory[i].DecreaseStack(stack);
+                    stack = 0;
+                }
+                else
+                {
+                    stack -= _inventory[i].GetStack();
+                    this._inventory[i].Clear();
+                }
+            }
+
+        }
+        Invoke();
         return stack;
     }
 

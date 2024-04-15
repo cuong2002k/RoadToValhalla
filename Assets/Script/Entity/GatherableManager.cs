@@ -7,6 +7,8 @@ public class GatherableManager : CharacterManager
     [SerializeField] private WeaponType _weaponType;
     [SerializeField] private GameObject _logWoodPrefabs;
     [SerializeField] private BaseItem _itemDrop;
+    private int from = 2;
+    private int to = 4;
     public override void TakeDamage(WeaponConfig weaponConfig, int physicDame, Vector3 contactPoint)
     {
         base.TakeDamage(weaponConfig, physicDame, contactPoint);
@@ -23,7 +25,8 @@ public class GatherableManager : CharacterManager
     {
         yield return new WaitForSeconds(0.1f);
         IsDead = true;
-        int logNum = 3;
+
+        int logNum = Random.Range(from, to);
         for (int i = 0; i < logNum; i++)
         {
             float randomX = Random.Range(-2f, 2f);

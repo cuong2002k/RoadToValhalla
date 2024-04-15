@@ -172,7 +172,7 @@ public class BuildingSystem : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 newPos = hit.point;
+            Vector3 newPos = hit.point + new Vector3(0, 0.5f, 0);
             ghostBuildGameObject.transform.position = newPos;
         }
     }

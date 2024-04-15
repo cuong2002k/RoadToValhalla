@@ -40,6 +40,8 @@ public class InventoryController : Container, IBind<InventoryData>
         data.id = this.id;
     }
     
+    
+
 }
 
 
