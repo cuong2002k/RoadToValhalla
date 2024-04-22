@@ -5,10 +5,12 @@ using UnityEngine;
 public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem instance;
+    BuildingDataManager buildingDataManager;
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(this.gameObject);
+        buildingDataManager = GetComponent<BuildingDataManager>();
     }
     [Header("Build Objects")]
     public List<GameObject> floorGameObject = new List<GameObject>();
@@ -132,10 +134,9 @@ public class BuildingSystem : MonoBehaviour
         {
             GameObject newBuild = Instantiate(GetCurrentBuild(), ghostBuildGameObject.transform.position, ghostBuildGameObject.transform.rotation);
             newBuild.GetComponentInChildren<Collider>().enabled = true;
-            // Destroy(ghostBuildGameObject);
-            // ghostBuildGameObject = null;
-            // isBuilding = false;
-            foreach (Connector connector in newBuild.GetComponentsInChildren<Connector>())
+
+            Connector[] connectors = newBuild.GetComponentsInChildren<Connector>();
+            foreach (Connector connector in connectors)
             {
                 connector.UpdateConnect(true);
             }

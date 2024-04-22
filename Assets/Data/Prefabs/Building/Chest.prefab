@@ -115,8 +115,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &8683749694485866429
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,8 +230,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &8683749694654454860
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,8 +380,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &8683749695163563799
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,8 +495,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &8683749695260092490
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8683749695340946101}
+  - component: {fileID: -5716838541586779713}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Buildables
@@ -568,6 +561,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5716838541586779713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683749695340946100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076c05f79d4d0434d9bd054251795d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingitem:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    prefabName: 
 --- !u!1001 &6331795748313288118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -623,6 +632,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 5041300451467468728, guid: 9407e798e5b755c48b4329912ff5fee2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041300451467468730, guid: 9407e798e5b755c48b4329912ff5fee2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041300451467468732, guid: 9407e798e5b755c48b4329912ff5fee2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041300451467468734, guid: 9407e798e5b755c48b4329912ff5fee2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9407e798e5b755c48b4329912ff5fee2, type: 3}
 --- !u!4 &1308650436306226734 stripped
@@ -647,7 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da428807f58aaf142a3a214ab4057401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dragDropManager: {fileID: 0}
   _inventoryModel:
     _inventory:
       items: []
@@ -655,7 +679,3 @@ MonoBehaviour:
       <id>k__BackingField: 189e72b7-e82a-4fe4-919b-0ddeec51195f
       items: []
       size: 0
-  _inventoryPanel: {fileID: 0}
-  _inventoryPrefabs: {fileID: 0}
-  _inventorySize: 12
-  _inventoryPanelObject: {fileID: 0}

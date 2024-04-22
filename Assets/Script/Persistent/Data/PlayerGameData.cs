@@ -11,8 +11,8 @@ public class PlayerGameData : ISaveData
 
     public PlayerGameData()
     {
-        position = Vector3.zero;
-        respawnPosition = Vector3.zero;
+        position = new Vector3(37, 0, 44.6f);
+        respawnPosition = new Vector3(37, 0, 44.6f);
     }
 
 }

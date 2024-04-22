@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264845256049708974}
   - component: {fileID: 1264845256049708973}
+  - component: {fileID: 3626783488368800799}
   m_Layer: 0
   m_Name: BuildingManager
   m_TagString: Untagged
@@ -46,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorGameObject:
   - {fileID: 7644162147404817415, guid: 349524bd4c6d6174782d0930397a3ecc, type: 3}
+  - {fileID: 1888232197143215805, guid: 6cfcef23b137eb24eb9c684b97f72018, type: 3}
+  - {fileID: 8683749695340946100, guid: 6669e533f70510e449d7a05e0dbed3b8, type: 3}
   wallGameObject:
   - {fileID: 5086621937760574780, guid: e313391196c17f14fbbd7da0b9fdde74, type: 3}
   - {fileID: 3281906793689947111, guid: 31f4a493d083145488685fff3679ef97, type: 3}
@@ -64,3 +67,16 @@ MonoBehaviour:
   ghostBuildGameObject: {fileID: 0}
   isGhostInValidPosition: 0
   modelParent: {fileID: 0}
+  buidingUI: {fileID: 0}
+--- !u!114 &3626783488368800799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264845256049708972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5cbff78fcaac134d90b7d70611a8847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

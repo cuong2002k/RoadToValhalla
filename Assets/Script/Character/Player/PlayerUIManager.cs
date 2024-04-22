@@ -35,6 +35,7 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private GameObject _playerInventoryPanel;
     [SerializeField] private GameObject _craftingPanel;
     [SerializeField] private GameObject _mousePoint;
+    [SerializeField] private GameObject _PauseMenu;
 
     private void Start()
     {
@@ -43,17 +44,6 @@ public class PlayerUIManager : MonoBehaviour
         DragDropManager.RestartMouseSlot();
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-
-    // private void OnEnable()
-    // {
-    //     InputManager.OpenInventoryEvent += HandlerUIInput;
-    // }
-
-    // private void OnDisable()
-    // {
-    //     InputManager.OpenInventoryEvent -= HandlerUIInput;
-    // }
 
     private void Update()
     {
@@ -71,6 +61,11 @@ public class PlayerUIManager : MonoBehaviour
             HandlerUIInput(!_playerInventoryPanel.activeInHierarchy);
             ChestController.Instance.OpenChest(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenPauseGame(!_PauseMenu.activeInHierarchy);
+        }
     }
 
     public void HandlerUIInput(bool active)
@@ -79,10 +74,21 @@ public class PlayerUIManager : MonoBehaviour
         _playerInventoryPanel.SetActive(active);
         _craftingPanel.SetActive(active);
         DragDropManager.RestartMouseSlot();
-        Camera.main.transform.root.GetComponent<PlayerController>().enabled = !active;
-        Camera.main.transform.GetComponentInParent<CameraController>().enabled = !active;
-        Cursor.visible = active;
-        Cursor.lockState = active ? CursorLockMode.None : CursorLockMode.Locked;
+        GameManager.Instance.ActiveControl(active);
     }
+
+    public void OpenPauseGame(bool active)
+    {
+        _playerInventoryPanel.SetActive(false);
+        _craftingPanel.SetActive(false);
+        _PauseMenu.SetActive(active);
+        DragDropManager.RestartMouseSlot();
+        GameManager.Instance.ActiveControl(active);
+    }
+
+
+
+
+
 
 }

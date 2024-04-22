@@ -32,7 +32,7 @@ public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
         Bind<InventoryController, InventoryData>(gameData.InventoryData);
         Bind<PlayerHotBarContainer, InventoryData>(gameData.HotbarData);
         Bind<EquipmentManager, EquipmentData>(gameData.EquipmentData);
-
+        Bind<BuildingDataManager, BuildingData>(gameData.BuildingData);
     }
 
     protected override void Awake()
@@ -59,19 +59,10 @@ public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
         }
     }
 
-    public void NewGame()
+    public GameData NewGame()
     {
-        gameData = new GameData
-        {
-            SaveName = "NewCharacter",
-            CurrentLevel = "Level0",
-            InventoryData = new InventoryData(),
-            PlayerGameData = new PlayerGameData(),
-            HotbarData = new InventoryData(),
-            EquipmentData = new EquipmentData()
-
-        };
-        SceneManager.LoadScene(gameData.CurrentLevel);
+        gameData = new GameData();
+        return gameData;
     }
 
     public void SaveGame()
@@ -79,15 +70,10 @@ public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
         dataService.SaveGame(gameData);
     }
 
-    public void LoadGame(string SaveName)
+    public GameData LoadGame(string SaveName)
     {
         gameData = dataService.LoadGame(SaveName);
-        Debug.Log(gameData.InventoryData.items.Length);
-        if (string.IsNullOrWhiteSpace(gameData.CurrentLevel))
-        {
-            SceneManager.LoadScene(gameData.CurrentLevel);
-        }
-        SceneManager.LoadScene(gameData.CurrentLevel);
+        return gameData;
     }
 
     public void DeleteGame(string SaveName)

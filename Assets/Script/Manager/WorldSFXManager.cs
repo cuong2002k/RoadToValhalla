@@ -18,8 +18,6 @@ public class WorldSFXManager : PersistentSingleton<WorldSFXManager>
     [Header("Die Sound")]
     public AudioClip DeathSound;
 
-    public GameObject soundPlay;
-
     protected override void Awake()
     {
         base.Awake();

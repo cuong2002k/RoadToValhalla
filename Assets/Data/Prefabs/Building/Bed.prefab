@@ -237,6 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888232197143044765}
+  - component: {fileID: 3558326308860760273}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Buildables
@@ -261,6 +262,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3558326308860760273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888232197143215805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076c05f79d4d0434d9bd054251795d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingitem:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    prefabName: 
 --- !u!1 &1888232197143215807
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,8 +490,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &4500305936494433889
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,8 +640,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &5498648044470220495
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,8 +755,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &6651146530411934232
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,5 +943,3 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1

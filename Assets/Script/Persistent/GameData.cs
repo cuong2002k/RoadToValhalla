@@ -12,6 +12,17 @@ public class GameData : ISaveData
     public InventoryData InventoryData;
     public InventoryData HotbarData;
     public EquipmentData EquipmentData;
+    public BuildingData BuildingData;
 
+    public GameData()
+    {
+        SaveName = "NewCharacter";
+        CurrentLevel = "Level0";
+        InventoryData = new InventoryData();
+        PlayerGameData = new PlayerGameData();
+        HotbarData = new InventoryData();
+        EquipmentData = new EquipmentData();
+        BuildingData = new BuildingData();
+    }
 
 }

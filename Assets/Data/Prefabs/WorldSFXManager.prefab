@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8662d4baa36fca0479c46975fef122cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitSFX: []
+  FootStepSound: {fileID: 8300000, guid: c45f05f0f1f136f41ac752b49b287a85, type: 3}
+  RunningSound: {fileID: 8300000, guid: 43e5924f8d4181a4f9f9c5baba80d394, type: 3}
+  DeathSound: {fileID: 8300000, guid: fa0a94284af1a2545845df79fd7c6fb1, type: 3}
+  soundPlay: {fileID: 0}
 --- !u!82 &8897746476233076256
 AudioSource:
   m_ObjectHideFlags: 0

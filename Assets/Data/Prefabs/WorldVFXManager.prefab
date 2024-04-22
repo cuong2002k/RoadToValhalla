@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e77b06c55060ad4f9f6a82a9a783af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BloodPletterVFX: {fileID: 950387614742595480, guid: e7f4065a40d12274aa81a3d7a5b5fb21, type: 3}
+  ChopTreeVFX: {fileID: 5072262535091023052, guid: e1b337998111a4f4983c1a0219492968, type: 3}
+  DamePopupVFX: {fileID: 8100247929418960430, guid: 848f04bec5f70b247a91ee43fef90b96, type: 3}

@@ -150,8 +150,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &5086621937290088350
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,8 +265,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &5086621937760574780
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5086621937760574781}
+  - component: {fileID: -7004653581232647793}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Buildables
@@ -302,6 +299,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7004653581232647793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5086621937760574780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076c05f79d4d0434d9bd054251795d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingitem:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    prefabName: 
 --- !u!1 &5086621937841199042
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,8 +462,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1 &5086621938646699478
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,8 +577,6 @@ MonoBehaviour:
   canConnectTo: 1
   isConnectToWall: 0
   isConnectToFloor: 0
-  canConnectToWall: 1
-  canConnectToFloor: 1
 --- !u!1001 &2943760293709524653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,9 +584,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5086621937841199043}
     m_Modifications:
+    - target: {fileID: 1073483035954110, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126680443663870, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169096004021108, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1438884826992546, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
       propertyPath: m_Name
       value: EA03_Village_Hut_Wall_Front_02i_PRE
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438884826992546, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992937461576946, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4246395580328868, guid: 8beab32d0b0a3f04786a91a7d19292b3, type: 3}
       propertyPath: m_RootOrder

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39556b9f8d4b2f7478e51426ffdd6957, type: 3}
   m_Name: Chest Leather Armor
   m_EditorClassIdentifier: 
+  ID: 2f997fc0-66be-4824-b440-e662f44888a3
   _itemName: Chest Leather Armor
   _icon: {fileID: 21300000, guid: cb0029952efe81542b4aa52ddbc3bc73, type: 3}
   _itemType: 2
@@ -20,5 +21,5 @@ MonoBehaviour:
   _itemObject: {fileID: 6213179630400706666, guid: 36f8f7600f0ba1c4db26953b43a4319d, type: 3}
   _equipmentType: 1
   _attackModifier: 1
-  _armorModifier: 3
+  _armorModifier: 5
   _equipmentMesh: {fileID: 7497151007666427146, guid: abc70b28a31dd59429cad2e5e26238c3, type: 3}

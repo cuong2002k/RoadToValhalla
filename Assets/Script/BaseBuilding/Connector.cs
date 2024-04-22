@@ -6,33 +6,33 @@ public class Connector : MonoBehaviour
 {
     public ConnectorPosition connectorPosition;
     public SelectBuildType connectorParentType;
-    [HideInInspector] public bool canConnectTo = true;
-    [HideInInspector] public bool isConnectToWall = false;
-    [HideInInspector] public bool isConnectToFloor = false;
+    public bool canConnectTo = true;
+    public bool isConnectToWall = false;
+    public bool isConnectToFloor = false;
 
-    [SerializeField] private bool canConnectToWall = true;
-    [SerializeField] private bool canConnectToFloor = true;
+    private bool canConnectToWall = true;
+    private bool canConnectToFloor = true;
 
     public void UpdateConnect(bool canRoot = false)
     {
         Collider[] connectionCollider = Physics.OverlapSphere(transform.position, transform.lossyScale.x / 2f);
         isConnectToFloor = !canConnectToFloor;
         isConnectToWall = !canConnectToWall;
-        foreach (Collider col in connectionCollider)
+        foreach (Collider collider in connectionCollider)
         {
-            if (col.GetInstanceID() == GetComponent<Collider>().GetInstanceID())
+            if (collider.GetInstanceID() == GetComponent<Collider>().GetInstanceID())
             {
                 continue;
             }
 
-            if(!col.gameObject.activeInHierarchy){
+            if (!collider.gameObject.activeInHierarchy)
+            {
                 continue;
             }
 
-            if (gameObject.layer == col.gameObject.layer)
+            if (this.gameObject.layer == collider.gameObject.layer)
             {
-                Connector connector = col.GetComponent<Connector>();
-
+                Connector connector = collider.GetComponent<Connector>();
                 if (connector.connectorParentType == SelectBuildType.floor) isConnectToFloor = true;
                 if (connector.connectorParentType == SelectBuildType.wall) isConnectToWall = true;
                 if (canRoot) UpdateConnect();
@@ -43,6 +43,12 @@ public class Connector : MonoBehaviour
         {
             canConnectTo = false;
         }
+
+
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, transform.lossyScale.x / 2f);
     }
 }
 

@@ -14,7 +14,6 @@ public class CharacterAIManager : CharacterManager
     {
         base.Start();
         IngnoreCollider();
-
     }
     public override IEnumerator ProcessDeathEvent()
     {
