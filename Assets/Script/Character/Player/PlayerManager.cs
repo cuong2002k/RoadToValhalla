@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : CharacterManager, IBind<PlayerGameData>
+public class PlayerManager : CharacterManager, ISaveData
 {
     #region Singleton
     public static PlayerManager Instance;
-    public string id { get; set; } = System.Guid.NewGuid().ToString();
-    public PlayerGameData PlayerData = new PlayerGameData();
+    public string id { get; set; }
+    private PlayerGameData playerData = new PlayerGameData();
     [HideInInspector] public PlayerWeaponEquipment PlayerWeaponEquipment;
     [HideInInspector] public PlayerStatsManager PlayerStatsManager;
     [HideInInspector] public PlayerController PlayerController;
@@ -34,23 +34,6 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
     }
     #endregion
 
-    //bind data
-    public void Bind(PlayerGameData playerData)
-    {
-        this.PlayerData = playerData;
-        transform.position = PlayerData.position;
-    }
-
-    protected override void Update()
-    {
-
-    }
-
-    protected override void LateUpdate()
-    {
-        PlayerData.position = transform.position;
-    }
-
     public override IEnumerator ProcessDeathEvent()
     {
         this.PlayerController.playerMachine.ChangeState(PlayerController.DeathState);
@@ -65,12 +48,13 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
         IsDead = false;
         this.PlayerController.playerMachine.ChangeState(PlayerController.IdleState);
         this.PlayerStatsManager.RestartStats();
-        this.transform.position = PlayerData.respawnPosition;
+
     }
 
     public void SetRespawnPos(Vector3 position)
     {
-        PlayerData.respawnPosition = position;
+        Vector3Serializer vector3Serializer = new Vector3Serializer(position);
+        playerData.respawnPosition = vector3Serializer;
     }
 
     public override void TakeDamage(WeaponConfig weaponConfig, int physicDame, Vector3 contactPoint)
@@ -82,5 +66,18 @@ public class PlayerManager : CharacterManager, IBind<PlayerGameData>
         CharacterEffectManager.ProcessInstanceEffect(takeDamageEffect);
     }
 
+    public object CaptureState()
+    {
+        Vector3Serializer currentPosition = new Vector3Serializer(this.transform.position);
+        playerData.position = currentPosition;
+        return playerData;
+    }
+
+    public void RestoreState(object state)
+    {
+        playerData = (PlayerGameData)state;
+        Vector3Serializer currentPosition = playerData.position;
+        this.transform.position = currentPosition.GetVector3();
+    }
 }
 

@@ -14,16 +14,15 @@ public class MainMenu : MonoBehaviour
     {
         load.SetActive(true);
         menu.SetActive(false);
-        GameData gameData = SaveLoadSystem.Instance.NewGame();
-        LoadingSceneManager.Instance.LoadingScene(gameData.CurrentLevel, slider);
+        LoadingSceneManager.Instance.LoadingScene("Level0", slider);
     }
 
     public void LoadGame()
     {
         menu.SetActive(false);
         load.SetActive(true);
-        GameData gameData = SaveLoadSystem.Instance.LoadGame("NewCharacter");
-        LoadingSceneManager.Instance.LoadingScene(gameData.CurrentLevel, slider);
+        LoadingSceneManager.Instance.LoadingScene("Level0", slider);
+        SaveLoadSystem.Instance.LoadGameState();
     }
 
     public void Exit()

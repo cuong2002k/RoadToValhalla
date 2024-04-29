@@ -11,25 +11,25 @@ public class SaveLoadManagerEditor : UnityEditor.Editor
         string nameSave = (target as SaveLoadSystem).GameData.SaveName;
         DrawDefaultInspector();
 
-        if (GUILayout.Button("New Game"))
-        {
-            saveLoadSystem.NewGame();
-        }
+        // if (GUILayout.Button("New Game"))
+        // {
+        //     saveLoadSystem.NewGame();
+        // }
 
         if (GUILayout.Button("Save Game"))
         {
-            saveLoadSystem.SaveGame();
+            saveLoadSystem.SaveGameState();
         }
 
         if (GUILayout.Button("Load Game"))
         {
-            saveLoadSystem.LoadGame(nameSave);
+            saveLoadSystem.LoadGameState();
         }
 
-        if (GUILayout.Button("Delete Game"))
-        {
-            saveLoadSystem.DeleteGame(nameSave);
-        }
+        // if (GUILayout.Button("Delete Game"))
+        // {
+        //     saveLoadSystem.DeleteGame(nameSave);
+        // }
 
     }
 }

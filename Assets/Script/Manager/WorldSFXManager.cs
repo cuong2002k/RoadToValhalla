@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldSFXManager : PersistentSingleton<WorldSFXManager>
 {
-
+    
     private AudioSource _audioSource;
     [Header("Hit SFX")]
     public AudioClip[] HitSFX;

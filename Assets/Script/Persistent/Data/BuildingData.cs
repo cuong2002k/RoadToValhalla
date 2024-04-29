@@ -26,6 +26,16 @@ public class BuildingData : ISaveData
     {
         buildItems.Clear();
     }
+
+    public object CaptureState()
+    {
+        return null;
+    }
+
+    public void RestoreState(object state)
+    {
+
+    }
 }
 [System.Serializable]
 public class BuildItemData

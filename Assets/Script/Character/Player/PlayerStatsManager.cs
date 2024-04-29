@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStatsManager : CharacterStatsManager
 {
-
     private PlayerHudManger _playerHubManager;
     private EquipmentManager _equipmentMananger;
     private PlayerManager _playerManager;

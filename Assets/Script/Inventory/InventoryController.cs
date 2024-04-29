@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System;
 
-public class InventoryController : Container, IBind<InventoryData>
+public class InventoryController : Container, ISaveData
 {
     [field: SerializeField] public string id { get; set; } = System.Guid.NewGuid().ToString();
 
@@ -34,14 +34,17 @@ public class InventoryController : Container, IBind<InventoryData>
         this._inventoryModel.Invoke();
     }
 
-    public void Bind(InventoryData data)
+    public object CaptureState()
     {
-        _inventoryModel.Bind(data, this._inventorySize);
-        data.id = this.id;
+        return _inventoryModel.GetData();
     }
-    
-    
 
+    public void RestoreState(object state)
+    {
+        KeyValuePair<string, int>[] dataRestore = (KeyValuePair<string, int>[])state;
+        _inventoryModel.RestoreData(dataRestore);
+        RefestUI();
+    }
 }
 
 

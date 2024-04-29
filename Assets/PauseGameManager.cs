@@ -20,7 +20,7 @@ public class PauseGameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        SaveLoadSystem.Instance.SaveGame();
+        // SaveLoadSystem.Instance.SaveGame();
     }
 
     public void BackToMenuMain()

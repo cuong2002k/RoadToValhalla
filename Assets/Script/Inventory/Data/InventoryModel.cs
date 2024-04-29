@@ -6,7 +6,7 @@ using System;
 public class InventoryModel
 {
     [SerializeField] private ObserverArray<ItemStack> _inventory;
-    [SerializeField] private InventoryData _inventoryData = new InventoryData();
+
 
     //event refest inventory UI
     public event Action<ItemStack[]> OnInventoryChange
@@ -24,35 +24,30 @@ public class InventoryModel
         }
     }
 
-    public void Bind(InventoryData inventoryData, int size)
+    public KeyValuePair<string, int>[] GetData()
     {
-        this._inventoryData = inventoryData;
-        this._inventoryData.size = size;
-        bool isNew = inventoryData.size == 0 || inventoryData.items == null;
-        if (isNew)
+        KeyValuePair<string, int>[] inventoryData = new KeyValuePair<string, int>[_inventory.Length];
+        for (int i = 0; i < _inventory.Length; i++)
         {
-            _inventoryData.size = size;
-            _inventoryData.items = new ItemStack[size];
-            for (int i = 0; i < size; i++)
+            if (_inventory[i] != null && !_inventory[i].IsEmpty())
             {
-                _inventoryData.items[i] = new ItemStack();
+                inventoryData[i] = new KeyValuePair<string, int>(_inventory[i].GetItem().ID, _inventory[i].GetStack());
             }
         }
-        else
+        return inventoryData;
+    }
+
+    public void RestoreData(KeyValuePair<string, int>[] dataRestore)
+    {
+        for (int i = 0; i < dataRestore.Length; i++)
         {
-            for (int i = 0; i < inventoryData.items.Length; i++)
+            if (dataRestore[i].Key != null)
             {
-                if (inventoryData.items[i].IsEmpty()) continue;
-                BaseItem item = ItemDatabase.GetItemWithID(inventoryData.items[i].Id);
-                if (item != null)
-                {
-                    inventoryData.items[i].SetItemStack(item, inventoryData.items[i].GetStack());
-                }
+                BaseItem baseItem = ItemDatabase.GetItemWithID(dataRestore[i].Key);
+                int stack = dataRestore[i].Value;
+                _inventory[i].SetItemStack(baseItem, stack);
             }
         }
-        this._inventory.Items = _inventoryData.items;
-        Invoke();
-        Debug.Log("Bind Inventory Data");
     }
 
     public int CountItemStack(BaseItem item)
@@ -110,7 +105,7 @@ public class InventoryModel
                 return stack;
             }
         }
-        
+
         Debug.Log("Full slot inventory");
         return stack;
     }

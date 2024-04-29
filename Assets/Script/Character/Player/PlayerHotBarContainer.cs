@@ -72,6 +72,6 @@ public class PlayerHotBarContainer : Container, IBind<InventoryData>
 
     public void Bind(InventoryData data)
     {
-        this._inventoryModel.Bind(data, this._inventorySize);
+        
     }
 }

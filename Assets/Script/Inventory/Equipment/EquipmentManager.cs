@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
+public class EquipmentManager : MonoBehaviour, ISaveData
 {
-    public string id { get; set; } = System.Guid.NewGuid().ToString();
+    public string id { get; set; }
     private InventoryController _inventoryController;
 
     #region Equipment tranform
 
     private CharacterMesh _characterMesh;
-    [SerializeField] private EquipmentData _equipmentData = new EquipmentData();
 
     #endregion
     [SerializeField] private EquipmentItem[] _currentEquipment;
@@ -22,7 +21,7 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
     private void Awake()
     {
         _characterMesh = GetComponent<CharacterMesh>();
-        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
+        int size = Enum.GetNames(typeof(EquipmentType)).Length;
         _currentEquipment = new EquipmentItem[size];
     }
 
@@ -45,7 +44,6 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
 
             // call event update stats
             OnChangeEquipmentItem?.Invoke(null, oldEquipment);
-            _equipmentData.EquipData[index] = null;
         }
         // set current equipment
         this._currentEquipment[index] = equipmentItem;
@@ -53,39 +51,33 @@ public class EquipmentManager : MonoBehaviour, IBind<EquipmentData>
         OnChangeEquipmentItem?.Invoke(equipmentItem, null);
         // Update Mesh
         _characterMesh.EquipSkinnedMesh(equipmentItem.GetEquipmentType(), equipmentItem.GetEquipmentMesh());
-        _equipmentData.EquipData[index] = equipmentItem.ID;
     }
 
-    //bind data
-    public void Bind(EquipmentData data)
+    public object CaptureState()
     {
-        _equipmentData = data;
-        bool isNew = _equipmentData.EquipData == null || _equipmentData == null;
-        int size = System.Enum.GetNames(typeof(EquipmentType)).Length;
-        if (isNew)
+        string[] equipmentData = new string[_currentEquipment.Length];
+        for (int i = 0; i < _currentEquipment.Length; i++)
         {
-            _equipmentData.EquipData = new string[size];
-        }
-        else
-        {
-            for (int i = 0; i < _equipmentData.EquipData.Length; i++)
+            if (_currentEquipment[i] != null)
             {
-                if (_equipmentData.EquipData[i] == null) continue;
-                EquipmentItem equipmentItem = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i]) as EquipmentItem;
-                if (equipmentItem != null)
-                {
-                    Equip(equipmentItem);
-                    _equipmentData.EquipData[i] = equipmentItem.ID;
-                }
-
+                equipmentData[i] = _currentEquipment[i].ID;
             }
         }
-        EquipmentItem[] equipmentItems = new EquipmentItem[size];
-        for (int i = 0; i < size; i++)
+        return equipmentData;
+    }
+
+    public void RestoreState(object state)
+    {
+        string[] equipmentData = (string[])state;
+        foreach (string itemId in equipmentData)
         {
-            equipmentItems[i] = ItemDatabase.GetItemWithID(_equipmentData.EquipData[i]) as EquipmentItem;
+            if (itemId != null)
+            {
+                EquipmentItem item = ItemDatabase.GetItemWithID(itemId) as EquipmentItem;
+                Equip(item);
+            }
         }
-        this._currentEquipment = equipmentItems;
+
     }
 }
 

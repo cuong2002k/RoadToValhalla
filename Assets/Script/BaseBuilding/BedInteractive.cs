@@ -11,6 +11,6 @@ public class BedInteractive : MonoBehaviour, IInteractable, ISelectable
 
     public void Interact()
     {
-        PlayerManager.Instance.PlayerData.respawnPosition = this.transform.position;
+        PlayerManager.Instance.SetRespawnPos(this.transform.position);
     }
 }

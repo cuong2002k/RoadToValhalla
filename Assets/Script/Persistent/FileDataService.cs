@@ -6,6 +6,7 @@ using System.IO;
 
 public class FileDataService : IDataService
 {
+
     private string pathName = "";
     private string extention = "";
     private ISerializer serializer;
@@ -22,20 +23,20 @@ public class FileDataService : IDataService
         return Path.Combine(pathName, SaveName + extention);
     }
 
-    public void SaveGame(GameData gameData, bool overwrite = true)
+    public void SaveGame(Dictionary<string, object> gameData, bool overwrite = true)
     {
-        string location = GetPathLocation(gameData.SaveName);
+        string location = GetPathLocation(gameData["SaveName"].ToString());
         if (!overwrite && File.Exists(location))
         {
             throw new Exception($"The File '{location}' already exits cannot overwriten");
         }
-        File.WriteAllText(location, serializer.Serialize<GameData>(gameData));
+        File.WriteAllText(location, serializer.Serialize<Dictionary<string, object>>(gameData));
         Debug.Log($"The file has been successfully saved at the path {location}");
 
     }
 
 
-    public GameData LoadGame(string SaveName)
+    public Dictionary<string, object> LoadGame(string SaveName)
     {
         string location = GetPathLocation(SaveName);
         if (!File.Exists(location))
@@ -43,7 +44,7 @@ public class FileDataService : IDataService
             throw new Exception($"No permisted gamedata with file name in '{location}'");
         }
 
-        return serializer.DeSerialize<GameData>(File.ReadAllText(location));
+        return serializer.DeSerialize<Dictionary<string, object>>(File.ReadAllText(location));
     }
 
     public void DeleteGame(string SaveName)

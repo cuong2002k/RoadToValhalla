@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
-
-public interface ISaveData
-{
-    [SerializeField] public string id { get; set; }
-}
+using Unity.VisualScripting;
 
 public interface IBind<TData> where TData : ISaveData
 {
@@ -21,6 +17,16 @@ public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     [SerializeField] private GameData gameData;
     public GameData GameData => gameData;
     private IDataService dataService;
+    private ISerializer serializer;
+    Dictionary<string, object> gameState = new Dictionary<string, object>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        serializer = new BinarySerializer();
+        dataService = new FileDataService(serializer);
+    }
+
     private void OnEnable() => SceneManager.sceneLoaded += OnScenesLoaded;
 
     private void Ondisable() => SceneManager.sceneLoaded -= OnScenesLoaded;
@@ -28,56 +34,36 @@ public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     private void OnScenesLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainMenu") return;
-        Bind<PlayerManager, PlayerGameData>(gameData.PlayerGameData);
-        Bind<InventoryController, InventoryData>(gameData.InventoryData);
-        Bind<PlayerHotBarContainer, InventoryData>(gameData.HotbarData);
-        Bind<EquipmentManager, EquipmentData>(gameData.EquipmentData);
-        Bind<BuildingDataManager, BuildingData>(gameData.BuildingData);
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        dataService = new FileDataService(new JsonSerializer());
-    }
-
-
-
-    public void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveData, new()
-    {
-        var entity = FindObjectsByType<T>(FindObjectsSortMode.None).FirstOrDefault();
-        if (entity != null)
+        foreach (EntitySaving entitySaving in FindObjectsOfType<EntitySaving>())
         {
-            if (data == null)
+            if (gameState.ContainsKey(entitySaving.GetUniqueID()))
             {
-                data = new TData
-                {
-                    id = entity.id
-                };
+                entitySaving.RestoreState(gameState[entitySaving.GetUniqueID()]);
             }
-            entity.Bind(data);
         }
     }
 
-    public GameData NewGame()
+
+    public void SaveGameState()
     {
-        gameData = new GameData();
-        return gameData;
+        foreach (EntitySaving entitySaving in FindObjectsOfType<EntitySaving>())
+        {
+            gameState[entitySaving.GetUniqueID()] = entitySaving.CaptureState();
+        }
+        gameState["SaveName"] = "NewCharacter";
+        dataService.SaveGame(gameState);
     }
 
-    public void SaveGame()
+    public void LoadGameState()
     {
-        dataService.SaveGame(gameData);
+        gameState = dataService.LoadGame("NewCharacter");
+        foreach (EntitySaving entitySaving in FindObjectsOfType<EntitySaving>())
+        {
+            if (gameState.ContainsKey(entitySaving.GetUniqueID()))
+            {
+                entitySaving.RestoreState(gameState[entitySaving.GetUniqueID()]);
+            }
+        }
     }
 
-    public GameData LoadGame(string SaveName)
-    {
-        gameData = dataService.LoadGame(SaveName);
-        return gameData;
-    }
-
-    public void DeleteGame(string SaveName)
-    {
-        dataService.DeleteGame(SaveName);
-    }
 }

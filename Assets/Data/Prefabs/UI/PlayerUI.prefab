@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotUIContainer: []
+  slotUIPrefabs: {fileID: 0}
 --- !u!1 &5949302168047110778
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +105,7 @@ GameObject:
   - component: {fileID: 8462911618876522921}
   - component: {fileID: 8462911618876522926}
   - component: {fileID: 8462911618876522927}
+  - component: {fileID: 2045554784169664638}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -152,12 +154,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99b78bdceb73fd4aae79c3f7ea476e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dragDropManager: {fileID: 0}
   _inventoryModel:
     _inventory:
       items: []
   _inventoryPanel: {fileID: 0}
   _inventoryPrefabs: {fileID: 5949302168132653336}
-  _inventorySize: 25
+  _inventorySize: 24
+  <id>k__BackingField: 5abc34e2-f6dd-4f41-905f-87c4a0959ece
 --- !u!114 &8462911618876522926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +204,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829c0b4081e74344fa6266592b3e2a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2045554784169664638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5949302168047110778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8082cb5033b2a40bb737e64482f571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Inventory
 --- !u!1 &5949302168132653336
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +255,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 350, y: -411}
-  m_SizeDelta: {x: 610.9414, y: 32}
+  m_SizeDelta: {x: 610.9414, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4830473965818160749
 CanvasRenderer:

@@ -25,4 +25,13 @@ public class GameData : ISaveData
         BuildingData = new BuildingData();
     }
 
+    public object CaptureState()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RestoreState(object state)
+    {
+        throw new NotImplementedException();
+    }
 }
